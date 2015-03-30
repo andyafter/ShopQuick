@@ -5,6 +5,8 @@
  */
 package sg.edu.nus.iss.ussa.domain;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author a0134449b
