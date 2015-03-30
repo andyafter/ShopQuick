@@ -11,4 +11,11 @@ package sg.edu.nus.iss.ussa.domain;
  */
 public class ShopKeeper {
     
+    
+    public static ShopKeeper getUser(String name,String pass)
+    {
+        ShopKeeper user=null;
+        //fetch from file and verify
+        return user;
+    }
 }

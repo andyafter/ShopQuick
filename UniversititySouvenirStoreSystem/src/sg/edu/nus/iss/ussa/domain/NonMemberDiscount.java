@@ -5,10 +5,16 @@
  */
 package sg.edu.nus.iss.ussa.domain;
 
+import java.util.Date;
+
 /**
  *
  * @author a0134449b
  */
 public class NonMemberDiscount extends Discount {
+
+    public NonMemberDiscount(String discountCode, String discountDescription, Date startDate, int period, double percent, String Applicable) {
+        super(discountCode, discountDescription, startDate, period, percent, Applicable);
+    }
     
 }
