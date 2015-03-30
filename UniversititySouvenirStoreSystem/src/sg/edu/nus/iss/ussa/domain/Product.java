@@ -62,7 +62,7 @@ public class Product {
 	public boolean compare(Product p)
     {
 		if(name.equals(p.getName())&&briefDescription.equals(p.getBriefDescription())&&category.equals(p.getCategory())
-				&&price==p.getPrice()&&barCodeNumber.equals(p.getBarCodeNumber())&&reorderQuantity==p.getReorderQuantity()
+				&&price==p.getPrice()&&barCode.equals(p.getBarCodeNumber())&&reorderQuantity==p.getReorderQuantity()
 				&&orderQuantity==p.getOrderQuantity()){
 			return true;
 		}
@@ -122,7 +122,7 @@ public class Product {
 	}
 
 	public String getBarCodeNumber() {
-		return barCodeNumber;
+		return barCode;
 	}
 
 	public void setBarCode(String barCode) {
