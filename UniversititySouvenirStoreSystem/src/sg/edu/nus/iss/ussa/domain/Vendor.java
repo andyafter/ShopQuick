@@ -11,4 +11,19 @@ package sg.edu.nus.iss.ussa.domain;
  */
 public class Vendor {
     
+    private String VendorName;
+    private String VendorDescription;
+
+    public String getVendorName() {
+        return VendorName;
+    }
+
+    public String getVendorDescription() {
+        return VendorDescription;
+    }
+
+    public Vendor(String VendorName, String VendorDescription) {
+        this.VendorName = VendorName;
+        this.VendorDescription = VendorDescription;
+    }
 }
