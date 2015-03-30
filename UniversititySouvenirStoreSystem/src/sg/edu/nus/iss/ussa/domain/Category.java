@@ -11,4 +11,22 @@ package sg.edu.nus.iss.ussa.domain;
  */
 public class Category {
     
+    
+    private String categoryCode;
+    private String categoryName;
+
+    public String getCategoryCode() {
+        return categoryCode;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public Category(String categoryCode, String categoryName) {
+        this.categoryCode = categoryCode;
+        this.categoryName = categoryName;
+    }
+    
+    
 }
