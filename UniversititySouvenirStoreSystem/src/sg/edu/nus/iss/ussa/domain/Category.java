@@ -10,23 +10,44 @@ package sg.edu.nus.iss.ussa.domain;
  * @author a0134449b
  */
 public class Category {
-    
-    
-    private String categoryCode;
-    private String categoryName;
-
-    public String getCategoryCode() {
-        return categoryCode;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public Category(String categoryCode, String categoryName) {
-        this.categoryCode = categoryCode;
-        this.categoryName = categoryName;
-    }
-    
+        
+    private String categorycode;
+	private String categoryname;
+	private ArrayList<Vendor> vendorList;
+	
+	public Category(String categorycode, String categoryname, ArrayList<Vendor> vendorList) 
+    {
+		super();
+		this.categorycode = categorycode;
+		this.categoryname = categoryname;
+		this.vendorList = vendorList;
+	}
+	
+	public String getCategoryCode() {
+		return categorycode;
+	}
+	public void setCategoryCode(String code) {
+		this.categorycode = categorycode;
+	}
+	public String getCategoryName() {
+		return categoryname;
+	}
+	public void setCategoryName(String name) {
+		this.categoryname = categoryname;
+	}
+	public ArrayList<Vendor> getVendorList() {
+		return vendorList;
+	}
+	public void setVendorList(ArrayList<Vendor> vendorList) {
+		this.vendorList = vendorList;
+	}
+	
+	public Vendor getFirstVendor(){
+		Vendor vendor = null;
+		if (!this.vendorList.isEmpty()){
+			vendor = this.vendorList.get(0);
+		}	
+		return vendor;
+	}
     
 }
