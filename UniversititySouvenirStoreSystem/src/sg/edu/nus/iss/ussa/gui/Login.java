@@ -17,7 +17,7 @@ import javax.swing.border.*;
  */
 public class Login extends JDialog implements ActionListener {
 
-        JLabel jLabel1 = new JLabel();
+     JLabel jLabel1 = new JLabel();
     JTextField jTextField1 = new JTextField();
     JLabel jLabel2 = new JLabel();
     JPasswordField jPasswordField1 = new JPasswordField();
