@@ -18,10 +18,10 @@ import java.util.*;
 public class SutejaStore_DONOTDELETE {
     public static void main(String args[]) throws IOException {
         MemberManager mm = new MemberManager();
-        Member member = new Member("H8478474",11, "Suteja");
+        Member member = new Member("H8478474",31, "Suteja");
         
         //mm.SearchMember("H27843888");
-        mm.updateLoyaltyPoints(member,10);
+        mm.updateName(member,"H8478474");
        /* try {
             mm.addMember(member);
         } catch (IOException ex) {
