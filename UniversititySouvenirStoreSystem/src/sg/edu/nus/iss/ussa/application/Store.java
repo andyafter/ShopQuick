@@ -3,6 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+ 
+ /**
+ *
+ * @author Ajay
+ */
 package sg.edu.nus.iss.ussa.application;
 
 import java.awt.*;
@@ -21,8 +26,13 @@ public class Store {
     private StoreMainFrame storeframe;
     public Store()
     {
+        UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         fmgr=new FileManager();
         Loginbox=new Login(new ShopKeeper());
+        } catch (Exception ex) {
+            Logger.getLogger(Store.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }
     public FileManager getFmgrInstance()
     {
