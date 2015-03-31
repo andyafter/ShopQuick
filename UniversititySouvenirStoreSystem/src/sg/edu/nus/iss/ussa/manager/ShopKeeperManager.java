@@ -14,7 +14,7 @@ import sg.edu.nus.iss.ussa.domain.ShopKeeper;
  *
  * @author a0134449b
  */
-public  final class FileManager {
+public  final class ShopKeeperManager {
     
     private static final ArrayList<ShopKeeper> shopKeeperList= new ArrayList<ShopKeeper>();
     private static final String C_DataFolderPath = "./data/";

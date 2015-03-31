@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package sg.edu.nus.iss.ussa.domain;
-import sg.edu.nus.iss.ussa.manager.FileManager;
+import sg.edu.nus.iss.ussa.manager.ShopKeeperManager;
 import java.util.ArrayList;
 
 /**
@@ -33,7 +33,7 @@ public class ShopKeeper {
         ShopKeeper user=null;
         boolean isValidUser = false;
         //fetch from file and verify
-        ArrayList<ShopKeeper> sdata=FileManager.getShopkeeperList();
+        ArrayList<ShopKeeper> sdata=ShopKeeperManager.getShopkeeperList();
 		for(ShopKeeper iter:sdata)
 		{
 			if(iter.getUserName().equalsIgnoreCase(name) && iter.getPassword().equalsIgnoreCase(pass))

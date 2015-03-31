@@ -30,7 +30,7 @@ import sg.edu.nus.iss.ussa.domain.Member;
  */
 public class MemberManager {
 
-    private String FileName = "C:\\Users\\A0134543L\\Downloads\\Members.dat.txt";
+    private String FileName = "C:\\Users\\A0134543L\\Downloads\\Members.dat";
     String MemberID = "";
 
     public MemberManager() {
@@ -41,7 +41,7 @@ public class MemberManager {
     public void SearchMember(String ID) throws ArrayIndexOutOfBoundsException {
         ArrayList<String> FileContent = null;
         int flag = 0;
-        FileManager fm = new FileManager();
+        ShopKeeperManager fm = new ShopKeeperManager();
 
         try {
             FileContent = fm.loadStringFromFile(FileName);
@@ -235,4 +235,78 @@ public class MemberManager {
 
     }
 
+
+
+ public void updateName(Member m, String ID) {
+        
+        //fetch the  values from the text boxes
+        // Create the old member object
+        //search in the file
+        //update the file
+        
+        
+        File file = new File(FileName);
+
+        File file2 = new File(file.getParent() + "\\temp" + file.getName());
+        PrintWriter pw = null;
+        Scanner read = null;
+
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
+        FileChannel src = null;
+        FileChannel dest = null;
+        String line = m.getCustomerName() + "," + m.getMemberID() + "," + m.getLoyaltyPoints();
+
+        try {
+
+            pw = new PrintWriter(file2);
+            read = new Scanner(file);
+
+            while (read.hasNextLine()) {
+
+                String currline = read.nextLine();
+
+                if (line.equalsIgnoreCase(currline)) { 
+                    String newName = "Sahaja";
+                    String UpdatedLineWithLoyaltyPoints = newName + "," + m.getMemberID() + "," + m.getLoyaltyPoints();
+                    pw.println(UpdatedLineWithLoyaltyPoints);
+                    continue;
+                } else {
+                    pw.println(currline);
+                }
+            }
+
+            pw.flush();
+
+            fis = new FileInputStream(file2);
+            src = fis.getChannel();
+            fos = new FileOutputStream(file);
+            dest = fos.getChannel();
+
+            dest.transferFrom(src, 0, src.size());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            pw.close();
+            read.close();
+
+            try {
+                fis.close();
+                fos.close();
+                src.close();
+                dest.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (file2.delete()) {
+                System.out.println("File is deleted");
+            } else {
+                System.out.println("Error occured! File: " + file2.getName() + " is not deleted!");
+            }
+        }
+
+    }
 }
+

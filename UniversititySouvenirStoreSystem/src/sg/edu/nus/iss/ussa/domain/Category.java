@@ -17,12 +17,35 @@ public class Category {
 	private String categoryname;
 	private ArrayList<Vendor> vendorList;
 	
-	public Category(String categorycode, String categoryname, ArrayList<Vendor> vendorList) 
-    {
+	public Category(String categorycode, String categoryname, ArrayList<Vendor> vendorList) {
 		super();
 		this.categorycode = categorycode;
 		this.categoryname = categoryname;
 		this.vendorList = vendorList;
+	}
+        
+        public void deleteVendor(String name){
+            if(name == ""){
+                return;
+            }
+            else{
+                if(this.vendorList.isEmpty()){
+                    System.out.println("The Vendor list is empty asshole!");
+                }
+                for(Vendor i: this.vendorList){
+                    if(i.getVendorName()==name){
+                        vendorList.remove(i);
+                    }
+                }
+            }
+        }
+        
+        public Vendor getFirstVendor(){
+		Vendor vendor = null;
+		if (!this.vendorList.isEmpty()){
+			vendor = this.vendorList.get(0);
+		}	
+		return vendor;
 	}
 	
 	public String getCategoryCode() {
@@ -43,13 +66,8 @@ public class Category {
 	public void setVendorList(ArrayList<Vendor> vendorList) {
 		this.vendorList = vendorList;
 	}
+        
 	
-	public Vendor getFirstVendor(){
-		Vendor vendor = null;
-		if (!this.vendorList.isEmpty()){
-			vendor = this.vendorList.get(0);
-		}	
-		return vendor;
-	}
+
     
 }

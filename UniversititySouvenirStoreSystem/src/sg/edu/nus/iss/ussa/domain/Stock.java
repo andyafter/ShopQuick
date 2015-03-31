@@ -5,10 +5,15 @@
  */
 package sg.edu.nus.iss.ussa.domain;
 
+import sg.edu.nus.iss.ussa.gui.Login;
+
 /**
  *
  * @author a0134449b
  */
 public class Stock {
-    
+    public static void main(String args[]){
+        
+        System.out.println("Helloe;");
+    }
 }
