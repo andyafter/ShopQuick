@@ -12,13 +12,13 @@ package sg.edu.nus.iss.ussa.domain;
 public class Member extends Customer {
     
     private String MemberID;
-    public Integer LoyaltyPoints;
+    public int LoyaltyPoints;
 
     public String getMemberID() {
         return MemberID;
     }
 
-    public Integer getLoyaltyPoints() {
+    public int getLoyaltyPoints() {
         return LoyaltyPoints;
     }
    

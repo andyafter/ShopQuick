@@ -18,8 +18,10 @@ import java.util.*;
 public class Store {
     public static void main(String args[]) throws IOException {
         MemberManager mm = new MemberManager();
-        Member member = new Member("3535",33, "Suraj1");
-        mm.SearchMember("3535");
+        Member member = new Member("H8478474",11, "Suteja");
+        
+        //mm.SearchMember("H27843888");
+        mm.updateLoyaltyPoints(member,10);
        /* try {
             mm.addMember(member);
         } catch (IOException ex) {
