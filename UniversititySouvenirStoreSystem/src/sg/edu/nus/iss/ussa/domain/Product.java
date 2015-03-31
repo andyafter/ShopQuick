@@ -51,16 +51,14 @@ public class Product {
 		this.orderQuantity = orderQuantity;
 	}
 
-	public boolean checkInventoryLevel()
-    {
+	public boolean checkInventoryLevel(){
 		if(this.quantityAvailable < this.reorderQuantity){
 			return false;
 		}
 		return true;
 	}
 	
-	public boolean compare(Product p)
-    {
+	public boolean compare(Product p){
 		if(name.equals(p.getName())&&briefDescription.equals(p.getBriefDescription())&&category.equals(p.getCategory())
 				&&price==p.getPrice()&&barCode.equals(p.getBarCodeNumber())&&reorderQuantity==p.getReorderQuantity()
 				&&orderQuantity==p.getOrderQuantity()){
