@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 //functions ---add member, delete member, update
-
 package sg.edu.nus.iss.ussa.manager;
 
 import java.util.ArrayList;
@@ -29,8 +28,11 @@ import sg.edu.nus.iss.ussa.domain.Member;
  * @author A0134543L
  */
 public class MemberManager {
+    
+    private String C_DataFolderPath = "./data/";
+    private String File_Name = "Members.dat";
 
-    private String FileName = "C:\\Users\\A0134543L\\Downloads\\Members.dat.txt";
+    //private String FileName = "C:\\Users\\A0134543L\\Downloads\\Members.dat.txt";
     String MemberID = "";
 
     public MemberManager() {
@@ -43,13 +45,19 @@ public class MemberManager {
         int flag = 0;
         FileManager fm = new FileManager();
 
-        try {
-            FileContent = fm.loadStringFromFile(FileName);
-        } catch (IOException ex) {
+      try{
+            FileContent = fm.loadStringFromFile(C_DataFolderPath+ File_Name);
+      }
+      catch (IOException ex) {
+          System.out.println(ex);
+          
+      }
+      
+       
             System.out.println(
                     "Unable to open file '"
-                    + FileName + "'");
-        }
+                    + File_Name + "'");
+        
 
         //display contents of the array list
         Iterator itr = FileContent.iterator();
@@ -92,7 +100,7 @@ public class MemberManager {
 
     public void addMember(Member m) throws IOException {
         try {
-            FileWriter fileWritter = new FileWriter(FileName, true);
+            FileWriter fileWritter = new FileWriter(C_DataFolderPath+ File_Name, true);
             BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
             String Line = m.getCustomerName() + "," + m.getMemberID() + "," + m.getLoyaltyPoints();
             bufferWritter.append('\n');
@@ -106,7 +114,7 @@ public class MemberManager {
 
     public void deleteMember(Member m) {
 
-        File file = new File(FileName);
+        File file = new File(C_DataFolderPath+ File_Name);
 
         File file2 = new File(file.getParent() + "\\temp" + file.getName());
         PrintWriter pw = null;
@@ -166,12 +174,11 @@ public class MemberManager {
         }
 
     }
-    
+
     public void updateLoyaltyPoints(Member m, int point) {
-        
+
         //update in the file
-        
-        File file = new File(FileName);
+        File file = new File(C_DataFolderPath+ File_Name);
 
         File file2 = new File(file.getParent() + "\\temp" + file.getName());
         PrintWriter pw = null;
@@ -192,9 +199,9 @@ public class MemberManager {
 
                 String currline = read.nextLine();
 
-                if (line.equalsIgnoreCase(currline)) { 
-                    int UpdatedPoints = m.getLoyaltyPoints()+point;
-                    String UpdatedLineWithLoyaltyPoints = m.getCustomerName() + "," + m.getMemberID() + "," +UpdatedPoints;
+                if (line.equalsIgnoreCase(currline)) {
+                    int UpdatedPoints = m.getLoyaltyPoints() + point;
+                    String UpdatedLineWithLoyaltyPoints = m.getCustomerName() + "," + m.getMemberID() + "," + UpdatedPoints;
                     pw.println(UpdatedLineWithLoyaltyPoints);
                     continue;
                 } else {
@@ -235,17 +242,14 @@ public class MemberManager {
 
     }
 
+    public void updateName(Member m, String ID) {
+        //Change the signature of the file ! - updateName(String ID)
 
-
- public void updateName(Member m, String ID) {
-        
         //fetch the  values from the text boxes
-        // Create the old member object
-        //search in the file
-        //update the file
-        
-        
-        File file = new File(FileName);
+        // Create the old member(m) object using the values
+        //search the line in the file of the member
+        //update the file with the new contents
+        File file = new File(C_DataFolderPath+ File_Name);
 
         File file2 = new File(file.getParent() + "\\temp" + file.getName());
         PrintWriter pw = null;
@@ -266,7 +270,7 @@ public class MemberManager {
 
                 String currline = read.nextLine();
 
-                if (line.equalsIgnoreCase(currline)) { 
+                if (line.equalsIgnoreCase(currline)) {
                     String newName = "Sahaja";
                     String UpdatedLineWithLoyaltyPoints = newName + "," + m.getMemberID() + "," + m.getLoyaltyPoints();
                     pw.println(UpdatedLineWithLoyaltyPoints);
@@ -309,4 +313,3 @@ public class MemberManager {
 
     }
 }
-
