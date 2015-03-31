@@ -10,18 +10,12 @@ package sg.edu.nus.iss.ussa.domain;
  * @author a0134449b
  */
 public class NonMember extends Customer {
-    
-    private Integer NonMemberName;
 
-    public Integer getNonMemberName() {
-        return NonMemberName;
-    }
-
-    public NonMember(Integer NonMemberName, String CustomerName) {
+    public NonMember(String CustomerName) {
         super(CustomerName);
-        this.NonMemberName = NonMemberName;
     }
     
+  
 
     
 }
