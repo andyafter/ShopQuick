@@ -15,7 +15,7 @@ import java.util.*;
  *
  * @author A0134543L
  */
-public class Store {
+public class SutejaStore_DONOTDELETE {
     public static void main(String args[]) throws IOException {
         MemberManager mm = new MemberManager();
         Member member = new Member("H8478474",11, "Suteja");
