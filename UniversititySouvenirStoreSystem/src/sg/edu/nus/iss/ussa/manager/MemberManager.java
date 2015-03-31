@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.*;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 import sg.edu.nus.iss.ussa.domain.Member;
 
@@ -26,10 +28,12 @@ public class MemberManager{
     }
     
     private ArrayList<Member> itemList = new ArrayList<Member>();
-
-       
-    public boolean addMember(Member m) throws IOException{
-        ArrayList<String> FileContent = null;
+    
+    
+ 
+      public void SearchMember(String ID){
+               ArrayList<String> FileContent = null;
+        int flag =0;
         FileManager fm = new FileManager();
         String FileName = "C:\\Users\\A0134543L\\Downloads\\Members.dat.txt";
         try {
@@ -43,28 +47,47 @@ public class MemberManager{
         
         //display contents of the array list
         Iterator itr = FileContent.iterator();
-      while(itr.hasNext()) {
-         Object line = itr.next(); //line 
-         System.out.print(line + " ");
+        while(itr.hasNext()) {
+         String line = itr.next().toString(); //line with commas
+         String MemberID = line.split(",")[1];         
+           if (MemberID.equals(ID)){             
+             flag = 1;
+             break;
+             //System.out.println("This customer is already present");                        
+         }
+         else{
+               flag =0;             
+             
+         }              
       }
-      System.out.println();
-        
-        //Traverse through each line and check if the name exists, if yes then alert saying it is already added, else add it
+      
+      if (flag==1){ System.out.println("This customer is an existing customer"); }
+      if (flag ==0) { // new customer , add him to the file
+          String NewCustomerName = "abc";//fetch it from the input
+          Integer LoyaltyPoints = -1;
+          Member m = new Member(ID,LoyaltyPoints, NewCustomerName );
+          try{
+          addMember(m);
+          }
+          catch(Exception e)
+          {
+                System.out.println(e);
+            
+          } 
+         
+          
+      }
+      
+    }
        
-    
+    public void addMember(Member m) throws IOException{
         
-        
-        return false;
-    }
-    
-    public boolean removeMember(){
-        return false;
-    }
-    
-    public boolean updateMember(){
-        return false;
-    }
-    
+        PrintWriter writer = new PrintWriter("Members.dat.txt", "UTF-8");
+        String Line = m.getCustomerName()+" "+m.getMemberID()+" "+ m.getLoyaltyPoints();
+        System.out.println(Line);
+        writer.println(Line);        
+        writer.close();
+    }  
    
         
     

@@ -11,18 +11,19 @@ package sg.edu.nus.iss.ussa.domain;
  */
 public class Member extends Customer {
     
-    private Integer MemberID;
-    private Integer LoyaltyPoints;
+    private String MemberID;
+    public Integer LoyaltyPoints;
 
-    public Integer getMemberID() {
+    public String getMemberID() {
         return MemberID;
     }
 
     public Integer getLoyaltyPoints() {
         return LoyaltyPoints;
     }
+   
 
-    public Member(Integer MemberID, Integer LoyaltyPoints, String CustomerName) {
+    public Member(String MemberID, Integer LoyaltyPoints, String CustomerName) {
         super(CustomerName);
         this.MemberID = MemberID;
         this.LoyaltyPoints = LoyaltyPoints;

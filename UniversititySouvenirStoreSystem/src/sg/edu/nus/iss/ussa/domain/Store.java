@@ -18,12 +18,13 @@ import java.util.*;
 public class Store {
     public static void main(String args[]) throws IOException {
         MemberManager mm = new MemberManager();
-        Member member = new Member(1234,45, "Satish");
-        try {
+        Member member = new Member("3535",33, "Suraj1");
+        mm.SearchMember("3535");
+       /* try {
             mm.addMember(member);
         } catch (IOException ex) {
             Logger.getLogger(MemberManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         
  }
 }
