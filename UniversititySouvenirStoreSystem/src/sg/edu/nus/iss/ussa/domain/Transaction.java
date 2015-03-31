@@ -15,7 +15,7 @@ import sg.edu.nus.iss.ussa.util.StoreUtil;
  * @author Ajay
  */
 public class Transaction {
-    private int id = 0;
+        private int id = 0;
 	private int redeemedLoyaltyPoint;
 	private Date date;
 	private Customer customer;

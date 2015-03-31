@@ -11,4 +11,17 @@ package sg.edu.nus.iss.ussa.domain;
  */
 public class NonMember extends Customer {
     
+    private Integer NonMemberName;
+
+    public Integer getNonMemberName() {
+        return NonMemberName;
+    }
+
+    public NonMember(Integer NonMemberName, String CustomerName) {
+        super(CustomerName);
+        this.NonMemberName = NonMemberName;
+    }
+    
+
+    
 }

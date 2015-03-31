@@ -11,4 +11,15 @@ package sg.edu.nus.iss.ussa.domain;
  */
 public class Customer {
     
+    private String CustomerName;
+    
+    public String getCustomerName() {
+        return CustomerName;
+    }
+
+        public Customer(String CustomerName) {
+        this.CustomerName = CustomerName;
+    }
+    
+    
 }
