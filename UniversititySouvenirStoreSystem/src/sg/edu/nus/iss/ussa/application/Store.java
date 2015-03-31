@@ -41,7 +41,7 @@ public class Store {
    
         Loginbox.setVisible(true);
         
-         if (Loginbox.getUser() == null) {
+         if (Loginbox.getUser().getUserName() == null) {
             System.exit(0);
         }
          storeframe=new StoreMainFrame();
