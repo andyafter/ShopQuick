@@ -7,7 +7,7 @@ import sg.edu.nus.iss.ussa.exception.DataFileException;
 import sg.edu.nus.iss.ussa.exception.DataInputException;
 import sg.edu.nus.iss.ussa.util.CalcUtil;
 
-public class TransactionItem
+public class CartItem
 {
 	/**
 	 * TransactionItem Class
@@ -20,12 +20,12 @@ public class TransactionItem
 	private double price =0;
 	private int qty = 0;
 	
-	public TransactionItem()
+	public CartItem()
 	{
 		
 	}
 	
-	public TransactionItem(Product product,double price,int qty)
+	public CartItem(Product product,double price,int qty)
 	{
 		this.product = product;
 		this.price = price;

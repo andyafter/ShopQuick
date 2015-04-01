@@ -1,6 +1,7 @@
 package sg.edu.nus.iss.ussa.gui;
 
 
+import sg.edu.nus.iss.ussa.application.Shopping;
 import sg.edu.nus.iss.ussa.domain.Vendor;
 import sg.edu.nus.iss.ussa.domain.Category;
 
@@ -17,7 +18,7 @@ public class VendorDialog extends javax.swing.JDialog {
 	private static final long serialVersionUID = 1L;
 	private final String[] columnNames = new String [] {"Vendor Name", "Description"};
 			
-	private StoreApplication manager;
+	private Shopping manager;
 
     private String VendorName = new String();
     private String VendorDescription  = new String();
@@ -48,7 +49,7 @@ public class VendorDialog extends javax.swing.JDialog {
         }
     };
     
-    public VendorDialog(StoreApplication manager, String categoryCode) {
+    public VendorDialog(Shopping manager, String categoryCode) {
     	this.manager = manager;
     	
         initComponents();
@@ -240,7 +241,7 @@ public class VendorDialog extends javax.swing.JDialog {
          if(this.init())
         {        
             if(this.validName()){
-            	UI_ErrorDialogBox.openDialog("Duplicate vendor name is not possible.");
+            	UIError.openDialog("Duplicate vendor name is not possible.");
             }
             else
             {
@@ -281,7 +282,7 @@ public class VendorDialog extends javax.swing.JDialog {
     private void BT_SSA_UpdateVendorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BT_SSA_UpdateVendorMouseClicked
         int selectedIndex = this.T_SSA_VendorTable.getSelectedRow();
        if(selectedIndex == -1 || this.T_SSA_VendorTable.getRowCount() == 0)
-           UI_ErrorDialogBox.openDialog("Please select an item.");
+           UIError.openDialog("Please select an item.");
        else if(this.init())
        {              
            if(!this.validName()){
@@ -297,7 +298,7 @@ public class VendorDialog extends javax.swing.JDialog {
     private void BT_SSA_DeleteVendorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BT_SSA_DeleteVendorMouseClicked
         int selectedIndex = this.T_SSA_VendorTable.getSelectedRow();
        if(selectedIndex == -1 || this.T_SSA_VendorTable.getRowCount() == 0)
-           UI_ErrorDialogBox.openDialog("Please select an item.");
+           UIError.openDialog("Please select an item.");
        else
        {
            	this.tableModel.removeRow(selectedIndex);
@@ -426,9 +427,9 @@ public class VendorDialog extends javax.swing.JDialog {
         this.VendorName = this.TF_SSA_VendorName.getText().trim();
         this.VendorDescription = this.TF_SSA_VendorDescription.getText().trim();
         if(this.VendorName.isEmpty() || this.VendorDescription.isEmpty())
-            UI_ErrorDialogBox.openDialog("Vendor Name or Description should not be empty.");
+            UIError.openDialog("Vendor Name or Description should not be empty.");
         else if(this.VendorDescription.contains(",") || this.VendorName.contains(","))
-            UI_ErrorDialogBox.openDialog("Please avoid COMMA(,)!!");
+            UIError.openDialog("Please avoid COMMA(,)!!");
         else
             return true;
         return false;

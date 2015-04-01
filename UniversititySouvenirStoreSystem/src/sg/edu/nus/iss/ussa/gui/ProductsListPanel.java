@@ -1,5 +1,6 @@
 package sg.edu.nus.iss.ussa.gui;
 
+import sg.edu.nus.iss.ussa.application.Shopping;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -46,9 +47,9 @@ public class ProductsListPanel extends JPanel{
 	private JButton deleteButton;
 	private JTable productTable;
 	private DefaultTableModel tableModel;
-	private StoreApplication manager;
+	private Shopping manager;
 	
-	public ProductsListPanel(StoreApplication manager){
+	public ProductsListPanel(Shopping manager){
 		this.manager = manager;
 		setLayout(new BorderLayout());
 		add("North",createTopPanel());
@@ -141,7 +142,7 @@ public class ProductsListPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				ProductDialog d = new ProductDialog(manager,"Add Product");				
+				ProductWindow d = new ProductWindow(manager,"Add Product");				
 				d.setVisible(true);
 			}
 		});
@@ -157,7 +158,7 @@ public class ProductsListPanel extends JPanel{
 				int columnIndex = productTable.getColumnModel().getColumnIndex("Id");
 				String id = (String)tableModel.getValueAt(rowIndex, columnIndex);
 				//int index = Integer.parseInt(id.substring(4));
-				ProductDialog d = new ProductDialog(manager,"Modify Product", id);
+				ProductWindow d = new ProductWindow(manager,"Modify Product", id);
 				d.setVisible(true);
 			}
 		});

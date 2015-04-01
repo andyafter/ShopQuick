@@ -1,4 +1,5 @@
 package sg.edu.nus.iss.ussa.gui;
+import sg.edu.nus.iss.ussa.application.Shopping;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -32,9 +33,9 @@ public class LoginScreen extends javax.swing.JFrame {
 	private JLabel lblPwd;
 	private JTextField txtName;
 	
-	private StoreApplication storeApp;
+	private Shopping storeApp;
 	
-	public LoginScreen(StoreApplication storeApp)
+	public LoginScreen(Shopping storeApp)
 	{
 		super();
 		this.storeApp=storeApp;

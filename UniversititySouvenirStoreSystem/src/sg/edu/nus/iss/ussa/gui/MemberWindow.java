@@ -1,5 +1,6 @@
 package sg.edu.nus.iss.ussa.gui;
 
+import sg.edu.nus.iss.ussa.application.Shopping;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,13 +11,13 @@ import javax.swing.border.EmptyBorder;
 import sg.edu.nus.iss.ussa.domain.*;
 import sg.edu.nus.iss.ussa.util.StringDocument;
 
-public class MemberDialog extends JDialog {
+public class MemberWindow extends JDialog {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private StoreApplication manager;
+	private Shopping manager;
 	private StoreWindow mainScreen;
 	private int index;
 
@@ -24,7 +25,7 @@ public class MemberDialog extends JDialog {
 	private JTextField memberID;
 	private JTextField loyaltyPoint;
 
-	public MemberDialog(StoreApplication manager, String title) {
+	public MemberWindow(Shopping manager, String title) {
 		super(manager.getStoreWindow(), title);
 		this.manager = manager;
 		this.mainScreen = manager.getStoreWindow();
@@ -32,7 +33,7 @@ public class MemberDialog extends JDialog {
 		add("South", createAddBottomPanel());
 	}
 
-	public MemberDialog(StoreApplication manager, String title, String id) {
+	public MemberWindow(Shopping manager, String title, String id) {
 		super(manager.getStoreWindow(), title);
 		this.manager = manager;
 		this.mainScreen = manager.getStoreWindow();
@@ -45,6 +46,7 @@ public class MemberDialog extends JDialog {
 
 	private void initGUI() {
 		try {
+                    System.out.println("Member Dialog initGUI");
 			setLayout(new BorderLayout());
 			add("Center", createCenterPanel());
 			setSize(400, 160);

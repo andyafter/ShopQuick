@@ -1,4 +1,4 @@
-package sg.edu.nus.iss.ussa.domain;
+package sg.edu.nus.iss.ussa.manager;
 
 
 import java.io.IOException;
@@ -6,7 +6,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
-import sg.edu.nus.iss.ussa.dataio.DiscountDao;
+import sg.edu.nus.iss.ussa.dataio.DiscountIO;
+import sg.edu.nus.iss.ussa.domain.Customer;
+import sg.edu.nus.iss.ussa.domain.Discount;
+import sg.edu.nus.iss.ussa.domain.Member;
+import sg.edu.nus.iss.ussa.domain.MemberDiscount;
 import sg.edu.nus.iss.ussa.exception.DataFileException;
 import sg.edu.nus.iss.ussa.util.Util;
 
@@ -15,16 +19,16 @@ import sg.edu.nus.iss.ussa.util.Util;
  * 
  * @ tanuj
  */
-public class DiscountMgr {
+public class DiscountManager {
 	private ArrayList<Discount> discountList;
-	private DiscountDao discountDao;
+	private DiscountIO discountDao;
 	
-	public DiscountMgr() throws IOException, DataFileException{
-		discountDao = new DiscountDao();
+	public DiscountManager() throws IOException, DataFileException{
+		discountDao = new DiscountIO();
 		loadData();
 	}
 
-	public DiscountMgr(ArrayList<Discount> list){
+	public DiscountManager(ArrayList<Discount> list){
 		this.discountList = list;
 	}
 

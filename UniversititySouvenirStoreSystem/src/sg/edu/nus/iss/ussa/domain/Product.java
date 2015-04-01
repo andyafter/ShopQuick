@@ -3,7 +3,7 @@ package sg.edu.nus.iss.ussa.domain;
 
 
 public class Product {
-
+    
 	private String productId;
 	private Category category;
 	private String name;

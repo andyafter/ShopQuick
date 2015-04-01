@@ -1,5 +1,6 @@
 package sg.edu.nus.iss.ussa.gui;
 
+import sg.edu.nus.iss.ussa.application.Shopping;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -19,9 +20,9 @@ import sg.edu.nus.iss.ussa.domain.*;
 import sg.edu.nus.iss.ussa.util.DigitDocument;
 import sg.edu.nus.iss.ussa.util.StringDocument;
 
-public class ProductDialog extends JDialog{
+public class ProductWindow extends JDialog{
 
-	private StoreApplication manager;
+	private Shopping manager;
 	private StoreWindow mainScreen;
 	private String id;
 	
@@ -36,7 +37,7 @@ public class ProductDialog extends JDialog{
 	private JTextField reorderQtyText;
 	private JTextField orderQtyText;
 	
-	public ProductDialog(StoreApplication manager, String title){
+	public ProductWindow(Shopping manager, String title){
 		super(manager.getStoreWindow(),title);
 		this.manager = manager;
 		this.mainScreen = manager.getStoreWindow();
@@ -47,7 +48,7 @@ public class ProductDialog extends JDialog{
 		idText.setText(id);
 	}
 	
-	public ProductDialog(StoreApplication manager,String title,String id){
+	public ProductWindow(Shopping manager,String title,String id){
 		super(manager.getStoreWindow(),title);
 		this.manager = manager;
 		this.mainScreen = manager.getStoreWindow();

@@ -21,7 +21,7 @@ import sg.edu.nus.iss.ussa.util.Util;
  * @author A0136010A
  * @version 1.0
  */
-public class TransactionDao extends BaseDao
+public class TransactionIO extends DataIO
 {
 	
 	// datafile name
@@ -31,7 +31,7 @@ public class TransactionDao extends BaseDao
 	// use store to get relevant product objects
 	private Store store;
 	
-	public TransactionDao(Store store){
+	public TransactionIO(Store store){
 		this.store = store;
 	}
 

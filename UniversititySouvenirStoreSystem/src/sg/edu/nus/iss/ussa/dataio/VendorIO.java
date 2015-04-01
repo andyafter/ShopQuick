@@ -8,7 +8,7 @@ import sg.edu.nus.iss.ussa.domain.Vendor;
 import sg.edu.nus.iss.ussa.exception.DataFileException;
 import sg.edu.nus.iss.ussa.util.Util;
 
-public class VendorDao extends BaseDao {
+public class VendorIO extends DataIO {
 	// datafile name
 	private static final String C_File_Name_Prxfix = "Vendors";
 	private static final String C_File_Name_Suffix = ".dat";

@@ -14,7 +14,7 @@ import sg.edu.nus.iss.ussa.util.Util;
  * @author  Achyut Suresh Rao
  * 
  */
-public class MemberDao extends BaseDao {
+public class MemberIO extends DataIO {
 
 	// datafile name
 	private static final String C_File_Name = "Members.dat";

@@ -1,5 +1,11 @@
 package sg.edu.nus.iss.ussa.domain;
 
+import sg.edu.nus.iss.ussa.manager.ProductManager;
+import sg.edu.nus.iss.ussa.manager.TransactionManager;
+import sg.edu.nus.iss.ussa.manager.StoreKeeperManager;
+import sg.edu.nus.iss.ussa.manager.DiscountManager;
+import sg.edu.nus.iss.ussa.manager.MemberManager;
+import sg.edu.nus.iss.ussa.manager.CategoryManager;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,12 +22,12 @@ import sg.edu.nus.iss.ussa.exception.DataNotFoundException;
  */
 public class Store {
 
-	private StoreKeeperMgr storekeeperMgr;	
-	private MemberMgr memberMgr;
-	private TransactionMgr transactionMgr;
-	private ProductMgr productMgr;
-	private CategoryMgr categoryMgr;
-	private DiscountMgr discountMgr;
+	private StoreKeeperManager storekeeperMgr;	
+	private MemberManager memberMgr;
+	private TransactionManager transactionMgr;
+	private ProductManager productMgr;
+	private CategoryManager categoryMgr;
+	private DiscountManager discountMgr;
 	
 	/**
 	 * 
@@ -29,12 +35,12 @@ public class Store {
 	 * @throws DataFileException
 	 */
 	public Store() throws IOException, DataFileException {
-		storekeeperMgr = new StoreKeeperMgr();
-		categoryMgr = new CategoryMgr();
-		memberMgr = new MemberMgr();
-		discountMgr = new DiscountMgr();
-		productMgr = new ProductMgr(this);
-		transactionMgr = new TransactionMgr(this);
+		storekeeperMgr = new StoreKeeperManager();
+		categoryMgr = new CategoryManager();
+		memberMgr = new MemberManager();
+		discountMgr = new DiscountManager();
+		productMgr = new ProductManager(this);
+		transactionMgr = new TransactionManager(this);
 	}
 	
 	/**
@@ -168,8 +174,8 @@ public class Store {
 		transactionMgr.addTransaction(transaction);
 		
 		// update product's quantity
-		ArrayList<TransactionItem> itemList = transaction.getItemList();
-		for(TransactionItem item : itemList){
+		ArrayList<CartItem> itemList = transaction.getItemList();
+		for(CartItem item : itemList){
 			productMgr.changeProductQty(item.getProduct(), item.getProduct().getQuantityAvailable() - item.getQty());
 		}
 		

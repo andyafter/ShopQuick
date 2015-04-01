@@ -1,6 +1,7 @@
 package sg.edu.nus.iss.ussa.gui;
 
 
+import sg.edu.nus.iss.ussa.application.Shopping;
 import sg.edu.nus.iss.ussa.domain.Category;
 import sg.edu.nus.iss.ussa.domain.Product;
 import sg.edu.nus.iss.ussa.domain.Vendor;
@@ -17,7 +18,7 @@ public class CategoryListPanel extends javax.swing.JPanel {
 	private static final long serialVersionUID = 1L;
 	private final String[] columnNames = {"Category Code", "Categry Name"};
 	
-	private StoreApplication manager;
+	private Shopping manager;
 	
     private String categoryName = new String();
     private String categoryCode  = new String();
@@ -26,7 +27,7 @@ public class CategoryListPanel extends javax.swing.JPanel {
     private ArrayList<Category> UI_CategoryList = new ArrayList<Category>();
     private DefaultTableModel tableModel = new DefaultTableModel();
     
-    public CategoryListPanel(StoreApplication manager) {
+    public CategoryListPanel(Shopping manager) {
     	this.manager = manager;
   
         initComponents();
@@ -204,7 +205,7 @@ public class CategoryListPanel extends javax.swing.JPanel {
         {
             if(!this.validAdd())
             {
-                UI_ErrorDialogBox.openDialog("Duplicate Category ID `"+categoryCode+"`");
+                UIError.openDialog("Duplicate Category ID `"+categoryCode+"`");
             }
             else
             {
@@ -217,7 +218,7 @@ public class CategoryListPanel extends javax.swing.JPanel {
     private void BT_SSA_UpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BT_SSA_UpdateMouseClicked
        int selectedIndex = this.T_SSA_CategoryTable.getSelectedRow();
        if(selectedIndex == -1 || this.T_SSA_CategoryTable.getRowCount() == 0)
-           UI_ErrorDialogBox.openDialog("Please select an item.");
+           UIError.openDialog("Please select an item.");
        else if(this.init())
        {
            if(this.validUpd())
@@ -227,7 +228,7 @@ public class CategoryListPanel extends javax.swing.JPanel {
                this.manager.updCategory(code, name);
                reloadData();
            }else
-        	   UI_ErrorDialogBox.openDialog("Category Code should not be changed");
+        	   UIError.openDialog("Category Code should not be changed");
        }
     }//GEN-LAST:event_BT_SSA_UpdateMouseClicked
 
@@ -243,7 +244,7 @@ public class CategoryListPanel extends javax.swing.JPanel {
     private void BT_SSA_DeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BT_SSA_DeleteMouseClicked
 	   int selectedIndex = this.T_SSA_CategoryTable.getSelectedRow();
 	   if(selectedIndex == -1 || this.T_SSA_CategoryTable.getRowCount() == 0)
-	       UI_ErrorDialogBox.openDialog("Please select an item.");
+	       UIError.openDialog("Please select an item.");
 	   else
 	   {	
 		   	String code = this.tableModel.getValueAt(this.T_SSA_CategoryTable.getSelectedRow(),0).toString();
@@ -251,7 +252,7 @@ public class CategoryListPanel extends javax.swing.JPanel {
 				manager.deleteCategoryByCode(code);
 				reloadData();
 			}else
-			   UI_ErrorDialogBox.openDialog("there have product in this Category `"+ code + "`, should not be deleted");
+			   UIError.openDialog("there have product in this Category `"+ code + "`, should not be deleted");
     	   	
        }
     }//GEN-LAST:event_BT_SSA_DeleteMouseClicked
@@ -273,7 +274,7 @@ public class CategoryListPanel extends javax.swing.JPanel {
     private void BT_SSA_ManageVendorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BT_SSA_ManageVendorMouseClicked
         int selectedIndex = this.T_SSA_CategoryTable.getSelectedRow();
         if(selectedIndex == -1 || this.T_SSA_CategoryTable.getRowCount() == 0)
-            UI_ErrorDialogBox.openDialog("Please select an item.");
+            UIError.openDialog("Please select an item.");
         else
         { 
             VendorDialog vendorDlg = new VendorDialog(manager, this.tableModel.getValueAt(selectedIndex,0).toString());
@@ -354,11 +355,11 @@ public class CategoryListPanel extends javax.swing.JPanel {
         this.categoryName = this.TF_SSA_CategoryName.getText().trim();
        
         if(this.categoryName.isEmpty() || this.categoryCode.isEmpty())
-            UI_ErrorDialogBox.openDialog("Category Name or ID should not be empty.");
+            UIError.openDialog("Category Name or ID should not be empty.");
         else if(this.categoryCode.length()!= 3)
-            UI_ErrorDialogBox.openDialog(" ID Should be 3 characters long!!");
+            UIError.openDialog(" ID Should be 3 characters long!!");
         else if(this.categoryName.contains(",") || this.categoryCode.contains(","))
-            UI_ErrorDialogBox.openDialog("Please avoid COMMA(,)!!");
+            UIError.openDialog("Please avoid COMMA(,)!!");
         else
             return true;
         return false;

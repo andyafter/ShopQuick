@@ -1,4 +1,4 @@
-package sg.edu.nus.iss.ussa.gui;
+package sg.edu.nus.iss.ussa.application;
 
 
 import java.io.IOException;
@@ -14,21 +14,21 @@ import sg.edu.nus.iss.ussa.domain.Transaction;
 import sg.edu.nus.iss.ussa.domain.Vendor;
 import sg.edu.nus.iss.ussa.exception.DataFileException;
 import sg.edu.nus.iss.ussa.exception.DataNotFoundException;
+import sg.edu.nus.iss.ussa.gui.LoginScreen;
+import sg.edu.nus.iss.ussa.gui.StoreWindow;
 
 /**
  * Main method here
  * @author Xu Minsheng
  *
  */
-public class StoreApplication {
+public class Shopping {
 
 	private Store store;
 	private LoginScreen loginScreen;
 	private StoreWindow storeWindow;
-	
-	public StoreApplication(){
-		// instantiate attributes
-		
+	public Shopping(){
+		// instantiate attributes	
 		try {
 			// instantiate store & load date
 			store = new Store();
@@ -36,23 +36,15 @@ public class StoreApplication {
 			
 			e.printStackTrace();
 			System.exit(0);
-		}
-		
+		}	
 	}
-	
-	/**
-	 * 
-	 */
 	public void startup(){
 		// show login screen
 		loginScreen = new LoginScreen(this);
 		loginScreen.setLocationRelativeTo(null);
 		loginScreen.setVisible(true);
 	}
-	
-	/**
-	 * 
-	 */
+        
 	public void shutdown(){
 		try {
 			store.saveData();
@@ -245,7 +237,6 @@ public class StoreApplication {
 	public void updCategory(String code, String name){
 		store.updCategory(code, name);
 	}
-	
 	/**
 	 * 
 	 * @param code
@@ -253,25 +244,12 @@ public class StoreApplication {
 	public void deleteCategoryByCode(String code){
 		store.delCategoryByCode(code);
 	}
-	
 	public ArrayList<Discount> getDiscountList(){
 		return store.getDiscountList();
 	
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public static void main(String[] args) {
-		StoreApplication manager = new StoreApplication();
+		Shopping manager = new Shopping();
 		manager.startup();	
 		
 		/*
@@ -290,16 +268,13 @@ public class StoreApplication {
 		//UI_CategoryManager.openCategoryManagerUI(manager);
 		
 	}
-
 	public StoreWindow getStoreWindow() {
 		return storeWindow;
 	}
-
 	public Discount get(int index) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	public void addDiscount(String discountCode, String discountDescription,
 			Date startDate, int period, double percent, String Applicable) {
 		// TODO Auto-generated method stub

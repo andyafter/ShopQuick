@@ -16,7 +16,7 @@ import sg.edu.nus.iss.ussa.util.Util;
  * @author Xu Minsheng
  *
  */
-public class ProductManager extends BaseDao{
+public class ProductIO extends DataIO{
 
 	// datafile name
 	private static final String C_File_Name = "Products.dat";
@@ -28,7 +28,7 @@ public class ProductManager extends BaseDao{
 	/**
 	 * 
 	 */
-	public ProductManager(Store store) {
+	public ProductIO(Store store) {
 		this.store = store;
 	}
 

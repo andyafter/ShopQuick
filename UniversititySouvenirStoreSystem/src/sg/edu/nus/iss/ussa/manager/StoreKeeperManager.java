@@ -1,25 +1,26 @@
 /**
  * 
  */
-package sg.edu.nus.iss.ussa.domain;
+package sg.edu.nus.iss.ussa.manager;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import sg.edu.nus.iss.ussa.dataio.StoreKeeperDao;
+import sg.edu.nus.iss.ussa.dataio.StoreKeeperIO;
+import sg.edu.nus.iss.ussa.domain.StoreKeeper;
 
 /**
  * @author CHARAN
  *
  */
-public class StoreKeeperMgr {
+public class StoreKeeperManager {
 	
 	private ArrayList<StoreKeeper> storeKeeperList;
-	private StoreKeeperDao userDao;
+	private StoreKeeperIO userDao;
 	
-	public StoreKeeperMgr() throws IOException
+	public StoreKeeperManager() throws IOException
 	{
-		userDao = new StoreKeeperDao();
+		userDao = new StoreKeeperIO();
 		storeKeeperList = new ArrayList<StoreKeeper>();
 		storeKeeperList = userDao.loadDataFromFile();
 	}

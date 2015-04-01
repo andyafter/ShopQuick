@@ -1,25 +1,26 @@
-package sg.edu.nus.iss.ussa.domain;
+package sg.edu.nus.iss.ussa.manager;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import sg.edu.nus.iss.ussa.dataio.MemberDao;
+import sg.edu.nus.iss.ussa.dataio.MemberIO;
+import sg.edu.nus.iss.ussa.domain.Member;
 import sg.edu.nus.iss.ussa.exception.DataFileException;
 
 /**
  * @author Achyut Suresh Rao
  */
 
-public class MemberMgr {
+public class MemberManager {
 
 	private ArrayList<Member> memberList;
-	private MemberDao memberDao;
+	private MemberIO memberDao;
 
-	public MemberMgr() throws IOException, DataFileException {
+	public MemberManager() throws IOException, DataFileException {
 
 		memberList = new ArrayList<Member>();
-		memberDao = new MemberDao();
+		memberDao = new MemberIO();
 		readFile();
 	}
 

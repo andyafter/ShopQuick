@@ -1,8 +1,8 @@
 package sg.edu.nus.iss.ussa.gui;
 
-public class UI_ErrorDialogBox extends javax.swing.JFrame {
+public class UIError extends javax.swing.JFrame {
 
-    public UI_ErrorDialogBox() {
+    public UIError() {
         initComponents();
     }
 
@@ -78,15 +78,15 @@ public class UI_ErrorDialogBox extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UI_ErrorDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UIError.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UI_ErrorDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UIError.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UI_ErrorDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UIError.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UI_ErrorDialogBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UIError.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        UI_ErrorDialogBox UIEDB = new UI_ErrorDialogBox();
+        UIError UIEDB = new UIError();
         UIEDB.L_SSA_ErrorMessage.setText(meaasge);
         UIEDB.setVisible(true);
         

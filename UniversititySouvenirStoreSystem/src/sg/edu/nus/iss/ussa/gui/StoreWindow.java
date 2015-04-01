@@ -1,5 +1,6 @@
 package sg.edu.nus.iss.ussa.gui;
 
+import sg.edu.nus.iss.ussa.application.Shopping;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -45,7 +46,7 @@ public class StoreWindow extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private StoreApplication manager;
+	private Shopping manager;
 	private JMenuBar menuBar;
 	private JPanel cards;
 	private ProductsListPanel productListPanel;
@@ -58,7 +59,7 @@ public class StoreWindow extends JFrame{
 	
 	//private ReportPanel reportPanel;
 	
-	public StoreWindow(StoreApplication manager){
+	public StoreWindow(Shopping manager){
 		super("University Store System");
 		this.manager = manager;
 		
@@ -165,7 +166,7 @@ public class StoreWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				ProductDialog d = new ProductDialog(manager,"Add Product");
+				ProductWindow d = new ProductWindow(manager,"Add Product");
 				d.setVisible(true);
 			}
 		});
@@ -293,7 +294,7 @@ public class StoreWindow extends JFrame{
 			
 			@Override
 			public void actionPerformed (ActionEvent e) {
-				ProductDialog dialog = new ProductDialog(manager,"Add Product");
+				ProductWindow dialog = new ProductWindow(manager,"Add Product");
 				dialog.setVisible(true);
 			}
 		});
@@ -332,7 +333,7 @@ public class StoreWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				MemberDialog memDialog = new MemberDialog(manager, "Add Member");
+				MemberWindow memDialog = new MemberWindow(manager, "Add Member");
 				memDialog.setVisible(true);
 				System.out.println("add member");
 				//changeCard("memberList");

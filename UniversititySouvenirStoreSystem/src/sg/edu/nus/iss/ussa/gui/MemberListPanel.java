@@ -1,5 +1,6 @@
 package sg.edu.nus.iss.ussa.gui;
 
+import sg.edu.nus.iss.ussa.application.Shopping;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -20,7 +21,7 @@ public class MemberListPanel extends JPanel {
 	private final String[] columnNames = { "Name", "Member ID",
 			"Loyalty Points" };
 
-	private StoreApplication manager;
+	private Shopping manager;
 	private JButton modifyButton;
 	private JButton deleteButton;
 	private JTable memberTable;
@@ -30,7 +31,7 @@ public class MemberListPanel extends JPanel {
 	 * 
 	 * @param manager
 	 */
-	public MemberListPanel(StoreApplication manager) {
+	public MemberListPanel(Shopping manager) {
 		this.manager = manager;
 		setLayout(new BorderLayout());
 		add("North", createTopPanel());
@@ -141,7 +142,7 @@ public class MemberListPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				MemberDialog memberDlg = new MemberDialog(manager, "Add Member");
+				MemberWindow memberDlg = new MemberWindow(manager, "Add Member");
 				memberDlg.setVisible(true);
 			}
 		});
@@ -155,7 +156,7 @@ public class MemberListPanel extends JPanel {
 				// TODO Auto-generated method stub
 				String id = (String) memberTable.getValueAt(
 						memberTable.getSelectedRow(), 1);
-				MemberDialog memberDlg = new MemberDialog(manager,
+				MemberWindow memberDlg = new MemberWindow(manager,
 						"Modify Member", id);
 
 				memberDlg.setVisible(true);

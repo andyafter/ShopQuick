@@ -5,20 +5,20 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import sg.edu.nus.iss.ussa.domain.Discount;
-import sg.edu.nus.iss.ussa.domain.DiscountMgr;
+import sg.edu.nus.iss.ussa.manager.DiscountManager;
 import sg.edu.nus.iss.ussa.domain.MemberDiscount;
 import sg.edu.nus.iss.ussa.domain.OcDiscount;
 import sg.edu.nus.iss.ussa.exception.DataFileException;
 import sg.edu.nus.iss.ussa.exception.DataInputException;
 import sg.edu.nus.iss.ussa.util.Util;
 
-public class DiscountDao extends BaseDao {
+public class DiscountIO extends DataIO {
 	private static final  String C_File_Name = "Discounts.dat";
 	private static final int  C_Field_No  = 6;
 	//private Discount discount;
 
 
-public DiscountDao() {
+public DiscountIO() {
 	
 }
 
@@ -121,7 +121,7 @@ public void saveDataToFile(ArrayList<Discount> discountList) throws IOException 
 		
 		try {
 			//discList=testDao.loadDataFromFile();
-			DiscountMgr discountMgrObject= new DiscountMgr();
+			DiscountManager discountMgrObject= new DiscountManager();
 			
 			mDisc=discountMgrObject.getMaxDiscount("Public", 1);
 		/*	discList=discountMgrObject.getDiscountlist();

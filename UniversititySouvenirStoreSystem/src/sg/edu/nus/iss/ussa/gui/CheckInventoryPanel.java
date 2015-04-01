@@ -1,5 +1,6 @@
 package sg.edu.nus.iss.ussa.gui;
 
+import sg.edu.nus.iss.ussa.application.Shopping;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -24,12 +25,12 @@ import sg.edu.nus.iss.ussa.util.TableColumnAdjuster;
 public class CheckInventoryPanel extends JPanel{
 
 	private String[] columnNames = {"Id","Name","Available Quantity","Threshold","Order Quantity"};
-	private StoreApplication manager;
+	private Shopping manager;
 	private JTable table;
 	private DefaultTableModel tableModel;
 	private JButton fire = new JButton("Fire");
 	
-	public CheckInventoryPanel(StoreApplication manager){
+	public CheckInventoryPanel(Shopping manager){
 		this.manager = manager;
 		setLayout(new BorderLayout());
 		add("North",createNorthPanel());

@@ -1,5 +1,6 @@
 package sg.edu.nus.iss.ussa.gui;
 
+import sg.edu.nus.iss.ussa.application.Shopping;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -27,7 +28,7 @@ import sg.edu.nus.iss.ussa.util.TableColumnAdjuster;
  * @author Xu Minsheng
  *
  */
-public class CategoryDialog extends JDialog{
+public class CategoryWindow extends JDialog{
 
 	/**
 	 * 
@@ -35,7 +36,7 @@ public class CategoryDialog extends JDialog{
 	private static final long serialVersionUID = 1L;
 	private final String[] columnNames = {"Name","Description"};
 	
-	private StoreApplication manager;
+	private Shopping manager;
 	private StoreWindow mainScreen;
 	
 	private DefaultTableModel tableModel;
@@ -45,7 +46,7 @@ public class CategoryDialog extends JDialog{
 	
 	private Category category;
 	
-	public CategoryDialog( StoreApplication manager, String title, Category category, DialogMode dialogMode){
+	public CategoryWindow( Shopping manager, String title, Category category, DialogMode dialogMode){
 		super(manager.getStoreWindow(),title);
 		this.manager = manager;
 		this.mainScreen = manager.getStoreWindow();

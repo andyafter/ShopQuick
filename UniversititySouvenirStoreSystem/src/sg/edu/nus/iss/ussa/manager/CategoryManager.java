@@ -1,10 +1,12 @@
-package sg.edu.nus.iss.ussa.domain;
+package sg.edu.nus.iss.ussa.manager;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import sg.edu.nus.iss.ussa.dataio.CategoryDao;
-import sg.edu.nus.iss.ussa.dataio.VendorDao;
+import sg.edu.nus.iss.ussa.dataio.VendorIO;
+import sg.edu.nus.iss.ussa.domain.Category;
+import sg.edu.nus.iss.ussa.domain.Vendor;
 import sg.edu.nus.iss.ussa.exception.DataFileException;
 
 /**
@@ -12,7 +14,7 @@ import sg.edu.nus.iss.ussa.exception.DataFileException;
  * @author Xu Minsheng
  *
  */
-public class CategoryMgr {
+public class CategoryManager {
 	private ArrayList<Category> categoryList;
 	// this VendorList only exist for maintain data consistency
 	// for example, if CLO and MUG share one vendor Nancy's , 
@@ -20,16 +22,16 @@ public class CategoryMgr {
 	//private ArrayList<Vendor> vendorList;
 	
 	private CategoryDao categoryDao;
-	private VendorDao vendorDao;
+	private VendorIO vendorDao;
 	
 	/**
 	 * 
 	 * @throws IOException
 	 * @throws DataFileException
 	 */
-	public CategoryMgr() throws IOException, DataFileException{
+	public CategoryManager() throws IOException, DataFileException{
 		categoryDao = new CategoryDao();
-		vendorDao = new VendorDao();
+		vendorDao = new VendorIO();
 		loadData();
 	}
 	

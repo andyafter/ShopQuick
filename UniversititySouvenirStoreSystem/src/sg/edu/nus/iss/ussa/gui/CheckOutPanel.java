@@ -1,6 +1,7 @@
 //CheckOutPanel.java
 package sg.edu.nus.iss.ussa.gui;
 
+import sg.edu.nus.iss.ussa.application.Shopping;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -33,7 +34,7 @@ import sg.edu.nus.iss.ussa.domain.Customer;
 import sg.edu.nus.iss.ussa.domain.Discount;
 import sg.edu.nus.iss.ussa.domain.Product;
 import sg.edu.nus.iss.ussa.domain.Transaction;
-import sg.edu.nus.iss.ussa.domain.TransactionItem;
+import sg.edu.nus.iss.ussa.domain.CartItem;
 import sg.edu.nus.iss.ussa.exception.DataInputException;
 import sg.edu.nus.iss.ussa.exception.DataNotFoundException;
 import sg.edu.nus.iss.ussa.util.DigitDocument;
@@ -79,7 +80,7 @@ public class CheckOutPanel extends JPanel
 	private String tempBarCode;
 	private Vector vector = new Vector();
 	private Listener listener = new Listener();
-	private StoreApplication sa = null;
+	private Shopping sa = null;
 	private Transaction transaction;
 	
 	private final String ERR_MSG_MEMBER_NOT_EXIST = "Error MemberID!";
@@ -113,7 +114,7 @@ public class CheckOutPanel extends JPanel
 		{
 			Vector subVector = new Vector();
 			subVector.add(i+1);
-			TransactionItem transactionitem = (TransactionItem) itemList.get(i);
+			CartItem transactionitem = (CartItem) itemList.get(i);
 			product = transactionitem.getProduct();
 			subVector.add(product.getBarCodeNumber());
 			subVector.add(product.getName());
@@ -128,7 +129,7 @@ public class CheckOutPanel extends JPanel
 		setOutputValue();
 	}
 
-	public void addProduct(ArrayList<TransactionItem> arrayList,int qty)
+	public void addProduct(ArrayList<CartItem> arrayList,int qty)
 	{
 		int productAddFlag = -1;
 		for (int m = 0;m < arrayList.size();m++)
@@ -140,11 +141,11 @@ public class CheckOutPanel extends JPanel
 		}
 		if (productAddFlag==-1)
 		{
-			arrayList.add(new TransactionItem(product,product.getPrice(),qty));
+			arrayList.add(new CartItem(product,product.getPrice(),qty));
 		}
 		else
 		{
-			TransactionItem tempTransactionItem = arrayList.get(productAddFlag);
+			CartItem tempTransactionItem = arrayList.get(productAddFlag);
 			tempTransactionItem.setQty(tempTransactionItem.getQty()+qty);
 		}
 	}
@@ -191,7 +192,7 @@ public class CheckOutPanel extends JPanel
 		}
 	}
 
-	public CheckOutPanel(StoreApplication sa)
+	public CheckOutPanel(Shopping sa)
 	{ // ʵ�ֹ��췽��
 		this.sa = sa;
 		// OPeration
@@ -624,7 +625,7 @@ public class CheckOutPanel extends JPanel
 						JlError.setText(ERR_MSG_PRODCUT_NOT_EXIST);
 						return;
 					}
-					ArrayList<TransactionItem> tempTransactionList = transaction.getItemList();
+					ArrayList<CartItem> tempTransactionList = transaction.getItemList();
 					addProduct(tempTransactionList,intqty);
 					tableDataBinding();
 					JtBarCodeID.setText(null);

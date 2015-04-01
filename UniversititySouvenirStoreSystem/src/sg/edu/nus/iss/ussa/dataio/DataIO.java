@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Xu Minsheng
  *
  */
-public abstract class BaseDao {
+public abstract class DataIO {
 	
 	private static final String C_DataFolderPath = "./data/";
 	

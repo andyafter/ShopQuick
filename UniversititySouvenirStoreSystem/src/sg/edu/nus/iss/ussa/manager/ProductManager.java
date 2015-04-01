@@ -1,9 +1,12 @@
-package sg.edu.nus.iss.ussa.domain;
+package sg.edu.nus.iss.ussa.manager;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import sg.edu.nus.iss.ussa.dataio.ProductManager;
+import sg.edu.nus.iss.ussa.dataio.ProductIO;
+import sg.edu.nus.iss.ussa.domain.Category;
+import sg.edu.nus.iss.ussa.domain.Product;
+import sg.edu.nus.iss.ussa.domain.Store;
 import sg.edu.nus.iss.ussa.exception.DataFileException;
 
 /*
@@ -11,17 +14,17 @@ import sg.edu.nus.iss.ussa.exception.DataFileException;
  * @ XIE JIABAO
  */
 
-public class ProductMgr {
+public class ProductManager {
 	
 	private ArrayList<Product> productList;
-	private ProductManager productDao;
+	private ProductIO productDao;
 	
-	public ProductMgr(Store store) throws IOException, DataFileException{
-		productDao = new ProductManager(store);
+	public ProductManager(Store store) throws IOException, DataFileException{
+		productDao = new ProductIO(store);
 		loadData();
 	}
 	
-	public ProductMgr(ArrayList<Product> list){
+	public ProductManager(ArrayList<Product> list){
 		this.productList = list;
 	}
 	

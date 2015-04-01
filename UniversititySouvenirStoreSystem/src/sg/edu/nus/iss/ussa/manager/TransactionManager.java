@@ -1,5 +1,5 @@
 //TransactionMgr.java
-package sg.edu.nus.iss.ussa.domain;
+package sg.edu.nus.iss.ussa.manager;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -7,10 +7,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import sg.edu.nus.iss.ussa.dataio.TransactionDao;
+import sg.edu.nus.iss.ussa.dataio.TransactionIO;
+import sg.edu.nus.iss.ussa.domain.Store;
+import sg.edu.nus.iss.ussa.domain.Transaction;
 import sg.edu.nus.iss.ussa.exception.DataFileException;
 
-public class TransactionMgr
+public class TransactionManager
 {
 	/**
 	 * TransactionMgr Class
@@ -20,7 +22,7 @@ public class TransactionMgr
 	 * @version 1.0
 	 */
 	private ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
-	private TransactionDao td;
+	private TransactionIO td;
 	
 	public void finalize() throws IOException
 	{
@@ -32,9 +34,9 @@ public class TransactionMgr
 		td.saveDataToFile(transactionList);
 	}
 	
-	public TransactionMgr(Store store) throws IOException, DataFileException
+	public TransactionManager(Store store) throws IOException, DataFileException
 	{
-		td = new TransactionDao(store);
+		td = new TransactionIO(store);
 		transactionList = td.loadDataFromFile();
 	}
 	

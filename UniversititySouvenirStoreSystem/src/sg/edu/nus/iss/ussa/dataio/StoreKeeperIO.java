@@ -13,7 +13,7 @@ import sg.edu.nus.iss.ussa.exception.DataFileException;
  * @author CHARAN
  *
  */
-public class StoreKeeperDao extends BaseDao {
+public class StoreKeeperIO extends DataIO {
 	
 	private static final String FILE_NAME = "StoreKeepers.dat";
 	private static final String FILE_SEP = ",";

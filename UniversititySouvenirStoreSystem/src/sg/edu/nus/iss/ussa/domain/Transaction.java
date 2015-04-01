@@ -23,7 +23,7 @@ public class Transaction
 	private Date date;
 	private Customer customer;
 	private Discount discount;
-	private ArrayList<TransactionItem> itemList = new ArrayList<TransactionItem>();
+	private ArrayList<CartItem> itemList = new ArrayList<CartItem>();
 	
 	private double cashAmount = 0;
 	private double totalPrice = 0;
@@ -86,12 +86,12 @@ public class Transaction
 		this.date = date;
 	}
 
-	public ArrayList<TransactionItem> getItemList()
+	public ArrayList<CartItem> getItemList()
 	{
 		return itemList;
 	}
 
-	public void setItemList(ArrayList<TransactionItem> itemList)
+	public void setItemList(ArrayList<CartItem> itemList)
 	{
 		this.itemList = itemList;
 	}
@@ -119,7 +119,7 @@ public class Transaction
 	
 	public void addItem(Product product,int qty)
 	{
-		TransactionItem transactionitem = new TransactionItem(product,product.getPrice(),qty);
+		CartItem transactionitem = new CartItem(product,product.getPrice(),qty);
 		if (itemList.contains(transactionitem))
 		{
 			
@@ -131,7 +131,7 @@ public class Transaction
 	
 	public void addItem(Product product,double price,int qty)
 	{
-		TransactionItem transactionitem = new TransactionItem(product,price,qty);
+		CartItem transactionitem = new CartItem(product,price,qty);
 		if (itemList.contains(transactionitem))
 		{
 			
@@ -155,7 +155,7 @@ public class Transaction
 		double sum = 0;
 		for (int i = 0; i < itemList.size(); i++)
 		{
-			TransactionItem it = (TransactionItem) itemList.get(i);
+			CartItem it = (CartItem) itemList.get(i);
 			sum = CalcUtil.add(sum,it.calculateAmount());
 		}
 		totalPrice = sum;
