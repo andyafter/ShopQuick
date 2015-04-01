@@ -1,29 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sg.edu.nus.iss.ussa.domain;
 
-/**
- *
- * @author a0134601w
- */
+
 public class Product {
 
-    private String productId;
+	private String productId;
 	private Category category;
 	private String name;
 	private String briefDescription;
 	private int quantityAvailable;
 	private double price;
-	private String barCode;
+	private String barCodeNumber;
 	private int reorderQuantity;
 	private int orderQuantity;	
 	
 	public Product(Category category, String name,
 			String briefDescription, int quantityAvailable, double price,
-			String barCode, int recorderQuantity, int orderQuantity) {
+			String barCodeNumber, int recorderQuantity, int orderQuantity) {
 		super();
 		
 		this.category = category;
@@ -31,14 +24,14 @@ public class Product {
 		this.briefDescription = briefDescription;
 		this.quantityAvailable = quantityAvailable;
 		this.price = price;
-		this.barCode = barCode;
+		this.barCodeNumber = barCodeNumber;
 		this.reorderQuantity = recorderQuantity;
 		this.orderQuantity = orderQuantity;
 	}
 	
 	public Product(String productId, Category category, String name,
 			String briefDescription, int quantityAvailable, double price,
-			String barCode, int recorderQuantity, int orderQuantity) {
+			String barCodeNumber, int recorderQuantity, int orderQuantity) {
 		super();
 		this.productId = productId;
 		this.category = category;
@@ -46,7 +39,7 @@ public class Product {
 		this.briefDescription = briefDescription;
 		this.quantityAvailable = quantityAvailable;
 		this.price = price;
-		this.barCode = barCode;
+		this.barCodeNumber = barCodeNumber;
 		this.reorderQuantity = recorderQuantity;
 		this.orderQuantity = orderQuantity;
 	}
@@ -60,7 +53,7 @@ public class Product {
 	
 	public boolean compare(Product p){
 		if(name.equals(p.getName())&&briefDescription.equals(p.getBriefDescription())&&category.equals(p.getCategory())
-				&&price==p.getPrice()&&barCode.equals(p.getBarCodeNumber())&&reorderQuantity==p.getReorderQuantity()
+				&&price==p.getPrice()&&barCodeNumber.equals(p.getBarCodeNumber())&&reorderQuantity==p.getReorderQuantity()
 				&&orderQuantity==p.getOrderQuantity()){
 			return true;
 		}
@@ -120,11 +113,11 @@ public class Product {
 	}
 
 	public String getBarCodeNumber() {
-		return barCode;
+		return barCodeNumber;
 	}
 
-	public void setBarCode(String barCode) {
-		this.barCode = barCode;
+	public void setBarCodeNumber(String barCodeNumber) {
+		this.barCodeNumber = barCodeNumber;
 	}
 
 	public int getReorderQuantity() {
@@ -143,9 +136,8 @@ public class Product {
 		this.orderQuantity = orderQuantity;
 	}
 	
-	public void show()
-    {
+	public void show(){
 		System.out.println(name);
 	}
-    
+        
 }

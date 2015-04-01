@@ -1,33 +1,47 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sg.edu.nus.iss.ussa.domain;
 
 /**
- *
- * @author a0134449b
+ * @author Andy Pan
  */
+
 public class Member extends Customer {
-    
-    private String MemberID;
-    public int LoyaltyPoints;
 
-    public String getMemberID() {
-        return MemberID;
-    }
+	private static final long serialVersionUID = 1L;
+	private String memberID;
+	private int loyaltyPoint;
 
-    public int getLoyaltyPoints() {
-        return LoyaltyPoints;
-    }
-   
+	public Member(String name, String memberID, int loyaltyPoint) {
+		super(name);
+		this.memberID = memberID;
+		this.loyaltyPoint = loyaltyPoint;
+	}
+	
+	public String getName(){
+		return name;
+	}
 
-    public Member(String MemberID, Integer LoyaltyPoints, String CustomerName) {
-        super(CustomerName);
-        this.MemberID = MemberID;
-        this.LoyaltyPoints = LoyaltyPoints;
-    }
-    
-    
+	public String getMemberID() {
+		return memberID;
+	}
+
+	public void setMemberID(String memberID) {
+		this.memberID = memberID;
+	}
+
+	public int getLoyaltyPoint() {
+		return loyaltyPoint;
+	}
+
+	public void setLoyaltyPoint(int loyaltyPoint) {
+		this.loyaltyPoint = loyaltyPoint;
+	}
+
+	public String toString() {
+		return name + "," + memberID + "," + loyaltyPoint;
+	}
+
+	@Override
+	public String getID() {
+		return memberID;
+	}
 }

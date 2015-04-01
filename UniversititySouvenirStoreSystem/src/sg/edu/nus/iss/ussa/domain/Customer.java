@@ -1,26 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sg.edu.nus.iss.ussa.domain;
 
-/**
- *
- * @author a0134449b
- */
-public class Customer {
-    
-    private String CustomerName;
-    
-    
-    public String getCustomerName() {
-        return CustomerName;
-    }
+import java.io.Serializable;
 
-        public Customer(String CustomerName) {
-        this.CustomerName = CustomerName;
-    }
-    
-    
+/**
+ * @author Achyut Suresh Rao
+ */
+
+public abstract class Customer implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	public String name;
+
+	// public List<Discount> getDiscount();
+
+	public Customer() {
+
+	}
+	
+	public Customer(String name) {
+		this.name = name;
+	}
+	
+	public abstract String getID();
+
 }

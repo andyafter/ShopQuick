@@ -1,26 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+//Transaction.java
 package sg.edu.nus.iss.ussa.domain;
 
 import java.util.ArrayList;
 import java.util.Date;
-import sg.edu.nus.iss.ussa.util.StoreUtil;
 
-/**
- *
- * @author Ajay
- */
-public class Transaction {
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.RestoreAction;
+
+import sg.edu.nus.iss.ussa.util.CalcUtil;
+
+public class Transaction
+{
+	/**
+	 * Transaction Class
+	 * 
+	 * @author Liu Xinzhuo
+	 * @author A0136010A
+	 * @version 1.0
+	 */
+
         private int id = 0;
 	private int redeemedLoyaltyPoint;
 	private Date date;
 	private Customer customer;
 	private Discount discount;
-	private ArrayList<CartItem> itemList = new ArrayList<CartItem>();
+	private ArrayList<TransactionItem> itemList = new ArrayList<TransactionItem>();
 	
 	private double cashAmount = 0;
 	private double totalPrice = 0;
@@ -83,12 +86,12 @@ public class Transaction {
 		this.date = date;
 	}
 
-	public ArrayList<CartItem> getItemList()
+	public ArrayList<TransactionItem> getItemList()
 	{
 		return itemList;
 	}
 
-	public void setItemList(ArrayList<CartItem> itemList)
+	public void setItemList(ArrayList<TransactionItem> itemList)
 	{
 		this.itemList = itemList;
 	}
@@ -116,19 +119,19 @@ public class Transaction {
 	
 	public void addItem(Product product,int qty)
 	{
-		CartItem cartitem = new CartItem(product,product.getPrice(),qty);
-		if (itemList.contains(cartitem))
+		TransactionItem transactionitem = new TransactionItem(product,product.getPrice(),qty);
+		if (itemList.contains(transactionitem))
 		{
 			
 		} else
 		{
-			itemList.add(cartitem);
+			itemList.add(transactionitem);
 		}
 	}
 	
 	public void addItem(Product product,double price,int qty)
 	{
-		CartItem transactionitem = new CartItem(product,price,qty);
+		TransactionItem transactionitem = new TransactionItem(product,price,qty);
 		if (itemList.contains(transactionitem))
 		{
 			
@@ -152,8 +155,8 @@ public class Transaction {
 		double sum = 0;
 		for (int i = 0; i < itemList.size(); i++)
 		{
-			CartItem it = (CartItem) itemList.get(i);
-			sum = StoreUtil.add(sum,it.calcAmount());
+			TransactionItem it = (TransactionItem) itemList.get(i);
+			sum = CalcUtil.add(sum,it.calculateAmount());
 		}
 		totalPrice = sum;
 		return totalPrice;
@@ -179,7 +182,8 @@ public class Transaction {
 
 	public double calcRest()
 	{
-		rest = discountedPirce - redeemedLoyaltyPoint*POINTS_TO_DOLLAR;
+		rest = calcDiscountPrice() - redeemedLoyaltyPoint*POINTS_TO_DOLLAR;
 		return rest;
 	}
-}
+	
+}///~

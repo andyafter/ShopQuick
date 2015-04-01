@@ -1,20 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sg.edu.nus.iss.ussa.domain;
 
 import java.util.Date;
 
-/**
- *
- * @author a0134449b
- */
-public class Discount {
-    
-        public String discountCode;
+public abstract class Discount {
+	private String discountCode;
 	private String discountDescription;
+	//private String startDate;
 	private Date startDate;
 	private int period;
 	private double percent;
@@ -67,7 +58,8 @@ public class Discount {
 	public Discount getHigherDiscount(Discount discount){
 		if ((discount == null) || (this.getPercent() > discount.getPercent())) 
 			return this;
-		else 
+	else 
 			return discount;
 	}
+
 }

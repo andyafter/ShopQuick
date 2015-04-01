@@ -1,29 +1,42 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sg.edu.nus.iss.ussa.domain;
 
 /**
+ * 
+ * @author 
  *
- * @author a0134449b
  */
 public class Vendor {
-    
-    private String VendorName;
-    private String VendorDescription;
+	private String name;
+	private String description;
+	
+	public Vendor(String name, String description) {
+		super();
+		this.name = name;
+		this.description = description;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public String getVendorName() {
-        return VendorName;
+	 boolean equalsName(Vendor VENOBJ) {
+        return this.name.equalsIgnoreCase(VENOBJ.name);
     }
-
-    public String getVendorDescription() {
-        return VendorDescription;
+	    
+    boolean equals(Vendor VENOBJ) {
+        return this.name.equalsIgnoreCase(VENOBJ.name) &&  this.description.equalsIgnoreCase(VENOBJ.description);
     }
-
-    public Vendor(String VendorName, String VendorDescription) {
-        this.VendorName = VendorName;
-        this.VendorDescription = VendorDescription;
-    }
+	
 }
