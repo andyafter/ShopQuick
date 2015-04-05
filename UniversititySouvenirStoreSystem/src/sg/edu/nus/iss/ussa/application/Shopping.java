@@ -141,7 +141,7 @@ public class Shopping {
 	}
 	
 	public void addProduct(String id,String name, String categoryCode, String briefDescription, 
-			int quantityAvailable, double price, String barCode, int threshold, int orderQuantity){
+			int quantityAvailable, float price, String barCode, int threshold, int orderQuantity){
 		store.addProduct(id,name, categoryCode, briefDescription, quantityAvailable, price, barCode, threshold, orderQuantity);	
 	}
 	
@@ -151,7 +151,7 @@ public class Shopping {
 	 * @param indenx
 	 */
 	public void modifyProduct(String id,String name, String categoryCode, String briefDescription, 
-			int quantityAvailable, double price, String barCode, int threshold, int orderQuantity){
+			int quantityAvailable, float price, String barCode, int threshold, int orderQuantity){
 		store.modifyProduct(id,name, categoryCode, briefDescription, quantityAvailable, price, barCode, threshold, orderQuantity);
 	}
 	

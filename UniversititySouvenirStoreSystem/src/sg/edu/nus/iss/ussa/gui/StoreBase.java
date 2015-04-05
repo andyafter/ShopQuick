@@ -52,7 +52,7 @@ public class StoreBase extends JFrame{
 	private ProdListPanel prodListPanel;
 	private CheckInventoryPanel checkInvPanel;
 	//private LoginPanel loginPanel;
-	private CheckOutJPanel checkOutPanel;
+	private CheckOutPanel checkOutPanel;
 	private MemListPanel memListPanel;
 	//private ProductListPanel productListPanel;
 	private CateListPanel cateListPanel;
@@ -66,7 +66,7 @@ public class StoreBase extends JFrame{
 		
 		setJMenuBar(createMenu());
 		this.panels = new JPanel(new CardLayout());
-		this.checkOutPanel = new CheckOutJPanel(shopping);
+		this.checkOutPanel = new CheckOutPanel(shopping);
 		this.prodListPanel = new ProdListPanel(shopping);
 		this.checkInvPanel = new CheckInventoryPanel(shopping);
 		this.cateListPanel = new CateListPanel(shopping);
@@ -89,8 +89,8 @@ public class StoreBase extends JFrame{
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
-                checkOutPanel.setTransaction(manager.checkOut());
-		changePanel("checkOut");
+                //checkOutPanel.setTransaction(manager.checkOut());
+		//changePanel("checkOut");
 		
 	}
 	

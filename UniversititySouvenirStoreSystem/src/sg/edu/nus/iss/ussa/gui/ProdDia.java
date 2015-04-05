@@ -287,8 +287,8 @@ public class ProdDia extends JDialog{
 		return Integer.parseInt(quantityText.getText());
 	}
 
-	public Double getPriceText() {
-		return Double.parseDouble(priceText.getText());
+	public float getPriceText() {
+		return Float.parseFloat(priceText.getText());
 	}
 
 	public String getBarCodeText() {
