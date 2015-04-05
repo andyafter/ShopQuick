@@ -4,18 +4,15 @@ import java.util.ArrayList;
 
 /**
  * 
- * @author 
+ * @author Andy Pan
  *
  */
 public class Category {
-	private String code;
-	private String name;
-	private ArrayList<Vendor> vendorList;
+	protected String code = "";
+	protected String name = "";
+	protected ArrayList<Vendor> vendorList;
 	
-	public Category(){
-		this.code = "";
-		this.name = "";
-	}
+	public Category(){}
 	
 	
 	public Category(String code, String name, ArrayList<Vendor> vendorList) {

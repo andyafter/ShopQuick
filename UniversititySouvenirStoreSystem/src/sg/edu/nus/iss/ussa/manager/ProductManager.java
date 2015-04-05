@@ -74,7 +74,7 @@ public class ProductManager {
 	
 	//add new product or implement product quantity if product exists
 	public void addProduct(String id,String name, Category category, String briefDescription, 
-			int quantityAvailable, double price, String barCode, int threshold, int orderQuantity){
+			int quantityAvailable, float price, String barCode, int threshold, int orderQuantity){
 		Product product = new Product(category, name, 
 				briefDescription, quantityAvailable, price, barCode, threshold, orderQuantity);
 		int i = 0;
@@ -95,7 +95,7 @@ public class ProductManager {
 	}
 	
 	public void modifyProduct(String id, String name, Category category, String briefDescription, 
-			int quantityAvailable, double price, String barCode, int threshold, int orderQuantity){
+			int quantityAvailable, float price, String barCode, int threshold, int orderQuantity){
 		Product product = new Product(id,category, name, briefDescription, quantityAvailable, price, barCode, threshold, orderQuantity);
 		String code = category.getCode();
 		for(Product p:this.productList){

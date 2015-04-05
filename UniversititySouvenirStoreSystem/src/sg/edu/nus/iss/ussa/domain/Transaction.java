@@ -129,7 +129,7 @@ public class Transaction
 		}
 	}
 	
-	public void addItem(Product product,double price,int qty)
+	public void addItem(Product product,float price,int qty)
 	{
 		CartItem transactionitem = new CartItem(product,price,qty);
 		if (itemList.contains(transactionitem))

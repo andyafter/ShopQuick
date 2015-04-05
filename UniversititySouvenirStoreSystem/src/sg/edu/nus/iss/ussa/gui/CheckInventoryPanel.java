@@ -107,7 +107,7 @@ public class CheckInventoryPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				manager.getStoreWindow().changeCard("mainScreen");
+				manager.getStoreWindow().changePanel("mainScreen");
 			}
 		});
 		p.add(b);

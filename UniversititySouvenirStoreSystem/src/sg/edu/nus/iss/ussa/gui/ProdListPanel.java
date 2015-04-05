@@ -40,7 +40,7 @@ import sg.edu.nus.iss.ussa.util.TableColumnAdjuster;
 * cardName: productList
 * @ XIE JIABAO
 */
-public class ProductsListPanel extends JPanel{
+public class ProdListPanel extends JPanel{
 	
 	private final String[] columnNames = {"Id","Name","Description","Price","Quality"};
 	private JButton modifyButton;
@@ -49,7 +49,7 @@ public class ProductsListPanel extends JPanel{
 	private DefaultTableModel tableModel;
 	private Shopping manager;
 	
-	public ProductsListPanel(Shopping manager){
+	public ProdListPanel(Shopping manager){
 		this.manager = manager;
 		setLayout(new BorderLayout());
 		add("North",createTopPanel());
@@ -142,7 +142,7 @@ public class ProductsListPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				ProductWindow d = new ProductWindow(manager,"Add Product");				
+				ProdDia d = new ProdDia(manager,"Add Product");				
 				d.setVisible(true);
 			}
 		});
@@ -158,7 +158,7 @@ public class ProductsListPanel extends JPanel{
 				int columnIndex = productTable.getColumnModel().getColumnIndex("Id");
 				String id = (String)tableModel.getValueAt(rowIndex, columnIndex);
 				//int index = Integer.parseInt(id.substring(4));
-				ProductWindow d = new ProductWindow(manager,"Modify Product", id);
+				ProdDia d = new ProdDia(manager,"Modify Product", id);
 				d.setVisible(true);
 			}
 		});
@@ -190,7 +190,7 @@ public class ProductsListPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				manager.getStoreWindow().changeCard("checkInventory");
+				manager.getStoreWindow().changePanel("checkInventory");
 			}
 		});
 		p.add(b);
@@ -201,7 +201,7 @@ public class ProductsListPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				manager.getStoreWindow().changeCard("mainScreen");
+				manager.getStoreWindow().changePanel("mainScreen");
 			}
 		});
 		p.add(b);

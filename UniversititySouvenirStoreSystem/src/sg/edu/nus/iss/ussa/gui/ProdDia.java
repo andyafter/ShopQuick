@@ -20,10 +20,10 @@ import sg.edu.nus.iss.ussa.domain.*;
 import sg.edu.nus.iss.ussa.util.DigitDocument;
 import sg.edu.nus.iss.ussa.util.StringDocument;
 
-public class ProductWindow extends JDialog{
+public class ProdDia extends JDialog{
 
 	private Shopping manager;
-	private StoreWindow mainScreen;
+	private StoreBase mainScreen;
 	private String id;
 	
 	private JTextField idText;
@@ -37,7 +37,7 @@ public class ProductWindow extends JDialog{
 	private JTextField reorderQtyText;
 	private JTextField orderQtyText;
 	
-	public ProductWindow(Shopping manager, String title){
+	public ProdDia(Shopping manager, String title){
 		super(manager.getStoreWindow(),title);
 		this.manager = manager;
 		this.mainScreen = manager.getStoreWindow();
@@ -48,7 +48,7 @@ public class ProductWindow extends JDialog{
 		idText.setText(id);
 	}
 	
-	public ProductWindow(Shopping manager,String title,String id){
+	public ProdDia(Shopping manager,String title,String id){
 		super(manager.getStoreWindow(),title);
 		this.manager = manager;
 		this.mainScreen = manager.getStoreWindow();

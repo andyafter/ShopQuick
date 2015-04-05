@@ -27,11 +27,13 @@ public class StoreKeeperManager {
 	
 	public boolean checkAuthority(String userName,String Password)
 	{
+            
 		boolean isValidUser = false;
 		for(StoreKeeper user:storeKeeperList)
 		{
-			if(user.getUserName().equalsIgnoreCase(userName) && user.getPassword().equalsIgnoreCase(Password))
+			if(user.getUserName().equalsIgnoreCase(userName) && user.getPassword().equals(Password))
 			{
+                            // password should be case sensitive
 				isValidUser = true;
 				break;
 			}				

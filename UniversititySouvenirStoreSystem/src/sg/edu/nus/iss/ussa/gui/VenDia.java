@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
-public class VendorDialog extends javax.swing.JDialog {
+public class VenDia extends javax.swing.JDialog {
 	
 	/**
 	 * 
@@ -49,7 +49,7 @@ public class VendorDialog extends javax.swing.JDialog {
         }
     };
     
-    public VendorDialog(Shopping manager, String categoryCode) {
+    public VenDia(Shopping manager, String categoryCode) {
     	this.manager = manager;
     	
         initComponents();
@@ -357,13 +357,13 @@ public class VendorDialog extends javax.swing.JDialog {
                  }
              }
          } catch (ClassNotFoundException ex) {
-             java.util.logging.Logger.getLogger(VendorDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+             java.util.logging.Logger.getLogger(VenDia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
          } catch (InstantiationException ex) {
-             java.util.logging.Logger.getLogger(VendorDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+             java.util.logging.Logger.getLogger(VenDia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
          } catch (IllegalAccessException ex) {
-             java.util.logging.Logger.getLogger(VendorDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+             java.util.logging.Logger.getLogger(VenDia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
          } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-             java.util.logging.Logger.getLogger(VendorDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+             java.util.logging.Logger.getLogger(VenDia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
          }
     	 
     	 setModal(true);

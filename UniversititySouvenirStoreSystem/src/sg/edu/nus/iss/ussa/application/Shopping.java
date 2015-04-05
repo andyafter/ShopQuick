@@ -14,19 +14,40 @@ import sg.edu.nus.iss.ussa.domain.Transaction;
 import sg.edu.nus.iss.ussa.domain.Vendor;
 import sg.edu.nus.iss.ussa.exception.DataFileException;
 import sg.edu.nus.iss.ussa.exception.DataNotFoundException;
-import sg.edu.nus.iss.ussa.gui.LoginScreen;
-import sg.edu.nus.iss.ussa.gui.StoreWindow;
+import sg.edu.nus.iss.ussa.gui.LoginForm;
+import sg.edu.nus.iss.ussa.gui.StoreBase;
 
 /**
  * Main method here
- * @author Xu Minsheng
+ * @author Andy Pan
  *
  */
 public class Shopping {
 
 	private Store store;
-	private LoginScreen loginScreen;
-	private StoreWindow storeWindow;
+	private LoginForm loginScreen;
+	private StoreBase storeWindow;
+        public static void main(String[] args) {
+		Shopping manager = new Shopping();
+		manager.startup();	
+		
+		/*
+		Transaction tr = manager.checkOut();
+		tr = manager.setBillCustomer(tr, "F42563743156");
+		
+		tr = manager.addBillItem(tr, "MUG/1", 10);
+		tr = manager.addBillItem(tr, "STA/1", 20);
+		tr = manager.removeBillItem(tr, "MUG/1");
+		tr = manager.setPayment(tr, 200, 100);
+		tr = manager.confirmPayment(tr);
+		*/
+		
+		//System.out.println("helloworld");
+		
+		//UI_CategoryManager.openCategoryManagerUI(manager);
+		
+	}
+        
 	public Shopping(){
 		// instantiate attributes	
 		try {
@@ -40,7 +61,7 @@ public class Shopping {
 	}
 	public void startup(){
 		// show login screen
-		loginScreen = new LoginScreen(this);
+		loginScreen = new LoginForm(this);
 		loginScreen.setLocationRelativeTo(null);
 		loginScreen.setVisible(true);
 	}
@@ -69,7 +90,7 @@ public class Shopping {
 			// close login screen 
 			loginScreen.dispose();
 			// show main menu
-			storeWindow = new StoreWindow(this);
+			storeWindow = new StoreBase(this);
 			storeWindow.setVisible(true);
 			return true;
 		}
@@ -248,27 +269,9 @@ public class Shopping {
 		return store.getDiscountList();
 	
 	}
-	public static void main(String[] args) {
-		Shopping manager = new Shopping();
-		manager.startup();	
-		
-		/*
-		Transaction tr = manager.checkOut();
-		tr = manager.setBillCustomer(tr, "F42563743156");
-		
-		tr = manager.addBillItem(tr, "MUG/1", 10);
-		tr = manager.addBillItem(tr, "STA/1", 20);
-		tr = manager.removeBillItem(tr, "MUG/1");
-		tr = manager.setPayment(tr, 200, 100);
-		tr = manager.confirmPayment(tr);
-		*/
-		
-		System.out.println("helloworld");
-		
-		//UI_CategoryManager.openCategoryManagerUI(manager);
-		
-	}
-	public StoreWindow getStoreWindow() {
+
+        
+	public StoreBase getStoreWindow() {
 		return storeWindow;
 	}
 	public Discount get(int index) {

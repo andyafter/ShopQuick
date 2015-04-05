@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 
-public class CategoryListPanel extends javax.swing.JPanel {
+public class CateListPanel extends javax.swing.JPanel {
 
 	/**
 	 * 
@@ -27,7 +27,7 @@ public class CategoryListPanel extends javax.swing.JPanel {
     private ArrayList<Category> UI_CategoryList = new ArrayList<Category>();
     private DefaultTableModel tableModel = new DefaultTableModel();
     
-    public CategoryListPanel(Shopping manager) {
+    public CateListPanel(Shopping manager) {
     	this.manager = manager;
   
         initComponents();
@@ -277,7 +277,7 @@ public class CategoryListPanel extends javax.swing.JPanel {
             UIError.openDialog("Please select an item.");
         else
         { 
-            VendorDialog vendorDlg = new VendorDialog(manager, this.tableModel.getValueAt(selectedIndex,0).toString());
+            VenDia vendorDlg = new VenDia(manager, this.tableModel.getValueAt(selectedIndex,0).toString());
             vendorDlg.setVisible(true);
             
         }
@@ -294,13 +294,13 @@ public class CategoryListPanel extends javax.swing.JPanel {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CategoryListPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CateListPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CategoryListPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CateListPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CategoryListPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CateListPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CategoryListPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CateListPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     

@@ -3,7 +3,7 @@ package sg.edu.nus.iss.ussa.manager;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import sg.edu.nus.iss.ussa.dataio.CategoryDao;
+import sg.edu.nus.iss.ussa.dataio.CategoryIO;
 import sg.edu.nus.iss.ussa.dataio.VendorIO;
 import sg.edu.nus.iss.ussa.domain.Category;
 import sg.edu.nus.iss.ussa.domain.Vendor;
@@ -21,7 +21,7 @@ public class CategoryManager {
 	// then in CLO and MUG, their vendors should reference to same instance of vendor  
 	//private ArrayList<Vendor> vendorList;
 	
-	private CategoryDao categoryDao;
+	private CategoryIO categoryDao;
 	private VendorIO vendorDao;
 	
 	/**
@@ -30,7 +30,7 @@ public class CategoryManager {
 	 * @throws DataFileException
 	 */
 	public CategoryManager() throws IOException, DataFileException{
-		categoryDao = new CategoryDao();
+		categoryDao = new CategoryIO();
 		vendorDao = new VendorIO();
 		loadData();
 	}

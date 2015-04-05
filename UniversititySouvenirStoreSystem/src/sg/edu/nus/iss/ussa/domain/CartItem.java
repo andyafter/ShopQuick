@@ -9,27 +9,18 @@ import sg.edu.nus.iss.ussa.util.CalcUtil;
 
 public class CartItem
 {
-	/**
-	 * TransactionItem Class
-	 * 
-	 * @author Liu Xinzhuo
-	 * @author A0136010A
-	 * @version 1.0
-	 */
+
 	private Product product = null;
-	private double price =0;
-	private int qty = 0;
+	private float price =0;
+	private int quantity = 0;
 	
-	public CartItem()
-	{
-		
-	}
+	public CartItem(){}
 	
-	public CartItem(Product product,double price,int qty)
+	public CartItem(Product product,float price,int qty)
 	{
 		this.product = product;
 		this.price = price;
-		this.qty = qty;
+		this.quantity = qty;
 	}
 	
 	public Product getProduct()
@@ -44,21 +35,21 @@ public class CartItem
 	{
 		return price;
 	}
-	public void setPrice(double price)
+	public void setPrice(float price)
 	{
 		this.price = price;
 	}
 	public int getQty()
 	{
-		return qty;
+		return quantity;
 	}
 	public void setQty(int qty)
 	{
-		this.qty = qty;
+		this.quantity = qty;
 	}
 	public double calculateAmount()
 	{
-		return CalcUtil.mul(this.price, this.qty);
+		return CalcUtil.mul(this.price, this.quantity);
 	}
 	
 }///~

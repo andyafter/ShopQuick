@@ -64,15 +64,15 @@ public class Util {
 	 * @return cast text to double
 	 * @throws DataInputException 
 	 */
-	public static double castDouble(String s) throws DataInputException{
+	public static float castFloat(String s) throws DataInputException{
 		
-		double result;
+		float result;
 		
 		try{
-			result = Double.parseDouble(s);
+			result = Float.parseFloat(s);
 		
 		}catch(NumberFormatException e){
-			throw new DataInputException(s + " is not double");
+			throw new DataInputException(s + " is not float");
 		}
 
 		return result;

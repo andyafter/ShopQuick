@@ -11,21 +11,21 @@ import javax.swing.border.EmptyBorder;
 import sg.edu.nus.iss.ussa.domain.*;
 import sg.edu.nus.iss.ussa.util.StringDocument;
 
-public class MemberWindow extends JDialog {
+public class MemDia extends JDialog {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Shopping manager;
-	private StoreWindow mainScreen;
+	private StoreBase mainScreen;
 	private int index;
 
 	private JTextField name;
 	private JTextField memberID;
 	private JTextField loyaltyPoint;
 
-	public MemberWindow(Shopping manager, String title) {
+	public MemDia(Shopping manager, String title) {
 		super(manager.getStoreWindow(), title);
 		this.manager = manager;
 		this.mainScreen = manager.getStoreWindow();
@@ -33,7 +33,7 @@ public class MemberWindow extends JDialog {
 		add("South", createAddBottomPanel());
 	}
 
-	public MemberWindow(Shopping manager, String title, String id) {
+	public MemDia(Shopping manager, String title, String id) {
 		super(manager.getStoreWindow(), title);
 		this.manager = manager;
 		this.mainScreen = manager.getStoreWindow();

@@ -15,7 +15,7 @@ import sg.edu.nus.iss.ussa.domain.Member;
 import sg.edu.nus.iss.ussa.exception.DataFileException;
 import sg.edu.nus.iss.ussa.util.TableColumnAdjuster;
 
-public class MemberListPanel extends JPanel {
+public class MemListPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private final String[] columnNames = { "Name", "Member ID",
@@ -31,7 +31,7 @@ public class MemberListPanel extends JPanel {
 	 * 
 	 * @param manager
 	 */
-	public MemberListPanel(Shopping manager) {
+	public MemListPanel(Shopping manager) {
 		this.manager = manager;
 		setLayout(new BorderLayout());
 		add("North", createTopPanel());
@@ -142,7 +142,7 @@ public class MemberListPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				MemberWindow memberDlg = new MemberWindow(manager, "Add Member");
+				MemDia memberDlg = new MemDia(manager, "Add Member");
 				memberDlg.setVisible(true);
 			}
 		});
@@ -156,7 +156,7 @@ public class MemberListPanel extends JPanel {
 				// TODO Auto-generated method stub
 				String id = (String) memberTable.getValueAt(
 						memberTable.getSelectedRow(), 1);
-				MemberWindow memberDlg = new MemberWindow(manager,
+				MemDia memberDlg = new MemDia(manager,
 						"Modify Member", id);
 
 				memberDlg.setVisible(true);
@@ -192,7 +192,7 @@ public class MemberListPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				manager.getStoreWindow().changeCard("mainScreen");
+				manager.getStoreWindow().changePanel("mainScreen");
 			}
 		});
 		p.add(b);

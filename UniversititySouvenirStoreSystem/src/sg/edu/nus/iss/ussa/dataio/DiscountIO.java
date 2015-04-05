@@ -7,7 +7,7 @@ import java.util.Date;
 import sg.edu.nus.iss.ussa.domain.Discount;
 import sg.edu.nus.iss.ussa.manager.DiscountManager;
 import sg.edu.nus.iss.ussa.domain.MemberDiscount;
-import sg.edu.nus.iss.ussa.domain.OcDiscount;
+import sg.edu.nus.iss.ussa.domain.UsualDiscount;
 import sg.edu.nus.iss.ussa.exception.DataFileException;
 import sg.edu.nus.iss.ussa.exception.DataInputException;
 import sg.edu.nus.iss.ussa.util.Util;
@@ -17,12 +17,8 @@ public class DiscountIO extends DataIO {
 	private static final int  C_Field_No  = 6;
 	//private Discount discount;
 
-
-public DiscountIO() {
-	
-}
-
-public ArrayList<Discount> loadDataFromFile() throws IOException, DataFileException {
+        
+        public ArrayList<Discount> loadDataFromFile() throws IOException, DataFileException {
 	ArrayList<String> stringList = null;
 	
 	stringList = super.loadStringFromFile(super.getcDatafolderpath() + C_File_Name);
@@ -56,7 +52,7 @@ public ArrayList<Discount> loadDataFromFile() throws IOException, DataFileExcept
 		    if (!fields[3].equalsIgnoreCase("ALWAYS"))			
 		    	period = Util.castInt(fields[3]);
 		    		
-			double percent = Util.castDouble(fields[4]);
+			float percent = Util.castFloat(fields[4]);
 			String Applicable=(fields[5]);
 			 
 			Discount discount;
@@ -64,7 +60,7 @@ public ArrayList<Discount> loadDataFromFile() throws IOException, DataFileExcept
 				
 				discount = new MemberDiscount(discountCode,discountDescription, startDate,period,percent,Applicable);
 			}else{
-			    discount = new OcDiscount(discountCode, discountDescription, startDate, period, percent, Applicable);
+			    discount = new UsualDiscount(discountCode, discountDescription, startDate, period, percent, Applicable);
 			}
 				
 				

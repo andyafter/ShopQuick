@@ -1,7 +1,7 @@
 package sg.edu.nus.iss.ussa.domain;
 
 /**
- * @author Achyut Suresh Rao
+ * @author Andy Pan
  */
 
 public class Public extends Customer {

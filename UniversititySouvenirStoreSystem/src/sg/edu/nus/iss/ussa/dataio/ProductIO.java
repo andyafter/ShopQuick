@@ -68,7 +68,7 @@ public class ProductIO extends DataIO{
 				String name = fields[1];
 				String briefDescription = fields[2];
 				int quantityAvaible = Util.castInt(fields[3]);
-				double price = Util.castDouble(fields[4]);
+				float price = Util.castFloat(fields[4]);
 				String barCodeNumber = fields[5];
 				int reorderQuantity = Util.castInt(fields[6]);
 				int orderQuantity = Util.castInt(fields[7]);

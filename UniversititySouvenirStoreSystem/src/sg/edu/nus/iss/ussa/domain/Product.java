@@ -5,41 +5,41 @@ package sg.edu.nus.iss.ussa.domain;
 public class Product {
     
 	private String productId;
-	private Category category;
-	private String name;
-	private String briefDescription;
+	private String productName;
+	private String description;
 	private int quantityAvailable;
-	private double price;
-	private String barCodeNumber;
+	private float price;
+	private String barCode;
 	private int reorderQuantity;
-	private int orderQuantity;	
+	private int orderQuantity;
+        private Category category;
 	
 	public Product(Category category, String name,
-			String briefDescription, int quantityAvailable, double price,
+			String briefDescription, int quantityAvailable, float price,
 			String barCodeNumber, int recorderQuantity, int orderQuantity) {
+            
 		super();
-		
-		this.category = category;
-		this.name = name;
-		this.briefDescription = briefDescription;
+                this.category = category;
+		this.productName = name;
+		this.description = briefDescription;
 		this.quantityAvailable = quantityAvailable;
 		this.price = price;
-		this.barCodeNumber = barCodeNumber;
+		this.barCode = barCodeNumber;
 		this.reorderQuantity = recorderQuantity;
 		this.orderQuantity = orderQuantity;
 	}
 	
 	public Product(String productId, Category category, String name,
-			String briefDescription, int quantityAvailable, double price,
+			String briefDescription, int quantityAvailable, float price,
 			String barCodeNumber, int recorderQuantity, int orderQuantity) {
 		super();
 		this.productId = productId;
-		this.category = category;
-		this.name = name;
-		this.briefDescription = briefDescription;
+                this.category = category;
+		this.productName = name;
+		this.description = briefDescription;
 		this.quantityAvailable = quantityAvailable;
 		this.price = price;
-		this.barCodeNumber = barCodeNumber;
+		this.barCode = barCodeNumber;
 		this.reorderQuantity = recorderQuantity;
 		this.orderQuantity = orderQuantity;
 	}
@@ -52,8 +52,8 @@ public class Product {
 	}
 	
 	public boolean compare(Product p){
-		if(name.equals(p.getName())&&briefDescription.equals(p.getBriefDescription())&&category.equals(p.getCategory())
-				&&price==p.getPrice()&&barCodeNumber.equals(p.getBarCodeNumber())&&reorderQuantity==p.getReorderQuantity()
+		if(productName.equals(p.getName())&&description.equals(p.getBriefDescription())&super.equals(p.getCategory())
+				&&price==p.getPrice()&&barCode.equals(p.getBarCodeNumber())&&reorderQuantity==p.getReorderQuantity()
 				&&orderQuantity==p.getOrderQuantity()){
 			return true;
 		}
@@ -81,19 +81,19 @@ public class Product {
 	}
 
 	public String getName() {
-		return name;
+		return productName;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.productName = name;
 	}
 
 	public String getBriefDescription() {
-		return briefDescription;
+		return description;
 	}
 
 	public void setBriefDescription(String briefDescription) {
-		this.briefDescription = briefDescription;
+		this.description = briefDescription;
 	}
 
 	public int getQuantityAvailable() {
@@ -104,20 +104,20 @@ public class Product {
 		this.quantityAvailable = quantityAvailable;
 	}
 
-	public double getPrice() {
+	public float getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 
 	public String getBarCodeNumber() {
-		return barCodeNumber;
+		return barCode;
 	}
 
 	public void setBarCodeNumber(String barCodeNumber) {
-		this.barCodeNumber = barCodeNumber;
+		this.barCode = barCodeNumber;
 	}
 
 	public int getReorderQuantity() {
@@ -137,7 +137,7 @@ public class Product {
 	}
 	
 	public void show(){
-		System.out.println(name);
+		System.out.println(productName);
 	}
         
 }

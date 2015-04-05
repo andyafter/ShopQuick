@@ -12,7 +12,7 @@ import sg.edu.nus.iss.ussa.util.Util;
  * @author Xu Minsheng
  *
  */
-public class CategoryDao extends DataIO {
+public class CategoryIO extends DataIO {
 
 	// datafile name
 	private static final String C_File_Name = "Category.dat";

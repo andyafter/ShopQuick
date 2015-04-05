@@ -42,17 +42,9 @@ import sg.edu.nus.iss.ussa.util.Util;
 
 public class CheckOutPanel extends JPanel
 {
-	/**
-	 * The CheckOutPanel
-	 * 
-	 * @author Liu Xinzhuo
-	 * @author A0136010A
-	 * @version 0.8
-	 */
-	private static final long serialVersionUID = 1L;
-
-	private JLabel JlMemberName;
-	private JLabel JlgetMemberName;
+    
+	private JLabel JlMemName;
+	private JLabel JlgetMemName;
 	private JLabel JlTotalPriceNum;
 	private JLabel JlDiscountNum;
 	private JLabel JlDiscountedPriceNum;
@@ -176,7 +168,7 @@ public class CheckOutPanel extends JPanel
 		}
 		// refresh UI
 		{
-			JlMemberName.setText(null);
+			JlMemName.setText(null);
 			JlTotalPriceNum.setText(Double.toString(transaction.calcTotalPrice()));
 			JlDiscountNum.setText(Double.toString(transaction.getDiscount().getPercent()));
 			JlDiscountedPriceNum.setText(Double.toString(transaction.calcDiscountPrice()));
@@ -194,10 +186,11 @@ public class CheckOutPanel extends JPanel
 
 	public CheckOutPanel(Shopping sa)
 	{ // ʵ�ֹ��췽��
+            System.out.println("Check Out Panel constructor");
 		this.sa = sa;
 		// OPeration
 		JPanel jpOperation = new JPanel();
-		this.add(jpOperation, BorderLayout.NORTH);
+		this.add(jpOperation, BorderLayout.EAST);
 		// Title
 		JLabel jlTitle = new JLabel("Check Out!");
 		jlTitle.setFont(new Font("Bauhaus 93", Font.PLAIN, 30));
@@ -226,8 +219,8 @@ public class CheckOutPanel extends JPanel
 		jpInput.add(jp1);
 
 		// jp2
-		JlMemberName = new JLabel("MEMBER  NAME");
-		JlgetMemberName = new JLabel("PUBLIC");
+		JlMemName = new JLabel("MEMBER  NAME");
+		JlgetMemName = new JLabel("PUBLIC");
 		JButton JbMemberSubmit = new JButton("  Enter ");
 		JbMemberSubmit.setActionCommand("JbMemberSubmit");
 		JbMemberSubmit.addActionListener(listener);
@@ -236,8 +229,8 @@ public class CheckOutPanel extends JPanel
 		JPanel jp2_2 = new JPanel();
 		jp2_1.setLayout(new FlowLayout(FlowLayout.LEFT));
 		jp2_2.setLayout(new FlowLayout(FlowLayout.LEFT));
-		jp2_1.add(JlMemberName);
-		jp2_1.add(JlgetMemberName);
+		jp2_1.add(JlMemName);
+		jp2_1.add(JlgetMemName);
 		jp2_2.add(JbMemberSubmit);
 		jp2.add(jp2_1);
 		jp2.add(jp2_2);
@@ -664,7 +657,7 @@ public class CheckOutPanel extends JPanel
 				try
 				{
 					if (JlDiscountedPriceNum.getText().length()!=0)
-					transaction.setCashAmount(Util.castDouble(JlDiscountedPriceNum.getText()));
+					transaction.setCashAmount(Util.castFloat(JlDiscountedPriceNum.getText()));
 					if (discount.getPercent()!=0)
 					transaction.setDiscount(discount);
 					if (JtPaidNum.getText().length()!=0)

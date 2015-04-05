@@ -40,46 +40,47 @@ import sg.edu.nus.iss.ussa.domain.*;
  * 
  * @ XIE JIABAO 
  */
-public class StoreWindow extends JFrame{
-
+public class StoreBase extends JFrame{
+    
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Shopping manager;
 	private JMenuBar menuBar;
-	private JPanel cards;
-	private ProductsListPanel productListPanel;
-	private CheckInventoryPanel checkInventoryPanel;
+	private JPanel panels;
+	private ProdListPanel prodListPanel;
+	private CheckInventoryPanel checkInvPanel;
 	//private LoginPanel loginPanel;
-	private CheckOutPanel checkOutPanel;
-	private MemberListPanel memberListPanel;
+	private CheckOutJPanel checkOutPanel;
+	private MemListPanel memListPanel;
 	//private ProductListPanel productListPanel;
-	private CategoryListPanel categoryListPanel;
+	private CateListPanel cateListPanel;
 	
 	//private ReportPanel reportPanel;
 	
-	public StoreWindow(Shopping manager){
-		super("University Store System");
-		this.manager = manager;
+	public StoreBase(Shopping shopping){
+		super("University Souvenir Store System");
+                System.out.println("Store Window constructor");
+		this.manager = shopping;
 		
 		setJMenuBar(createMenu());
-		this.cards = new JPanel(new CardLayout());
-		this.checkOutPanel = new CheckOutPanel(manager);
-		this.productListPanel = new ProductsListPanel(manager);
-		this.checkInventoryPanel = new CheckInventoryPanel(manager);
-		this.categoryListPanel = new CategoryListPanel(manager);
-		this.memberListPanel = new MemberListPanel(manager);
+		this.panels = new JPanel(new CardLayout());
+		this.checkOutPanel = new CheckOutJPanel(shopping);
+		this.prodListPanel = new ProdListPanel(shopping);
+		this.checkInvPanel = new CheckInventoryPanel(shopping);
+		this.cateListPanel = new CateListPanel(shopping);
+		this.memListPanel = new MemListPanel(shopping);
 		
 		
 		//register cards with cardName
-		cards.add(createMainPanel(),"mainScreen");
-		cards.add(checkOutPanel,"checkOut");
-		cards.add(productListPanel,"productList");
-		cards.add(checkInventoryPanel,"checkInventory");
-		cards.add(categoryListPanel,"categoryList");
-		cards.add(memberListPanel,"memberList");
-		setContentPane(cards);
+		panels.add(createMainPanel(),"mainScreen");
+		panels.add(checkOutPanel,"checkOut");
+		panels.add(prodListPanel,"productList");
+		panels.add(checkInvPanel,"checkInventory");
+		panels.add(cateListPanel,"categoryList");
+		panels.add(memListPanel,"memberList");
+		setContentPane(panels);
 		
 		//setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addWindowListener(windorListener);
@@ -88,6 +89,8 @@ public class StoreWindow extends JFrame{
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
+                checkOutPanel.setTransaction(manager.checkOut());
+		changePanel("checkOut");
 		
 	}
 	
@@ -113,7 +116,7 @@ public class StoreWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				changeCard("mainScreen");
+				changePanel("mainScreen");
 			}
 		});
 		menu.add(menuItem);
@@ -140,7 +143,7 @@ public class StoreWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				changeCard("memberList");
+				changePanel("memberList");
 				
 			}
 		});
@@ -155,7 +158,7 @@ public class StoreWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				changeCard("productList");
+				changePanel("productList");
 			}
 		});
 		menu.add(menuItem);
@@ -166,7 +169,7 @@ public class StoreWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				ProductWindow d = new ProductWindow(manager,"Add Product");
+				ProdDia d = new ProdDia(manager,"Add Product");
 				d.setVisible(true);
 			}
 		});
@@ -178,7 +181,7 @@ public class StoreWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				changeCard("checkInventory");
+				changePanel("checkInventory");
 			}
 		});
 		menu.add(menuItem);
@@ -194,7 +197,7 @@ public class StoreWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				changeCard("categoryList");
+				changePanel("categoryList");
 			}
 		});
 		menu.add(menuItem);
@@ -241,19 +244,19 @@ public class StoreWindow extends JFrame{
 	//main screen
 	//cardName: mainScreen
 	private Container createMainPanel(){
-		JPanel mainCard;
+		JPanel mainWin;
 		JButton button;
-		
-		mainCard = new JPanel();
-		mainCard.setLayout(new BoxLayout(mainCard, BoxLayout.Y_AXIS));
-		mainCard.add(createTransactionFactory());
-		mainCard.add(createMemberFactory());
-		mainCard.add(createDiscountFactory());
-		mainCard.add(createCategoryFactory());
-		mainCard.add(createProductFactory());
-		mainCard.add(createReportFactory());
+                
+		mainWin = new JPanel();
+		mainWin.setLayout(new BoxLayout(mainWin, BoxLayout.Y_AXIS));
+		mainWin.add(createTransactionFactory());
+		mainWin.add(createMemberFactory());
+		mainWin.add(createDiscountFactory());
+		mainWin.add(createCategoryFactory());
+		mainWin.add(createProductFactory());
+		mainWin.add(createReportFactory());
 
-		return mainCard;
+		return mainWin;
 	}
 	
 	private JPanel createTransactionFactory(){
@@ -267,7 +270,7 @@ public class StoreWindow extends JFrame{
 				// TODO Auto-generated method stub
 				System.out.println("checkout");
 				checkOutPanel.setTransaction(manager.checkOut());
-				changeCard("checkOut");
+				changePanel("checkOut");
 				
 			}
 		});
@@ -285,7 +288,7 @@ public class StoreWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				changeCard("productList");
+				changePanel("productList");
 			}
 		});
 		p.add(button);
@@ -294,7 +297,7 @@ public class StoreWindow extends JFrame{
 			
 			@Override
 			public void actionPerformed (ActionEvent e) {
-				ProductWindow dialog = new ProductWindow(manager,"Add Product");
+				ProdDia dialog = new ProdDia(manager,"Add Product");
 				dialog.setVisible(true);
 			}
 		});
@@ -305,7 +308,7 @@ public class StoreWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				changeCard("checkInventory");
+				changePanel("checkInventory");
 			}
 		});
 		p.add(button);
@@ -323,7 +326,7 @@ public class StoreWindow extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				System.out.println("member list");
-				changeCard("memberList");
+				changePanel("memberList");
 			}
 		});
 		p.add(button);
@@ -333,7 +336,7 @@ public class StoreWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				MemberWindow memDialog = new MemberWindow(manager, "Add Member");
+				MemDia memDialog = new MemDia(manager, "Add Member");
 				memDialog.setVisible(true);
 				System.out.println("add member");
 				//changeCard("memberList");
@@ -383,7 +386,7 @@ public class StoreWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				changeCard("categoryList");
+				changePanel("categoryList");
 			}
 		});
 		p.add(button);
@@ -453,9 +456,9 @@ public class StoreWindow extends JFrame{
 	
 	}
 	
-	public void changeCard(String cardName){
-		CardLayout cl =  (CardLayout)cards.getLayout();
-		cl.show(cards, cardName);
+	public void changePanel(String panelName){
+		CardLayout cl =  (CardLayout)panels.getLayout();
+		cl.show(panels, panelName);
 	}
 	
 	public void exit(){
@@ -466,15 +469,15 @@ public class StoreWindow extends JFrame{
 	}
 
 	public JPanel getCards() {
-		return cards;
+		return panels;
 	}
 
-	public ProductsListPanel getProductListPanel() {
-		return productListPanel;
+	public ProdListPanel getProductListPanel() {
+		return prodListPanel;
 	}
 	
-	public MemberListPanel getMemberPanel(){
-		return memberListPanel;
+	public MemListPanel getMemberPanel(){
+		return memListPanel;
 	}
 	
 	

@@ -11,27 +11,19 @@ import java.util.ArrayList;
 /**
  * Super Class for Data Access Object, provide access to flat file
  * 
- * @author Xu Minsheng
+ * @author Andy Pan 
  *
  */
 public abstract class DataIO {
 	
 	private static final String C_DataFolderPath = "./data/";
 	
-	/**
-	 * 
-	 * @return default data folder path
-	 */
+        
 	public static String getcDatafolderpath() {
 		return C_DataFolderPath;
 	}
 	
-	/**
-	 * 
-	 * @param filename
-	 * @return data 
-	 * @throws IOException
-	 */
+
 	public ArrayList<String> loadStringFromFile(String fullpath) throws IOException{
 		
 		ArrayList<String> stringList = new ArrayList<String>();
@@ -51,12 +43,7 @@ public abstract class DataIO {
 		return stringList;
 	}
 	
-	/**
-	 * 
-	 * @param filename
-	 * @param dataList
-	 * @throws IOException 
-	 */
+
 	public void saveStringToFile(String fullpath ,ArrayList<String> stringList) throws IOException{
 		File outFile = new File(fullpath);
 		BufferedWriter bw = new BufferedWriter(new java.io.FileWriter(outFile));

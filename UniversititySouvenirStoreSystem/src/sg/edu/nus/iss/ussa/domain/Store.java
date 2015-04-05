@@ -268,7 +268,7 @@ public class Store {
 	}
 	
 	public void addProduct(String id,String name, String categoryCode, String briefDescription, 
-			int quantityAvailable, double price, String barCode, int threshold, int orderQuantity){
+			int quantityAvailable, float price, String barCode, int threshold, int orderQuantity){
 		
 		productMgr.addProduct(id,name, categoryMgr.getCategoryByCode(categoryCode),
 				briefDescription, quantityAvailable, price, barCode, threshold, orderQuantity);
@@ -281,7 +281,7 @@ public class Store {
 	 */
 	
 	public void modifyProduct(String id,String name, String categoryCode, String briefDescription, 
-			int quantityAvailable, double price, String barCode, int threshold, int orderQuantity){
+			int quantityAvailable, float price, String barCode, int threshold, int orderQuantity){
 		productMgr.modifyProduct(id,name, categoryMgr.getCategoryByCode(categoryCode), briefDescription
 				, quantityAvailable, price, barCode, threshold, orderQuantity);
 		
@@ -322,7 +322,7 @@ public class Store {
 	public PurchaseOrder getPurchaseOrder(){
 		
 		PurchaseOrder purchaseOrder = new PurchaseOrder();
-		
+                
 		ArrayList<Product> productList = null;
 		productList = productMgr.checkInventory();
 

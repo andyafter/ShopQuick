@@ -28,7 +28,7 @@ import sg.edu.nus.iss.ussa.util.TableColumnAdjuster;
  * @author Xu Minsheng
  *
  */
-public class CategoryWindow extends JDialog{
+public class CateDia extends JDialog{
 
 	/**
 	 * 
@@ -37,7 +37,7 @@ public class CategoryWindow extends JDialog{
 	private final String[] columnNames = {"Name","Description"};
 	
 	private Shopping manager;
-	private StoreWindow mainScreen;
+	private StoreBase mainScreen;
 	
 	private DefaultTableModel tableModel;
 	
@@ -46,7 +46,7 @@ public class CategoryWindow extends JDialog{
 	
 	private Category category;
 	
-	public CategoryWindow( Shopping manager, String title, Category category, DialogMode dialogMode){
+	public CateDia( Shopping manager, String title, Category category, DialogMode dialogMode){
 		super(manager.getStoreWindow(),title);
 		this.manager = manager;
 		this.mainScreen = manager.getStoreWindow();

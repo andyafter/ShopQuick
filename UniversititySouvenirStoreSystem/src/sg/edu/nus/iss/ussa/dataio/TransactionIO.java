@@ -17,9 +17,7 @@ import sg.edu.nus.iss.ussa.util.Util;
 /**
  * provide Data Access to file for Product entity
  * 
- * @author Liu Xinzhuo
- * @author A0136010A
- * @version 1.0
+ * @author Andy Pan
  */
 public class TransactionIO extends DataIO
 {
@@ -72,7 +70,7 @@ public class TransactionIO extends DataIO
 				String customerID = fields[2];
 				int qty = Util.castInt(fields[3]);
 				Date date = Util.castDate(fields[4]);
-				double price = Util.castDouble(fields[5]);
+				float price = Util.castFloat(fields[5]);
 				//System.out.println("Dao" + date);
 				//ProductMgr pm = new ProductMgr();
 				Product product = store.getProductById(productID);
