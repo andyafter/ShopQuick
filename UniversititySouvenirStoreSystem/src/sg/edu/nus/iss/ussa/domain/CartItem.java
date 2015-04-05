@@ -16,10 +16,10 @@ public class CartItem {
     public CartItem() {
     }
 
-    public CartItem(Product product, double price, int qty) {
+    public CartItem(Product product, double price, int quantity) {
         this.product = product;
         this.price = price;
-        this.quantity = qty;
+        this.quantity = quantity;
     }
 
     public Product getProduct() {

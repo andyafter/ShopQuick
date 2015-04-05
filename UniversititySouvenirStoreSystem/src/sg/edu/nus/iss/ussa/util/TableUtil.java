@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
 
-public class TableColumnAdjuster implements PropertyChangeListener, TableModelListener {
+public class TableUtil implements PropertyChangeListener, TableModelListener {
 
     private JTable table;
     private int spacing;
@@ -21,14 +21,14 @@ public class TableColumnAdjuster implements PropertyChangeListener, TableModelLi
     /*
      *  Specify the table and use default spacing
      */
-    public TableColumnAdjuster(JTable table) {
+    public TableUtil(JTable table) {
         this(table, 6);
     }
 
     /*
      *  Specify the table and spacing
      */
-    public TableColumnAdjuster(JTable table, int spacing) {
+    public TableUtil(JTable table, int spacing) {
         this.table = table;
         this.spacing = spacing;
         setColumnHeaderIncluded(true);

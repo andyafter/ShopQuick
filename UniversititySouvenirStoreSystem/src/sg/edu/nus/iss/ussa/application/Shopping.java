@@ -8,13 +8,13 @@ import sg.edu.nus.iss.ussa.domain.Category;
 import sg.edu.nus.iss.ussa.domain.Discount;
 import sg.edu.nus.iss.ussa.domain.Member;
 import sg.edu.nus.iss.ussa.domain.Product;
-import sg.edu.nus.iss.ussa.domain.Store;
+import sg.edu.nus.iss.ussa.domain.Shop;
 import sg.edu.nus.iss.ussa.domain.Transaction;
 import sg.edu.nus.iss.ussa.domain.Vendor;
 import sg.edu.nus.iss.ussa.exception.DataFileException;
 import sg.edu.nus.iss.ussa.exception.DataNotFoundException;
 import sg.edu.nus.iss.ussa.gui.LoginForm;
-import sg.edu.nus.iss.ussa.gui.StoreBase;
+import sg.edu.nus.iss.ussa.gui.ShopBase;
 
 /**
  * Main method here
@@ -24,33 +24,21 @@ import sg.edu.nus.iss.ussa.gui.StoreBase;
  */
 public class Shopping {
 
-    private Store store;
+    private Shop shop;
     private LoginForm loginScreen;
-    private StoreBase storeWindow;
+    private ShopBase shopWin;
 
     public static void main(String[] args) {
-        Shopping manager = new Shopping();
-        manager.startup();
+        Shopping shopping = new Shopping();
+        shopping.startup();
 
-        /*
-         Transaction tr = manager.checkOut();
-         tr = manager.setBillCustomer(tr, "F42563743156");
-		
-         tr = manager.addBillItem(tr, "MUG/1", 10);
-         tr = manager.addBillItem(tr, "STA/1", 20);
-         tr = manager.removeBillItem(tr, "MUG/1");
-         tr = manager.setPayment(tr, 200, 100);
-         tr = manager.confirmPayment(tr);
-         */
-		//System.out.println("helloworld");
-		//UI_CategoryManager.openCategoryManagerUI(manager);
     }
 
     public Shopping() {
         // instantiate attributes	
         try {
             // instantiate store & load date
-            store = new Store();
+            shop = new Shop();
         } catch (IOException | DataFileException e) {
 
             e.printStackTrace();
@@ -67,7 +55,7 @@ public class Shopping {
 
     public void shutdown() {
         try {
-            store.saveData();
+            shop.saveData();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -76,20 +64,14 @@ public class Shopping {
         System.exit(0);
     }
 
-    /**
-     *
-     * @param username
-     * @param password
-     * @return
-     */
     public boolean login(String username, String password) {
-        // authority check
-        if (store.login(username, password) == true) {
-            // close login screen 
+
+        if (shop.login(username, password) == true) {
+
             loginScreen.dispose();
-            // show main menu
-            storeWindow = new StoreBase(this);
-            storeWindow.setVisible(true);
+
+            shopWin = new ShopBase(this);
+            shopWin.setVisible(true);
             return true;
         } else {
             return false;
@@ -97,21 +79,21 @@ public class Shopping {
     }
 
     public Transaction checkOut() {
-        return store.checkout();
+        return shop.checkout();
     }
 
-    public Transaction setBillCustomer(Transaction transaction, String memberId) {
+    public Transaction setMemTransaction(Transaction transaction, String memberId) {
         try {
-            transaction = store.setBillCustomer(transaction, memberId);
+            transaction = shop.setBillCustomer(transaction, memberId);
         } catch (DataNotFoundException e) {
             e.printStackTrace();
         }
         return transaction;
     }
 
-    public Transaction addBillItem(Transaction transaction, String productId, int quantity) {
+    public Transaction addTransactionItem(Transaction transaction, String productId, int quantity) {
         try {
-            transaction = store.addBillItem(transaction, productId, quantity);
+            transaction = shop.addBillItem(transaction, productId, quantity);
         } catch (DataNotFoundException e) {
 			// UI action
 
@@ -120,36 +102,32 @@ public class Shopping {
         return transaction;
     }
 
-    public Transaction removeBillItem(Transaction transaction, String productId) {
-        transaction = store.removeBillItem(transaction, productId);
+    public Transaction removeTransactionItem(Transaction transaction, String productId) {
+        transaction = shop.removeBillItem(transaction, productId);
         return transaction;
     }
 
-    public Transaction setPayment(Transaction transaction, double cash, int redeemLoyaltyPoint) {
-        return this.store.setPayment(transaction, cash, redeemLoyaltyPoint);
+    public Transaction makePayment(Transaction transaction, double cash, int redeemLoyaltyPoint) {
+        return this.shop.setPayment(transaction, cash, redeemLoyaltyPoint);
     }
 
     public Transaction confirmPayment(Transaction transaction) {
-        return store.confirmPayment(transaction);
+        return shop.confirmPayment(transaction);
     }
 
-    public String getNewProductIdByCategory(String code) {
-        return store.getNewProductIdByCategory(code);
+    public String Cate2ProdID(String code) {
+        return shop.getNewProductIdByCategory(code);
     }
 
     public void addProduct(String id, String name, String categoryCode, String briefDescription,
             int quantityAvailable, float price, String barCode, int threshold, int orderQuantity) {
-        store.addProduct(id, name, categoryCode, briefDescription, quantityAvailable, price, barCode, threshold, orderQuantity);
+        shop.addProduct(id, name, categoryCode, briefDescription, quantityAvailable, price, barCode, threshold, orderQuantity);
     }
 
-    /**
-     *
-     * @param product
-     * @param indenx
-     */
+
     public void modifyProduct(String id, String name, String categoryCode, String briefDescription,
             int quantityAvailable, float price, String barCode, int threshold, int orderQuantity) {
-        store.modifyProduct(id, name, categoryCode, briefDescription, quantityAvailable, price, barCode, threshold, orderQuantity);
+        shop.modifyProduct(id, name, categoryCode, briefDescription, quantityAvailable, price, barCode, threshold, orderQuantity);
     }
 
     /**
@@ -157,24 +135,17 @@ public class Shopping {
      * @param index
      */
     public void deleteProduct(String id) {
-        store.deleteProduct(id);
+        shop.deleteProduct(id);
     }
 
-    /**
-     *
-     * @return
-     */
+
     public ArrayList<Product> getProductList() {
-        return store.getProductList();
+        return shop.getProductList();
     }
 
-    /**
-     *
-     * @param productId
-     * @return
-     */
+
     public Product getProductById(String productId) {
-        return store.getProductById(productId);
+        return shop.getProductById(productId);
     }
 
     /**
@@ -182,8 +153,8 @@ public class Shopping {
      * @param barCode
      * @return
      */
-    public Product getProductByBarCode(String barCode) {
-        return store.getProductByBarCode(barCode);
+    public Product barCodeToProd(String barCode) {
+        return shop.getProductByBarCode(barCode);
     }
 
     /**
@@ -191,8 +162,8 @@ public class Shopping {
      * @param memberId
      * @return
      */
-    public Member getMemberById(String memberId) {
-        return store.getMemberById(memberId);
+    public Member IdToMember(String memberId) {
+        return shop.getMemberById(memberId);
     }
 
     /**
@@ -200,91 +171,77 @@ public class Shopping {
      * @return
      */
     public ArrayList<Member> getMemberList() {
-        return store.getMemberList();
+        return shop.getMemberList();
     }
 
     /**
      *
      * @return
      */
-    public void removeMember(String memberID) {
-        store.removeMember(memberID);
+    public void deleteMember(String memberID) {
+        shop.removeMember(memberID);
     }
 
-    public void registerMember(Member mem) {
-        store.registerMember(mem);
+    public void newMember(Member mem) {
+        shop.registerMember(mem);
     }
 
-    public void registerMember(String name, String id, int loyalty) {
-        store.registerMember(name, id, loyalty);
+    public void newMember(String name, String id, int loyalty) {
+        shop.registerMember(name, id, loyalty);
     }
 
-    public void modifyMember(String name, String memID, int loyaltyPoint, int index) {
-        store.modifyMember(name, memID, loyaltyPoint, index);
+    public void changeMember(String name, String memID, int loyaltyPoint, int index) {
+        shop.modifyMember(name, memID, loyaltyPoint, index);
     }
 
     public ArrayList<Category> getCategoryList() {
-        return store.getCategoryList();
+        return shop.getCategoryList();
     }
 
     public ArrayList<Transaction> getTransactionList() {
-        return store.getTransactionList();
+        return shop.getTransactionList();
     }
 
-    /**
-     *
-     * @return
-     */
-    public Category getCategoryByCode(String code) {
-        return store.getCategoryByCode(code);
+
+    public Category codeToCate(String code) {
+        return shop.getCategoryByCode(code);
     }
 
-    /**
-     *
-     * @param code
-     * @param name
-     * @param vendorList
-     */
+
     public void addCategory(String code, String name, ArrayList<Vendor> vendorList) {
-        store.addCategory(code, name, vendorList);
+        shop.addCategory(code, name, vendorList);
     }
 
-    /**
-     *
-     * @param code
-     * @param name
-     * @param vendorList
-     */
-    public void updCategory(String code, String name) {
-        store.updCategory(code, name);
+
+    public void changeCate(String code, String name) {
+        shop.updCategory(code, name);
     }
 
     /**
      *
      * @param code
      */
-    public void deleteCategoryByCode(String code) {
-        store.delCategoryByCode(code);
+    public void deleteCate(String code) {
+        shop.delCategoryByCode(code);
     }
 
     public ArrayList<Discount> getDiscountList() {
-        return store.getDiscountList();
+        return shop.getDiscountList();
 
     }
 
-    public StoreBase getStoreWindow() {
-        return storeWindow;
+    public ShopBase getShopWindow() {
+        return shopWin;
     }
 
     public Discount get(int index) {
-        // TODO Auto-generated method stub
+
         return null;
     }
 
     public void addDiscount(String discountCode, String discountDescription,
             Date startDate, int period, double percent, String Applicable) {
-        // TODO Auto-generated method stub
-        store.addDiscount(discountCode, discountDescription, startDate, period, percent, Applicable);
+        shop.addDiscount(discountCode, discountDescription, startDate, period, percent, Applicable);
     }
 
 }

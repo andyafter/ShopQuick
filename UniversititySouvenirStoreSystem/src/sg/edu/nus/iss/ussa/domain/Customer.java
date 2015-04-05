@@ -2,15 +2,11 @@ package sg.edu.nus.iss.ussa.domain;
 
 import java.io.Serializable;
 
-/**
- * @author Achyut Suresh Rao
- */
-public abstract class Customer implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+public class Customer  {
+
     public String name;
 
-	// public List<Discount> getDiscount();
     public Customer() {
 
     }
@@ -19,6 +15,7 @@ public abstract class Customer implements Serializable {
         this.name = name;
     }
 
-    public abstract String getID();
+    public String getID()
+    {return "";};
 
 }

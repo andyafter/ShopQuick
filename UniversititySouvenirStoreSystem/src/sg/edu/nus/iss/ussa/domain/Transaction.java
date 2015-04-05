@@ -19,21 +19,19 @@ public class Transaction {
      */
 
     private int id = 0;
-    private int redeemedLoyaltyPoint;
+    private int usedPoints;
     private Date date;
     private Customer customer;
     private Discount discount;
     private ArrayList<CartItem> itemList = new ArrayList<CartItem>();
-
     private double cashAmount = 0;
     private double totalPrice = 0;
     private double discountedPirce = 0;
     private int gainedPoint = 0;
     private double rest = 0;
     private double change = 0;
-
-    private static final double DOLLAR_TO_POINT = 0.1;
-    private static final double POINTS_TO_DOLLAR = 0.05;
+    private static final double buyPoint = 0.1;
+    private static final double pointValue = 0.05;
 
     public Discount getDiscount() {
         return discount;
@@ -92,27 +90,27 @@ public class Transaction {
         this.cashAmount = cashAmount;
     }
 
-    public int getRedeemedLoyaltyPoint() {
-        return redeemedLoyaltyPoint;
+    public int getUsedPoints() {
+        return usedPoints;
     }
 
-    public void setRedeemedLoyaltyPoint(int redeemedLoyaltyPoint) {
-        this.redeemedLoyaltyPoint = redeemedLoyaltyPoint;
+    public void setUsedPoints(int points) {
+        this.usedPoints = points;
     }
 
-    public void addItem(Product product, int qty) {
-        CartItem transactionitem = new CartItem(product, product.getPrice(), qty);
-        if (!itemList.contains(transactionitem)) {
-            itemList.add(transactionitem);
+    public void addItem(Product product, int quantity) {
+        CartItem cartItem = new CartItem(product, product.getPrice(), quantity);
+        if (!itemList.contains(cartItem)) {
+            itemList.add(cartItem);
         }
     }
 
-    public void addItem(Product product, double price, int qty) {
-        CartItem transactionitem = new CartItem(product, price, qty);
-        if (itemList.contains(transactionitem)) {
+    public void addItem(Product product, double price, int quantity) {
+        CartItem cartItem = new CartItem(product, price, quantity);
+        if (itemList.contains(cartItem)) {
 
         } else {
-            itemList.add(transactionitem);
+            itemList.add(cartItem);
         }
     }
 
@@ -124,7 +122,7 @@ public class Transaction {
         }
     }
 
-    public double calcTotalPrice() {
+    public double getTotal() {
         double sum = 0;
         for (int i = 0; i < itemList.size(); i++) {
             CartItem it = (CartItem) itemList.get(i);
@@ -135,7 +133,7 @@ public class Transaction {
     }
 
     public double calcDiscountPrice() {
-        discountedPirce = calcTotalPrice() * (100 - discount.getPercent()) / 100;
+        discountedPirce = getTotal() * (100 - discount.getPercent()) / 100;
         return discountedPirce;
     }
 
@@ -145,12 +143,12 @@ public class Transaction {
     }
 
     public int calcGainedPoint() {
-        gainedPoint = (int) (calcRest() * DOLLAR_TO_POINT);
+        gainedPoint = (int) (calcRest() * buyPoint);
         return gainedPoint;
     }
 
     public double calcRest() {
-        rest = calcDiscountPrice() - redeemedLoyaltyPoint * POINTS_TO_DOLLAR;
+        rest = calcDiscountPrice() - usedPoints * pointValue;
         return rest;
     }
 

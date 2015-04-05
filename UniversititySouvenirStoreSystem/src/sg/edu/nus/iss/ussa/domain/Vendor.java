@@ -32,12 +32,12 @@ public class Vendor {
         this.description = description;
     }
 
-    boolean equalsName(Vendor VENOBJ) {
-        return this.name.equalsIgnoreCase(VENOBJ.name);
+    boolean equalsName(Vendor ven) {
+        return this.name.equalsIgnoreCase(ven.name);
     }
 
-    boolean equals(Vendor VENOBJ) {
-        return this.name.equalsIgnoreCase(VENOBJ.name) && this.description.equalsIgnoreCase(VENOBJ.description);
+    boolean equals(Vendor ven) {
+        return this.name.equalsIgnoreCase(ven.name) && this.description.equalsIgnoreCase(ven.description);
     }
 
 }

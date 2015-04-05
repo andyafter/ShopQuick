@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import sg.edu.nus.iss.ussa.dataio.TransactionIO;
-import sg.edu.nus.iss.ussa.domain.Store;
+import sg.edu.nus.iss.ussa.domain.Shop;
 import sg.edu.nus.iss.ussa.domain.Transaction;
 import sg.edu.nus.iss.ussa.exception.DataFileException;
 
@@ -25,20 +25,20 @@ public class TransactionManager {
     private TransactionIO td;
 
     public void finalize() throws IOException {
-        td.saveDataToFile(transactionList);
+        td.saveData(transactionList);
     }
 
     public void save() throws IOException {
-        td.saveDataToFile(transactionList);
+        td.saveData(transactionList);
     }
 
     public ArrayList<Transaction> getTransactionList() {
         return transactionList;
     }
 
-    public TransactionManager(Store store) throws IOException, DataFileException {
+    public TransactionManager(Shop store) throws IOException, DataFileException {
         td = new TransactionIO(store);
-        transactionList = td.loadDataFromFile();
+        transactionList = td.loadData();
     }
 
     public void setTransaction(ArrayList<Transaction> transactionList) {

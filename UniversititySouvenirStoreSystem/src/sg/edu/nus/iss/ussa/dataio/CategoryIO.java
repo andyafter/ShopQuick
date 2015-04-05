@@ -14,20 +14,13 @@ import sg.edu.nus.iss.ussa.util.Util;
  */
 public class CategoryIO extends DataIO {
 
-    // datafile name
-    private static final String C_File_Name = "Category.dat";
-    // determine if the No. of fields of a record is correct
-    private static final int C_Field_No = 2;
+    private static final String fileName = "Category.dat";
+    private static final int columns = 2;
 
-    /**
-     *
-     * @return @throws IOException
-     * @throws DataFileException
-     */
-    public ArrayList<Category> loadDataFromFile() throws IOException, DataFileException {
+    public ArrayList<Category> loadData() throws IOException, DataFileException {
         ArrayList<String> stringList = null;
 
-        stringList = super.loadStringFromFile(super.getcDatafolderpath() + C_File_Name);
+        stringList = super.loadFile(super.getcDatafolderpath() + fileName);
 
         ArrayList<Category> dataList = new ArrayList<Category>();
 
@@ -37,11 +30,11 @@ public class CategoryIO extends DataIO {
 
             String line = stringList.get(lineNo);
 
-            String[] fields = line.split(Util.C_Separator);
+            String[] fields = line.split(Util.comma);
 
             // when the No. of fields of a record is less then C_Field_No, skip this record
-            if (fields.length != C_Field_No) {
-                errMsg.append("datafile[" + C_File_Name + "] LineNo:" + (lineNo + 1) + System.getProperty("line.separator"));
+            if (fields.length != columns) {
+                errMsg.append("datafile[" + fileName + "] LineNo:" + (lineNo + 1) + System.getProperty("line.separator"));
                 continue;
             }
 
@@ -61,11 +54,7 @@ public class CategoryIO extends DataIO {
         return dataList;
     }
 
-    /**
-     *
-     * @param dataList
-     * @throws IOException
-     */
+
     public void saveDataToFile(ArrayList<Category> dataList) throws IOException {
 
         ArrayList<String> stringList = new ArrayList<String>();
@@ -73,13 +62,13 @@ public class CategoryIO extends DataIO {
         for (Category category : dataList) {
             StringBuffer line;
 
-            line = new StringBuffer(category.getCode() + Util.C_Separator);
+            line = new StringBuffer(category.getCode() + Util.comma);
             line.append(category.getName());
 
             stringList.add(line.toString());
         }
 
-        super.saveStringToFile(super.getcDatafolderpath() + C_File_Name, stringList);
+        super.saveString(super.getcDatafolderpath() + fileName, stringList);
 
     }
 

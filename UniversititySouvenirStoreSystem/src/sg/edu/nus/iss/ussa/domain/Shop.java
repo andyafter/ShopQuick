@@ -20,21 +20,11 @@ import sg.edu.nus.iss.ussa.exception.DataNotFoundException;
  * @author Xu Minsheng
  *
  */
-public class Store {
+public class Shop {
 
-    private StoreKeeperManager storekeeperMgr;
-    private MemberManager memberMgr;
-    private TransactionManager transactionMgr;
-    private ProductManager productMgr;
-    private CategoryManager categoryMgr;
-    private DiscountManager discountMgr;
 
-    /**
-     *
-     * @throws IOException
-     * @throws DataFileException
-     */
-    public Store() throws IOException, DataFileException {
+
+    public Shop() throws IOException, DataFileException {
         storekeeperMgr = new StoreKeeperManager();
         categoryMgr = new CategoryManager();
         memberMgr = new MemberManager();
@@ -158,7 +148,7 @@ public class Store {
      * @return
      */
     public Transaction setPayment(Transaction transaction, double cash, int redeemLoyaltyPoint) {
-        transaction.setRedeemedLoyaltyPoint(redeemLoyaltyPoint);
+        transaction.setUsedPoints(redeemLoyaltyPoint);
         transaction.setCashAmount(cash);
         return transaction;
     }
@@ -177,39 +167,28 @@ public class Store {
         // update product's quantity
         ArrayList<CartItem> itemList = transaction.getItemList();
         for (CartItem item : itemList) {
-            productMgr.changeProductQty(item.getProduct(), item.getProduct().getQuantityAvailable() - item.getQty());
+            productMgr.changeProductQty(item.getProduct(), item.getProduct().getQuantity() - item.getQty());
         }
 
         // update Member's loyalty point
         Customer customer = transaction.getCustomer();
         if (customer instanceof Member) {
             Member member = (Member) customer;
-            int originalPoint = member.getLoyaltyPoint();
+            int originalPoint = member.getPoint();
             int currentPoint = originalPoint
-                    - transaction.getRedeemedLoyaltyPoint() + transaction.calcGainedPoint();
-            member.setLoyaltyPoint(currentPoint);
+                    - transaction.getUsedPoints() + transaction.calcGainedPoint();
+            member.setPoint(currentPoint);
         }
 
-		// check inventory
-        // productMgr.checkInventory();
         return transaction;
     }
 
-    /**
-     *
-     * @param date
-     * @return TransactionList
-     */
+
     public ArrayList<Transaction> getTransactionByDate(Date date) {
         return transactionMgr.getTransactionListByDate(date);
     }
 
-//  -------------------- member related methods	-------------------
-    /**
-     *
-     * @param name
-     * @param memberId
-     */
+
     public void registerMember(String name, String memberId, int loyalty) {
         memberMgr.registerMember(name, memberId, loyalty);
     }
@@ -218,19 +197,12 @@ public class Store {
         memberMgr.registerMember(mem);
     }
 
-    /**
-     *
-     * @param memberId
-     * @return
-     */
+
     public Member getMemberById(String memberId) {
         return memberMgr.getMemberByID(memberId);
     }
 
-    /**
-     *
-     * @return
-     */
+
     public ArrayList<Member> getMemberList() {
         return memberMgr.getMemberList();
     }
@@ -239,8 +211,8 @@ public class Store {
         memberMgr.removeMember(memberID);
     }
 
-    public void modifyMember(String name, String memID, int loyaltyPoint, int index) {
-        memberMgr.modifyMember(name, memID, loyaltyPoint, index);
+    public void modifyMember(String name, String memID, int point, int index) {
+        memberMgr.modifyMember(name, memID, point, index);
     }
 
     public Member getMemberByID(String memID) {
@@ -413,24 +385,18 @@ public class Store {
 
     }
 
-    /**
-     *
-     * @param index
-     */
     public void deleteDiscount(int index) {
         discountMgr.deleteDiscount(index);
     }
 
-    /**
-     *
-     * @return
-     */
     public ArrayList<Discount> getDiscountList() {
         return discountMgr.getDiscountlist();
     }
 
-    /**
-     *
-     * @return
-     */
+    private StoreKeeperManager storekeeperMgr;
+    private MemberManager memberMgr;
+    private TransactionManager transactionMgr;
+    private ProductManager productMgr;
+    private CategoryManager categoryMgr;
+    private DiscountManager discountMgr;
 }

@@ -20,7 +20,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import sg.edu.nus.iss.ussa.domain.Product;
-import sg.edu.nus.iss.ussa.util.TableColumnAdjuster;
+import sg.edu.nus.iss.ussa.util.TableUtil;
 
 public class CheckInventoryPanel extends JPanel {
 
@@ -56,7 +56,7 @@ public class CheckInventoryPanel extends JPanel {
 
         table = new JTable(tableModel);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        TableColumnAdjuster tca = new TableColumnAdjuster(table);
+        TableUtil tca = new TableUtil(table);
         tca.setColumnHeaderIncluded(true);
         tca.setColumnDataIncluded(true);
         tca.setOnlyAdjustLarger(true);
@@ -107,7 +107,7 @@ public class CheckInventoryPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 // TODO Auto-generated method stub
-                manager.getStoreWindow().changePanel("mainScreen");
+                manager.getShopWindow().changePanel("mainScreen");
             }
         });
         p.add(b);
@@ -118,8 +118,8 @@ public class CheckInventoryPanel extends JPanel {
         Object[][] data = new Object[products.size()][5];
         for (int i = 0; i < products.size(); i++) {
             data[i][0] = products.get(i).getProductId();
-            data[i][1] = products.get(i).getName();
-            data[i][2] = products.get(i).getQuantityAvailable();
+            data[i][1] = products.get(i).getProductName();
+            data[i][2] = products.get(i).getQuantity();
             data[i][3] = products.get(i).getReorderQuantity();
             data[i][4] = products.get(i).getOrderQuantity();
         }

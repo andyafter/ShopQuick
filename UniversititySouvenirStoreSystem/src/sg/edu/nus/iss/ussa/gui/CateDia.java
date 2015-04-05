@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import sg.edu.nus.iss.ussa.domain.*;
 import sg.edu.nus.iss.ussa.util.DialogMode;
 import sg.edu.nus.iss.ussa.util.StringDocument;
-import sg.edu.nus.iss.ussa.util.TableColumnAdjuster;
+import sg.edu.nus.iss.ussa.util.TableUtil;
 
 /**
  *
@@ -37,7 +37,7 @@ public class CateDia extends JDialog {
     private final String[] columnNames = {"Name", "Description"};
 
     private Shopping manager;
-    private StoreBase mainScreen;
+    private ShopBase mainScreen;
 
     private DefaultTableModel tableModel;
 
@@ -47,9 +47,9 @@ public class CateDia extends JDialog {
     private Category category;
 
     public CateDia(Shopping manager, String title, Category category, DialogMode dialogMode) {
-        super(manager.getStoreWindow(), title);
+        super(manager.getShopWindow(), title);
         this.manager = manager;
-        this.mainScreen = manager.getStoreWindow();
+        this.mainScreen = manager.getShopWindow();
         this.category = category;
         initGUI();
 
@@ -243,7 +243,7 @@ public class CateDia extends JDialog {
     }
 
     private void setTableFormat(JTable table) {
-        TableColumnAdjuster tca = new TableColumnAdjuster(table);
+        TableUtil tca = new TableUtil(table);
         tca.setColumnHeaderIncluded(true);
         tca.setColumnDataIncluded(true);
         tca.adjustColumns();

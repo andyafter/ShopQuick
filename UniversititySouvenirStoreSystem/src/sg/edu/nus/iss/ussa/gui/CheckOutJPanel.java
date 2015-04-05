@@ -163,8 +163,8 @@ public class CheckOutJPanel extends javax.swing.JPanel {
             subVector.add(i + 1);
             CartItem transactionitem = (CartItem) itemList.get(i);
             product = transactionitem.getProduct();
-            subVector.add(product.getBarCodeNumber());
-            subVector.add(product.getName());
+            subVector.add(product.getBarCode());
+            subVector.add(product.getProductName());
             subVector.add(Integer.toString(transactionitem.getQty()));
             subVector.add(product.getPrice());
             subVector.add(transactionitem.calculateAmount());
@@ -191,7 +191,7 @@ public class CheckOutJPanel extends javax.swing.JPanel {
         }
         // refresh UI
         {
-            jLabelTotalMoney.setText(Double.toString(transaction.calcTotalPrice()));
+            jLabelTotalMoney.setText(Double.toString(transaction.getTotal()));
             jLabelAfterDiscount.setText(Double.toString(transaction.calcDiscountPrice()));
             jLabelMemberPoints.setText("0");
             jLabelAfterDiscount.setText(Double.toString(transaction.calcRest()));
@@ -206,7 +206,7 @@ public class CheckOutJPanel extends javax.swing.JPanel {
     }
 
     public void setOutputValue() {
-        jLabelTotalMoney.setText(df.format(transaction.calcTotalPrice()));
+        jLabelTotalMoney.setText(df.format(transaction.getTotal()));
         //JlDiscountNum.setText(Double.toString(transaction.getDiscount().getPercent()));
         jLabelAfterDiscount.setText(df.format(transaction.calcDiscountPrice()));
     }
@@ -492,7 +492,7 @@ public class CheckOutJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         flowControlTag = 1;
         tempBarCode = jTextBarCode.getText();
-        product = shopping.getProductByBarCode(tempBarCode);
+        product = shopping.barCodeToProd(tempBarCode);
         String quan = jTextFieldQuantity.getText();
         if (tempBarCode.length() == 0) {
             jLabelErrorMSG.setText(emsg.getWrongBarCode());
@@ -535,11 +535,11 @@ public class CheckOutJPanel extends javax.swing.JPanel {
             jLabelErrorMSG.setText(emsg.getNonExistingMem());
         } else {
             try {
-                transaction = shopping.setBillCustomer(transaction, MemberID);
+                transaction = shopping.setMemTransaction(transaction, MemberID);
                 jLabelMemberID.setText(((Member) transaction.getCustomer()).getName());
                 StringBuilder sb = new StringBuilder();
                 sb.append("");
-                sb.append(((Member) transaction.getCustomer()).getLoyaltyPoint());
+                sb.append(((Member) transaction.getCustomer()).getPoint());
                 String strI = sb.toString();
                 jLabelMemberPoints.setText(strI);
             } catch (NullPointerException e2) {
@@ -591,13 +591,13 @@ public class CheckOutJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             if (jLabelAfterDiscount.getText().length() != 0) {
-                transaction.setCashAmount(Util.castDouble(jLabelAfterDiscount.getText()));
+                transaction.setCashAmount(Util.strToDouble(jLabelAfterDiscount.getText()));
             }
             if (discount.getPercent() != 0) {
                 transaction.setDiscount(discount);
             }
             if (jTextCashPaid.getText().length() != 0) {
-                transaction.setRedeemedLoyaltyPoint(Util.castInt(jTextCashPaid.getText()));
+                transaction.setUsedPoints(Util.strToInt(jTextCashPaid.getText()));
             }
         } catch (DataInputException e1) {
             // TODO Auto-generated catch block

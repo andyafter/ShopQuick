@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 import sg.edu.nus.iss.ussa.domain.Member;
 import sg.edu.nus.iss.ussa.exception.DataFileException;
-import sg.edu.nus.iss.ussa.util.TableColumnAdjuster;
+import sg.edu.nus.iss.ussa.util.TableUtil;
 
 /**
  *
@@ -52,7 +52,7 @@ public class MemberListPanel extends javax.swing.JPanel {
 
         jTableMember.setModel(tableModel);
         jTableMember.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        TableColumnAdjuster tca = new TableColumnAdjuster(jTableMember);
+        TableUtil tca = new TableUtil(jTableMember);
         tca.setColumnHeaderIncluded(true);
         tca.setColumnDataIncluded(true);
         tca.adjustColumns();
@@ -97,7 +97,7 @@ public class MemberListPanel extends javax.swing.JPanel {
             member = memberList.get(i);
             data[i][0] = member.getName();
             data[i][1] = member.getMemberID();
-            data[i][2] = member.getLoyaltyPoint();
+            data[i][2] = member.getPoint();
         }
         return data;
     }
@@ -106,7 +106,7 @@ public class MemberListPanel extends javax.swing.JPanel {
         String id = (String) jTableMember.getValueAt(
                 jTableMember.getSelectedRow(), 1);
 
-        shopping.removeMember(id);
+        shopping.deleteMember(id);
 
         refreshTable();
     }
@@ -217,7 +217,7 @@ public class MemberListPanel extends javax.swing.JPanel {
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
         // TODO add your handling code here:
-        shopping.getStoreWindow().changePanel("checkOut");
+        shopping.getShopWindow().changePanel("checkOut");
     }//GEN-LAST:event_jButtonBackActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed

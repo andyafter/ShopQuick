@@ -40,7 +40,7 @@ import sg.edu.nus.iss.ussa.domain.*;
  * 
  * @ XIE JIABAO 
  */
-public class StoreBase extends JFrame {
+public class ShopBase extends JFrame {
 
     /**
      *
@@ -56,7 +56,7 @@ public class StoreBase extends JFrame {
     private CateListPanel cateListPanel;
 
     //private ReportPanel reportPanel;
-    public StoreBase(Shopping shopping) {
+    public ShopBase(Shopping shopping) {
         super("University Souvenir Store System");
         System.out.println("Store Window constructor");
         this.baseApp = shopping;

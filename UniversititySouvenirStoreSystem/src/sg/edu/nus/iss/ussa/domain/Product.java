@@ -5,7 +5,7 @@ public class Product {
     private String productId;
     private String productName;
     private String description;
-    private int quantityAvailable;
+    private int quantity;
     private double price;
     private String barCode;
     private int reorderQuantity;
@@ -20,7 +20,7 @@ public class Product {
         this.category = category;
         this.productName = name;
         this.description = briefDescription;
-        this.quantityAvailable = quantityAvailable;
+        this.quantity = quantityAvailable;
         this.price = price;
         this.barCode = barCodeNumber;
         this.reorderQuantity = recorderQuantity;
@@ -35,31 +35,27 @@ public class Product {
         this.category = category;
         this.productName = name;
         this.description = briefDescription;
-        this.quantityAvailable = quantityAvailable;
+        this.quantity = quantityAvailable;
         this.price = price;
         this.barCode = barCodeNumber;
         this.reorderQuantity = recorderQuantity;
         this.orderQuantity = orderQuantity;
     }
 
-    public boolean checkInventoryLevel() {
-        if (this.quantityAvailable < this.reorderQuantity) {
+    public boolean getStorageStatus() {
+        if (this.quantity < this.reorderQuantity) {
             return false;
         }
         return true;
     }
 
     public boolean compare(Product p) {
-        if (productName.equals(p.getName()) && description.equals(p.getBriefDescription()) & super.equals(p.getCategory())
-                && price == p.getPrice() && barCode.equals(p.getBarCodeNumber()) && reorderQuantity == p.getReorderQuantity()
+        if (productName.equals(p.getProductId()) && description.equals(p.getDescription()) & super.equals(p.getCategory())
+                && price == p.getPrice() && barCode.equals(p.getBarCode()) && reorderQuantity == p.getReorderQuantity()
                 && orderQuantity == p.getOrderQuantity()) {
             return true;
         }
         return false;
-    }
-
-    public void addQuantity(int add) {
-        this.quantityAvailable = this.quantityAvailable + add;
     }
 
     public String getProductId() {
@@ -70,36 +66,28 @@ public class Product {
         this.productId = productId;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public String getName() {
+    public String getProductName() {
         return productName;
     }
 
-    public void setName(String name) {
-        this.productName = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getBriefDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setBriefDescription(String briefDescription) {
-        this.description = briefDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getQuantityAvailable() {
-        return quantityAvailable;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setQuantityAvailable(int quantityAvailable) {
-        this.quantityAvailable = quantityAvailable;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public double getPrice() {
@@ -110,20 +98,20 @@ public class Product {
         this.price = price;
     }
 
-    public String getBarCodeNumber() {
+    public String getBarCode() {
         return barCode;
     }
 
-    public void setBarCodeNumber(String barCodeNumber) {
-        this.barCode = barCodeNumber;
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
     }
 
     public int getReorderQuantity() {
         return reorderQuantity;
     }
 
-    public void setRecorderQuantity(int recorderQuantity) {
-        this.reorderQuantity = recorderQuantity;
+    public void setReorderQuantity(int reorderQuantity) {
+        this.reorderQuantity = reorderQuantity;
     }
 
     public int getOrderQuantity() {
@@ -134,8 +122,18 @@ public class Product {
         this.orderQuantity = orderQuantity;
     }
 
-    public void show() {
-        System.out.println(productName);
+    public Category getCategory() {
+        return category;
     }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    
+    public void addQuantity(int add) {
+        this.quantity = this.quantity + add;
+    }
+
 
 }

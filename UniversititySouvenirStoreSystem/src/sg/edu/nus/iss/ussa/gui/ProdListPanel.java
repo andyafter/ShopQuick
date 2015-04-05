@@ -20,7 +20,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import sg.edu.nus.iss.ussa.domain.*;
-import sg.edu.nus.iss.ussa.util.TableColumnAdjuster;
+import sg.edu.nus.iss.ussa.util.TableUtil;
 import sg.edu.nus.iss.ussa.exception.*;
 
 /**
@@ -62,10 +62,10 @@ public class ProdListPanel extends JPanel {
         for (int i = 0; i < products.size(); i++) {
             p = products.get(i);
             data[i][0] = p.getProductId();
-            data[i][1] = p.getName();
-            data[i][2] = p.getBriefDescription();
+            data[i][1] = p.getProductName();
+            data[i][2] = p.getDescription();
             data[i][3] = p.getPrice();
-            data[i][4] = p.getQuantityAvailable();
+            data[i][4] = p.getQuantity();
         }
         return data;
     }
@@ -188,7 +188,7 @@ public class ProdListPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 // TODO Auto-generated method stub
-                manager.getStoreWindow().changePanel("checkInventory");
+                manager.getShopWindow().changePanel("checkInventory");
             }
         });
         p.add(b);
@@ -199,7 +199,7 @@ public class ProdListPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 // TODO Auto-generated method stub
-                manager.getStoreWindow().changePanel("mainScreen");
+                manager.getShopWindow().changePanel("mainScreen");
             }
         });
         p.add(b);
@@ -207,7 +207,7 @@ public class ProdListPanel extends JPanel {
     }
 
     private void setTableFormat() {
-        TableColumnAdjuster tca = new TableColumnAdjuster(productTable);
+        TableUtil tca = new TableUtil(productTable);
         tca.setColumnHeaderIncluded(true);
         tca.setColumnDataIncluded(true);
         //tca.setOnlyAdjustLarger(true);

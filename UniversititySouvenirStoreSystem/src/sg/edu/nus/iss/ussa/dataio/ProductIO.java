@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import sg.edu.nus.iss.ussa.domain.Category;
 import sg.edu.nus.iss.ussa.domain.Product;
-import sg.edu.nus.iss.ussa.domain.Store;
+import sg.edu.nus.iss.ussa.domain.Shop;
 import sg.edu.nus.iss.ussa.exception.DataFileException;
 import sg.edu.nus.iss.ussa.exception.DataInputException;
 import sg.edu.nus.iss.ussa.util.Util;
@@ -18,30 +18,23 @@ import sg.edu.nus.iss.ussa.util.Util;
  */
 public class ProductIO extends DataIO {
 
-    // datafile name
-    private static final String C_File_Name = "Products.dat";
-    // determine if the No. of fields of a record is correct
-    private static final int C_Field_No = 8;
-    // use store to get relevant category objects
-    private Store store;
+    private static final String fileName = "Products.dat";
+    private static final int columns = 8;
+
+    private Shop shop;
 
     /**
      *
      */
-    public ProductIO(Store store) {
-        this.store = store;
+    public ProductIO(Shop shop) {
+        this.shop = shop;
     }
 
-    /**
-     *
-     * @return @throws DataInputException
-     * @throws IOException
-     * @throws DataFileException
-     */
+    
     public ArrayList<Product> loadDataFromFile() throws IOException, DataFileException {
         ArrayList<String> stringList = null;
 
-        stringList = super.loadStringFromFile(super.getcDatafolderpath() + C_File_Name);
+        stringList = super.loadFile(super.getcDatafolderpath() + fileName);
 
         ArrayList<Product> dataList = new ArrayList<Product>();
 
@@ -51,33 +44,33 @@ public class ProductIO extends DataIO {
 
             String line = stringList.get(lineNo);
 
-            String[] fields = line.split(Util.C_Separator);
+            String[] fields = line.split(Util.comma);
 
             // when the No. of fields of a record is less then C_Field_No, skip this record
-            if (fields.length != C_Field_No) {
-                errMsg.append("datafile[" + C_File_Name + "] LineNo:" + (lineNo + 1) + System.getProperty("line.separator"));
+            if (fields.length != columns) {
+                errMsg.append("datafile[" + fileName + "] LineNo:" + (lineNo + 1) + System.getProperty("line.separator"));
                 continue;
             }
 
             try {
                 String productId = fields[0];
                 String categoryCode = productId.substring(0, 3);
-                Category category = store.getCategoryByCode(categoryCode);
+                Category category = shop.getCategoryByCode(categoryCode);
 
                 String name = fields[1];
                 String briefDescription = fields[2];
-                int quantityAvaible = Util.castInt(fields[3]);
-                double price = Util.castDouble(fields[4]);
+                int quantityAvaible = Util.strToInt(fields[3]);
+                double price = Util.strToDouble(fields[4]);
                 String barCodeNumber = fields[5];
-                int reorderQuantity = Util.castInt(fields[6]);
-                int orderQuantity = Util.castInt(fields[7]);
+                int reorderQuantity = Util.strToInt(fields[6]);
+                int orderQuantity = Util.strToInt(fields[7]);
 
                 Product product = new Product(productId, category, name, briefDescription,
                         quantityAvaible, price, barCodeNumber, reorderQuantity, orderQuantity);
 
                 dataList.add(product);
             } catch (DataInputException e) {
-                errMsg.append("datafile[" + C_File_Name + "] LineNo:" + (lineNo + 1) + System.getProperty("line.separator"));
+                errMsg.append("datafile[" + fileName + "] LineNo:" + (lineNo + 1) + System.getProperty("line.separator"));
             }
         }
 
@@ -101,19 +94,19 @@ public class ProductIO extends DataIO {
         for (Product product : dataList) {
             StringBuffer line;
 
-            line = new StringBuffer(product.getProductId() + Util.C_Separator);
-            line.append(product.getName() + Util.C_Separator);
-            line.append(product.getBriefDescription() + Util.C_Separator);
-            line.append(product.getQuantityAvailable() + Util.C_Separator);
-            line.append(product.getPrice() + Util.C_Separator);
-            line.append(product.getBarCodeNumber() + Util.C_Separator);
-            line.append(product.getReorderQuantity() + Util.C_Separator);
+            line = new StringBuffer(product.getProductId() + Util.comma);
+            line.append(product.getProductName() + Util.comma);
+            line.append(product.getDescription() + Util.comma);
+            line.append(product.getQuantity() + Util.comma);
+            line.append(product.getPrice() + Util.comma);
+            line.append(product.getBarCode() + Util.comma);
+            line.append(product.getReorderQuantity() + Util.comma);
             line.append(product.getOrderQuantity());
 
             stringList.add(line.toString());
         }
 
-        super.saveStringToFile(super.getcDatafolderpath() + C_File_Name, stringList);
+        super.saveString(super.getcDatafolderpath() + fileName, stringList);
 
     }
 

@@ -5,14 +5,13 @@ package sg.edu.nus.iss.ussa.domain;
  */
 public class Member extends Customer {
 
-    private static final long serialVersionUID = 1L;
     private String memberID;
-    private int loyaltyPoint;
+    private int point;
 
-    public Member(String name, String memberID, int loyaltyPoint) {
+    public Member(String name, String memberID, int point) {
         super(name);
         this.memberID = memberID;
-        this.loyaltyPoint = loyaltyPoint;
+        this.point = point;
     }
 
     public String getName() {
@@ -27,16 +26,16 @@ public class Member extends Customer {
         this.memberID = memberID;
     }
 
-    public int getLoyaltyPoint() {
-        return loyaltyPoint;
+    public int getPoint() {
+        return point;
     }
 
-    public void setLoyaltyPoint(int loyaltyPoint) {
-        this.loyaltyPoint = loyaltyPoint;
+    public void setPoint(int point) {
+        this.point = point;
     }
 
     public String toString() {
-        return name + "," + memberID + "," + loyaltyPoint;
+        return name + "," + memberID + "," + point;
     }
 
     @Override

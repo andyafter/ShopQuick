@@ -3,11 +3,7 @@
  */
 package sg.edu.nus.iss.ussa.domain;
 
-/**
- * @author CHARAN
- *
- */
-public class StoreKeeper {
+public class ShopKeeper {
 
     private String userName;
     private String password;

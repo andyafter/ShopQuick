@@ -24,7 +24,7 @@ import sg.edu.nus.iss.ussa.exception.*;
 public class ProdDia extends JDialog {
 
     private Shopping manager;
-    private StoreBase mainScreen;
+    private ShopBase mainScreen;
     private String id;
 
     private JTextField idText;
@@ -39,26 +39,26 @@ public class ProdDia extends JDialog {
     private JTextField orderQtyText;
 
     public ProdDia(Shopping manager, String title) {
-        super(manager.getStoreWindow(), title);
+        super(manager.getShopWindow(), title);
         this.manager = manager;
-        this.mainScreen = manager.getStoreWindow();
+        this.mainScreen = manager.getShopWindow();
         initGUI();
         add("South", createAddBottomPanel());
         String code = (String) categoryList.getSelectedItem();
-        this.id = manager.getNewProductIdByCategory(code);
+        this.id = manager.Cate2ProdID(code);
         idText.setText(id);
     }
 
     public ProdDia(Shopping manager, String title, String id) {
-        super(manager.getStoreWindow(), title);
+        super(manager.getShopWindow(), title);
         this.manager = manager;
-        this.mainScreen = manager.getStoreWindow();
+        this.mainScreen = manager.getShopWindow();
         this.id = id;
         initGUI();
         add("South", createModifyBottomPanel());
         Product p = manager.getProductById(id);
-        setData(p.getProductId(), p.getName(), p.getCategory().getCode(), p.getBriefDescription(), p.getQuantityAvailable(),
-                p.getPrice(), p.getBarCodeNumber(), p.getReorderQuantity(), p.getOrderQuantity());
+        setData(p.getProductId(), p.getProductName(), p.getCategory().getCode(), p.getDescription(), p.getQuantity(),
+                p.getPrice(), p.getBarCode(), p.getReorderQuantity(), p.getOrderQuantity());
         categoryList.setEnabled(false);
     }
 
@@ -218,7 +218,7 @@ public class ProdDia extends JDialog {
                 // TODO Auto-generated method stub
                 if (categoryList.getSelectedIndex() != -1) {
                     String code = (String) categoryList.getSelectedItem();
-                    idText.setText(manager.getNewProductIdByCategory(code));
+                    idText.setText(manager.Cate2ProdID(code));
 
                 }
             }

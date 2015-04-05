@@ -72,7 +72,7 @@ public class DiscountManager {
         Iterator<Discount> i = discountList.iterator();
         while (i.hasNext()) {
             Discount disc = i.next();
-            if (disc.getDiscountcode().equals(discountCode)) {
+            if (disc.getCode().equals(discountCode)) {
                 return disc;
             }
         }
@@ -107,13 +107,13 @@ public class DiscountManager {
         discList = this.getDiscountlist();
 
         for (Discount d : discList) {
-            if (d.getApplicable().equalsIgnoreCase("m") && isMember) {
+            if (d.getStatus().equalsIgnoreCase("m") && isMember) {
 
-                if (!hasTransaction && d.getDiscountcode().equalsIgnoreCase("MEMBER_FIRST")) {
+                if (!hasTransaction && d.getCode().equalsIgnoreCase("MEMBER_FIRST")) {
                     if (maxDiscount < d.getPercent()) {
                         maxDiscount = d.getPercent();
                     }
-                } else if (!d.getDiscountcode().equalsIgnoreCase("MEMBER_FIRST")) {
+                } else if (!d.getCode().equalsIgnoreCase("MEMBER_FIRST")) {
 
                     if (maxDiscount < d.getPercent()) {
                         maxDiscount = d.getPercent();
@@ -121,7 +121,7 @@ public class DiscountManager {
 
                 }
 
-            } else if (d.getStartDate().compareTo(currentDate) <= 0 && Util.addDays(d.getStartDate(), d.getPeriod()).compareTo(currentDate) >= 0) {
+            } else if (d.getStartDate().compareTo(currentDate) <= 0 && Util.dateInc(d.getStartDate(), d.getPeriod()).compareTo(currentDate) >= 0) {
                 if (maxDiscount < d.getPercent()) {
                     maxDiscount = d.getPercent();
 
@@ -151,24 +151,24 @@ public class DiscountManager {
 
         if (customer instanceof Member) {
             isMember = true;
-            if (((Member) customer).getLoyaltyPoint() != -1) {
+            if (((Member) customer).getPoint() != -1) {
                 hasTransaction = true;
             }
         }
 
         for (Discount discount : this.discountList) {
-            if (discount.getApplicable().equalsIgnoreCase("m") && isMember) {
+            if (discount.getStatus().equalsIgnoreCase("m") && isMember) {
 			    // discount for member only && customer is a member 
 
-                if (!hasTransaction && discount.getDiscountcode().equalsIgnoreCase("MEMBER_FIRST")) {
+                if (!hasTransaction && discount.getCode().equalsIgnoreCase("MEMBER_FIRST")) {
                     // discount for member's first purchase only
                     maxDiscount = discount.getHigherDiscount(maxDiscount);
-                } else if (!discount.getDiscountcode().equalsIgnoreCase("MEMBER_FIRST")) {
+                } else if (!discount.getCode().equalsIgnoreCase("MEMBER_FIRST")) {
                     // discount for member's subseq purchase
                     maxDiscount = discount.getHigherDiscount(maxDiscount);
                 }
             } else if (discount.getStartDate().compareTo(currentDate) <= 0
-                    && Util.addDays(discount.getStartDate(), discount.getPeriod()).compareTo(currentDate) >= 0) {
+                    && Util.dateInc(discount.getStartDate(), discount.getPeriod()).compareTo(currentDate) >= 0) {
                 // occasional discount is valid for current date 
                 maxDiscount = discount.getHigherDiscount(maxDiscount);
             }

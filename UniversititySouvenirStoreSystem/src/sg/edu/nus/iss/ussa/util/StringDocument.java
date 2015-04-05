@@ -4,11 +4,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
-/*
- * Limit input comma to JTextField
- * 
- *  @ XIE JIABAO
- */
+
 public class StringDocument extends PlainDocument {
 
     private int limitedLength;

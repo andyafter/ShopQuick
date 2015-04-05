@@ -16,23 +16,16 @@ import sg.edu.nus.iss.ussa.util.Util;
  */
 public class MemberIO extends DataIO {
 
-    // datafile name
-    private static final String C_File_Name = "Members.dat";
-    // determine if the No. of fields of a record is correct
-    private static final int C_Field_No = 3;
+    private static final String fileName = "Members.dat";
+    private static final int columns = 3;
 
-    /**
-     *
-     * @return @throws DataInputException
-     * @throws IOException
-     * @throws DataFileException
-     */
-    public ArrayList<Member> loadDataFromFile() throws IOException,
+
+    public ArrayList<Member> loadData() throws IOException,
             DataFileException {
         ArrayList<String> stringList = null;
 
-        stringList = super.loadStringFromFile(super.getcDatafolderpath()
-                + C_File_Name);
+        stringList = super.loadFile(super.getcDatafolderpath()
+                + fileName);
 
         ArrayList<Member> dataList = new ArrayList<Member>();
 
@@ -42,12 +35,12 @@ public class MemberIO extends DataIO {
 
             String line = stringList.get(lineNo);
 
-            String[] fields = line.split(Util.C_Separator);
+            String[] fields = line.split(Util.comma);
 
 			// when the No. of fields of a record is less then C_Field_No, skip
             // this record
-            if (fields.length != C_Field_No) {
-                errMsg.append("datafile[" + C_File_Name + "] LineNo:"
+            if (fields.length != columns) {
+                errMsg.append("datafile[" + fileName + "] LineNo:"
                         + (lineNo + 1) + System.getProperty("line.separator"));
                 continue;
             }
@@ -55,13 +48,13 @@ public class MemberIO extends DataIO {
             try {
                 String name = fields[0];
                 String memberID = fields[1];
-                int loyaltyPoint = Util.castInt(fields[2]);
+                int loyaltyPoint = Util.strToInt(fields[2]);
 
                 Member member = new Member(name, memberID, loyaltyPoint);
 
                 dataList.add(member);
             } catch (DataInputException e) {
-                errMsg.append("datafile[" + C_File_Name + "] LineNo:"
+                errMsg.append("datafile[" + fileName + "] LineNo:"
                         + (lineNo + 1) + System.getProperty("line.separator"));
             }
         }
@@ -87,14 +80,14 @@ public class MemberIO extends DataIO {
         for (Member member : dataList) {
             StringBuffer line;
 
-            line = new StringBuffer(member.getName() + Util.C_Separator);
-            line.append(member.getMemberID() + Util.C_Separator);
-            line.append(member.getLoyaltyPoint());
+            line = new StringBuffer(member.getName() + Util.comma);
+            line.append(member.getMemberID() + Util.comma);
+            line.append(member.getPoint());
 
             stringList.add(line.toString());
         }
 
-        super.saveStringToFile(super.getcDatafolderpath() + C_File_Name,
+        super.saveString(super.getcDatafolderpath() + fileName,
                 stringList);
 
     }

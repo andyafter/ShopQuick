@@ -16,20 +16,14 @@ import java.util.ArrayList;
  */
 public abstract class DataIO {
 
-    private static final String C_DataFolderPath = "./data/";
+    private static final String relativePath = "./data/";
 
-    public static String getcDatafolderpath() {
-        return C_DataFolderPath;
-    }
-
-    public ArrayList<String> loadStringFromFile(String fullpath) throws IOException {
+    public ArrayList<String> loadFile(String fullpath) throws IOException {
 
         ArrayList<String> stringList = new ArrayList<String>();
-
         File inFile = new File(fullpath);
         FileReader fr = new FileReader(inFile);
         BufferedReader br = new BufferedReader(fr);
-
         String line;
         while ((line = br.readLine()) != null) {
             stringList.add(line);
@@ -41,7 +35,7 @@ public abstract class DataIO {
         return stringList;
     }
 
-    public void saveStringToFile(String fullpath, ArrayList<String> stringList) throws IOException {
+    public void saveString(String fullpath, ArrayList<String> stringList) throws IOException {
         File outFile = new File(fullpath);
         BufferedWriter bw = new BufferedWriter(new java.io.FileWriter(outFile));
         PrintWriter pw = new PrintWriter(bw);
@@ -53,6 +47,9 @@ public abstract class DataIO {
 
         pw.close();
         bw.close();
+    }
+    public static String getcDatafolderpath() {
+        return relativePath;
     }
 
 }

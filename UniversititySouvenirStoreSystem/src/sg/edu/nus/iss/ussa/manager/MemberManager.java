@@ -68,7 +68,7 @@ public class MemberManager {
     }
 
     public void readFile() throws IOException, DataFileException {
-        memberList = memberDao.loadDataFromFile();
+        memberList = memberDao.loadData();
     }
 
 }

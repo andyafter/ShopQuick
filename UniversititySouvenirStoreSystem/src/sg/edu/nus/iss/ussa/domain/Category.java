@@ -12,7 +12,7 @@ public class Category {
     protected String code = "";
     protected String name = "";
     protected ArrayList<Vendor> vendorList;
-
+    
     public Category() {
     }
 

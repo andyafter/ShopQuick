@@ -10,26 +10,19 @@ import sg.edu.nus.iss.ussa.exception.DataInputException;
 
 /**
  *
- * @author Xu Minsheng
+ * @author andy pan
  *
  */
 public class Util {
 
-    public static final String C_Separator = ",";
+    public static String comma = ",";
+    public static String dataForm = "yyyy-MM-dd";
+    public static DecimalFormat decForm = new DecimalFormat("0.00");
 
-    public static final String C_Date_Format = "yyyy-MM-dd";
 
-    public static final DecimalFormat df = new DecimalFormat("0.00");
+    public static String testString(String s) throws DataInputException {
 
-    /**
-     * throw Exception when Component's text contains ","
-     *
-     * @return Component's text
-     * @throws DataInputException
-     */
-    public static String examineString(String s) throws DataInputException {
-
-        if (s.contains(C_Separator)) {
+        if (s.contains(comma)) {
 
             throw new DataInputException(s + " contains unexpected char(',')");
         } else {
@@ -38,16 +31,10 @@ public class Util {
 
     }
 
-    /**
-     * String cast to int
-     *
-     * @return cast text to integer
-     * @throws DataInputException
-     */
-    public static int castInt(String s) throws DataInputException {
+
+    public static int strToInt(String s) throws DataInputException {
 
         int result;
-
         try {
             result = Integer.parseInt(s);
         } catch (NumberFormatException e) {
@@ -58,13 +45,8 @@ public class Util {
 
     }
 
-    /**
-     * String cast to double
-     *
-     * @return cast text to double
-     * @throws DataInputException
-     */
-    public static double castDouble(String s) throws DataInputException {
+
+    public static double strToDouble(String s) throws DataInputException {
 
         double result;
 
@@ -78,16 +60,10 @@ public class Util {
         return result;
     }
 
-    /**
-     * String cast to date
-     *
-     * @return cast text to date
-     * @throws DataInputException
-     */
-    public static Date castDate(String s) throws DataInputException {
+    public static Date strToDate(String s) throws DataInputException {
 
         Date result;
-        SimpleDateFormat sdf = new SimpleDateFormat(C_Date_Format);
+        SimpleDateFormat sdf = new SimpleDateFormat(dataForm);
 
         try {
             result = sdf.parse(s);
@@ -99,37 +75,23 @@ public class Util {
         return result;
     }
 
-    /**
-     * Cast date to String in yyyy-MM-dd format
-     *
-     * @param date
-     * @return String
-     */
+
     public static String dateToString(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat(C_Date_Format);
+        SimpleDateFormat sdf = new SimpleDateFormat(dataForm);
         return sdf.format(date);
     }
 
-    /**
-     *
-     * @param date
-     * @param period
-     * @return
-     */
-    public static Date addDays(Date date, int period) {
+
+    public static Date dateInc(Date date, int period) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.add(Calendar.DATE, period);
         return cal.getTime();
     }
 
-    /**
-     *
-     * @param price
-     * @return
-     */
-    public static String priceFormat(double price) {
-        return df.format(price);
+
+    public static String priceForm(double price) {
+        return decForm.format(price);
     }
 
 }

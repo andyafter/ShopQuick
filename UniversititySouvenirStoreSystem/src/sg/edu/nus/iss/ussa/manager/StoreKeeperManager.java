@@ -6,8 +6,8 @@ package sg.edu.nus.iss.ussa.manager;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import sg.edu.nus.iss.ussa.dataio.StoreKeeperIO;
-import sg.edu.nus.iss.ussa.domain.StoreKeeper;
+import sg.edu.nus.iss.ussa.dataio.ShopKeeperIO;
+import sg.edu.nus.iss.ussa.domain.ShopKeeper;
 
 /**
  * @author CHARAN
@@ -15,19 +15,19 @@ import sg.edu.nus.iss.ussa.domain.StoreKeeper;
  */
 public class StoreKeeperManager {
 
-    private ArrayList<StoreKeeper> storeKeeperList;
-    private StoreKeeperIO userDao;
+    private ArrayList<ShopKeeper> storeKeeperList;
+    private ShopKeeperIO userDao;
 
     public StoreKeeperManager() throws IOException {
-        userDao = new StoreKeeperIO();
-        storeKeeperList = new ArrayList<StoreKeeper>();
-        storeKeeperList = userDao.loadDataFromFile();
+        userDao = new ShopKeeperIO();
+        storeKeeperList = new ArrayList<ShopKeeper>();
+        storeKeeperList = userDao.loadData();
     }
 
     public boolean checkAuthority(String userName, String Password) {
 
         boolean isValidUser = false;
-        for (StoreKeeper user : storeKeeperList) {
+        for (ShopKeeper user : storeKeeperList) {
             if (user.getUserName().equalsIgnoreCase(userName) && user.getPassword().equals(Password)) {
                 // password should be case sensitive
                 isValidUser = true;

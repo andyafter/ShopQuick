@@ -44,10 +44,10 @@ public class CategoryManager {
      */
     public void loadData() throws IOException, DataFileException {
         // load category basic info.
-        categoryList = categoryDao.loadDataFromFile();
+        categoryList = categoryDao.loadData();
 		// load vendor and set to category
         //vendorList = vendorDao.loadDataFromFile(categoryList);
-        vendorDao.loadDataFromFile(categoryList);
+        vendorDao.loadData(categoryList);
     }
 
     /**
@@ -64,11 +64,7 @@ public class CategoryManager {
         this.categoryList = categoryList;
     }
 
-    /**
-     *
-     * @param code
-     * @return
-     */
+
     public Category getCategoryByCode(String code) {
         for (Category category : this.categoryList) {
             if (code.equals(category.getCode())) {
@@ -78,44 +74,21 @@ public class CategoryManager {
         return null;
     }
 
-    /**
-     *
-     * @return
-     */
     public ArrayList<Category> getCategoryList() {
         return this.categoryList;
     }
 
-    /**
-     *
-     * @param name
-     * @return
-     */
+
     public Vendor getVendorByName(String name) {
-
-        /*for(Vendor vendor : this.vendorList){
-         if(name.equals(vendor.getName())){
-         return vendor;
-         }
-         }*/
         return null;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public ArrayList<Vendor> getVendorList() {
-        //return this.vendorList;
         return null;
     }
 
-    /**
-     *
-     * @param code
-     * @param name
-     * @param vendorList
-     */
+
     public void addCategory(String code, String name, ArrayList<Vendor> vendorList) {
         Category category = new Category(code, name, vendorList);
         this.categoryList.add(category);
@@ -123,12 +96,7 @@ public class CategoryManager {
         this.maintainVendorList();
     }
 
-    /**
-     *
-     * @param code
-     * @param name
-     * @param vendorList
-     */
+
     public void updCategory(String code, String name) {
         Category category = this.getCategoryByCode(code);
         category.setName(name);

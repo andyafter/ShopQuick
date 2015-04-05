@@ -218,7 +218,7 @@ public class CateListPanel extends javax.swing.JPanel {
             if (this.validUpd()) {
                 String code = this.tableModel.getValueAt(this.T_SSA_CategoryTable.getSelectedRow(), 0).toString();
                 String name = this.TF_SSA_CategoryName.getText().toString();
-                this.manager.updCategory(code, name);
+                this.manager.changeCate(code, name);
                 reloadData();
             } else {
                 UIError.openDialog("Category Code should not be changed");
@@ -241,7 +241,7 @@ public class CateListPanel extends javax.swing.JPanel {
         } else {
             String code = this.tableModel.getValueAt(this.T_SSA_CategoryTable.getSelectedRow(), 0).toString();
             if (validDel(code)) {
-                manager.deleteCategoryByCode(code);
+                manager.deleteCate(code);
                 reloadData();
             } else {
                 UIError.openDialog("there have product in this Category `" + code + "`, should not be deleted");

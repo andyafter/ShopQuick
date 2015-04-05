@@ -12,41 +12,25 @@ public class VendorIO extends DataIO {
 
     // datafile name
 
-    private static final String C_File_Name_Prxfix = "Vendors";
-    private static final String C_File_Name_Suffix = ".dat";
+    private static final String filePrefix = "Vendors";
+    private static final String fileSuffix = ".dat";
 
-    // determine if the No. of fields of a record is correct
-    private static final int C_Field_No = 2;
+    private static final int columns = 2;
 
-    /**
-     *
-     * @return @throws IOException
-     * @throws DataFileException
-     */
-    public ArrayList<Vendor> loadDataFromFile(ArrayList<Category> categoryList) throws IOException, DataFileException {
 
-		//ArrayList<Vendor> allVendorList = new ArrayList<Vendor>();
-        for (Category category : categoryList) {
+    public ArrayList<Vendor> loadData(ArrayList<Category> cateList) throws IOException, DataFileException {
 
-            // file name example: vendors MUG .dat
-            String filename = C_File_Name_Prxfix + category.getCode() + C_File_Name_Suffix;
+        for (Category category : cateList) {
 
+            String filename = filePrefix + category.getCode() + fileSuffix;
             ArrayList<String> stringList = null;
-
-            stringList = super.loadStringFromFile(super.getcDatafolderpath() + filename);
-
+            stringList = super.loadFile(super.getcDatafolderpath() + filename);
             ArrayList<Vendor> vendorOfCategoryList = new ArrayList<Vendor>();
-
             StringBuffer errMsg = new StringBuffer();
-
             for (int lineNo = 0; lineNo < stringList.size(); lineNo++) {
-
                 String line = stringList.get(lineNo);
-
-                String[] fields = line.split(Util.C_Separator);
-
-                // when the No. of fields of a record is less then C_Field_No, skip this record
-                if (fields.length != C_Field_No) {
+                String[] fields = line.split(Util.comma);
+                if (fields.length != columns) {
                     errMsg.append("datafile[" + filename + "] LineNo:" + (lineNo + 1) + System.getProperty("line.separator"));
                     continue;
                 }
@@ -92,20 +76,20 @@ public class VendorIO extends DataIO {
 
         for (Category category : categoryList) {
 
-            String filename = C_File_Name_Prxfix + category.getCode() + C_File_Name_Suffix;
+            String filename = filePrefix + category.getCode() + fileSuffix;
 
             ArrayList<String> stringList = new ArrayList<String>();
 
             for (Vendor vendor : category.getVendorList()) {
                 StringBuffer line;
 
-                line = new StringBuffer(vendor.getName() + Util.C_Separator);
+                line = new StringBuffer(vendor.getName() + Util.comma);
                 line.append(vendor.getDescription());
 
                 stringList.add(line.toString());
             }
 
-            super.saveStringToFile(super.getcDatafolderpath() + filename, stringList);
+            super.saveString(super.getcDatafolderpath() + filename, stringList);
         }
     }
 

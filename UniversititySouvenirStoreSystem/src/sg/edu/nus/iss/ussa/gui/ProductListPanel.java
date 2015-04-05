@@ -39,7 +39,7 @@ import javax.swing.table.TableRowSorter;
 
 import sg.edu.nus.iss.ussa.domain.*;
 import sg.edu.nus.iss.ussa.application.*;
-import sg.edu.nus.iss.ussa.util.TableColumnAdjuster;
+import sg.edu.nus.iss.ussa.util.TableUtil;
 
 public class ProductListPanel extends javax.swing.JPanel {
 
@@ -88,16 +88,16 @@ public class ProductListPanel extends javax.swing.JPanel {
         for (int i = 0; i < products.size(); i++) {
             p = products.get(i);
             data[i][0] = p.getProductId();
-            data[i][1] = p.getName();
-            data[i][2] = p.getBriefDescription();
+            data[i][1] = p.getProductName();
+            data[i][2] = p.getDescription();
             data[i][3] = p.getPrice();
-            data[i][4] = p.getQuantityAvailable();
+            data[i][4] = p.getQuantity();
         }
         return data;
     }
 
     private void setTableFormat() {
-        TableColumnAdjuster tca = new TableColumnAdjuster(jTableProduct);
+        TableUtil tca = new TableUtil(jTableProduct);
         tca.setColumnHeaderIncluded(true);
         tca.setColumnDataIncluded(true);
         tca.adjustColumns();
@@ -244,12 +244,12 @@ public class ProductListPanel extends javax.swing.JPanel {
 
     private void jButtonCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckActionPerformed
         // TODO add your handling code here:
-        shopping.getStoreWindow().changePanel("checkInventory");
+        shopping.getShopWindow().changePanel("checkInventory");
     }//GEN-LAST:event_jButtonCheckActionPerformed
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
         // TODO add your handling code here:
-        shopping.getStoreWindow().changePanel("checkOut");
+        shopping.getShopWindow().changePanel("checkOut");
     }//GEN-LAST:event_jButtonBackActionPerformed
 
 

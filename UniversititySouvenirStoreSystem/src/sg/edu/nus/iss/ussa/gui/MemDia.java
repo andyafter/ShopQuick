@@ -18,7 +18,7 @@ public class MemDia extends JDialog {
      */
     private static final long serialVersionUID = 1L;
     private Shopping manager;
-    private StoreBase mainScreen;
+    private ShopBase mainScreen;
     private int index;
 
     private JTextField name;
@@ -26,22 +26,22 @@ public class MemDia extends JDialog {
     private JTextField loyaltyPoint;
 
     public MemDia(Shopping manager, String title) {
-        super(manager.getStoreWindow(), title);
+        super(manager.getShopWindow(), title);
         this.manager = manager;
-        this.mainScreen = manager.getStoreWindow();
+        this.mainScreen = manager.getShopWindow();
         initGUI();
         add("South", createAddBottomPanel());
     }
 
     public MemDia(Shopping manager, String title, String id) {
-        super(manager.getStoreWindow(), title);
+        super(manager.getShopWindow(), title);
         this.manager = manager;
-        this.mainScreen = manager.getStoreWindow();
-        this.index = manager.getMemberList().indexOf(manager.getMemberById(id));
+        this.mainScreen = manager.getShopWindow();
+        this.index = manager.getMemberList().indexOf(manager.IdToMember(id));
         initGUI();
         add("South", createModifyBottomPanel());
         Member m = manager.getMemberList().get(index);
-        setData(m.getName(), m.getMemberID(), m.getLoyaltyPoint());
+        setData(m.getName(), m.getMemberID(), m.getPoint());
     }
 
     private void initGUI() {
@@ -113,7 +113,7 @@ public class MemDia extends JDialog {
             public void actionPerformed(ActionEvent arg0) {
 
                 if (validateData()) {
-                    manager.registerMember(getNameText(), getIdText(), -1);
+                    manager.newMember(getNameText(), getIdText(), -1);
                     mainScreen.getMemberPanel().refreshTable();
                     dispose();
                 } else {
@@ -147,7 +147,7 @@ public class MemDia extends JDialog {
             public void actionPerformed(ActionEvent arg0) {
 
                 if (validateData()) {
-                    manager.modifyMember(getNameText(), getIdText(),
+                    manager.changeMember(getNameText(), getIdText(),
                             getLoyaltyText(), index);
 
                     mainScreen.getMemberPanel().refreshTable();

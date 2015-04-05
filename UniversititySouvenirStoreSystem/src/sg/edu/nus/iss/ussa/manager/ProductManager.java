@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import sg.edu.nus.iss.ussa.dataio.ProductIO;
 import sg.edu.nus.iss.ussa.domain.Category;
 import sg.edu.nus.iss.ussa.domain.Product;
-import sg.edu.nus.iss.ussa.domain.Store;
+import sg.edu.nus.iss.ussa.domain.Shop;
 import sg.edu.nus.iss.ussa.exception.DataFileException;
 
 /*
@@ -18,7 +18,7 @@ public class ProductManager {
     private ArrayList<Product> productList;
     private ProductIO productDao;
 
-    public ProductManager(Store store) throws IOException, DataFileException {
+    public ProductManager(Shop store) throws IOException, DataFileException {
         productDao = new ProductIO(store);
         loadData();
     }
@@ -44,7 +44,7 @@ public class ProductManager {
         }
         ArrayList<Product> orderList = new ArrayList<Product>();
         for (int i = 0; i < productList.size(); i++) {
-            if (!productList.get(i).checkInventoryLevel()) {
+            if (!productList.get(i).getStorageStatus()) {
                 orderList.add(productList.get(i));
             }
         }
@@ -118,11 +118,10 @@ public class ProductManager {
         }
     }
 
-    //change quantity of product when checkout 
-    public void changeProductQty(Product p, int qty) {
+    public void changeProductQty(Product p, int quantity) {
         if (productList.contains(p)) {
             int i = productList.indexOf(p);
-            productList.get(i).setQuantityAvailable(qty);
+            productList.get(i).setQuantity(quantity);
         }
 
     }
@@ -139,7 +138,7 @@ public class ProductManager {
     //return the bar code of product
     public Product getProductByBarCode(String barCode) {
         for (int x = 0; x < productList.size(); x++) {
-            if (barCode.equals(productList.get(x).getBarCodeNumber())) {
+            if (barCode.equals(productList.get(x).getBarCode())) {
                 return productList.get(x);
             }
         }
@@ -150,9 +149,5 @@ public class ProductManager {
         return this.productList;
     }
 
-    public void showData() {
-        for (int i = 0; i < productList.size(); i++) {
-            productList.get(i).show();
-        }
-    }
+    
 }

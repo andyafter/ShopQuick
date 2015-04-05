@@ -5,8 +5,6 @@ package sg.edu.nus.iss.ussa.domain;
  */
 public class Public extends Customer {
 
-    private static final long serialVersionUID = 1L;
-
     public Public() {
         super();
     }
