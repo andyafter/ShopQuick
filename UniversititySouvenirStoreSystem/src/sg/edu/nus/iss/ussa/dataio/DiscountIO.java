@@ -52,7 +52,7 @@ public class DiscountIO extends DataIO {
 		    if (!fields[3].equalsIgnoreCase("ALWAYS"))			
 		    	period = Util.castInt(fields[3]);
 		    		
-			float percent = Util.castFloat(fields[4]);
+			double percent = Util.castDouble(fields[4]);
 			String Applicable=(fields[5]);
 			 
 			Discount discount;

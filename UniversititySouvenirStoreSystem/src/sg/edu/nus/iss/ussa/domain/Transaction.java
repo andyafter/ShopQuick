@@ -120,16 +120,13 @@ public class Transaction
 	public void addItem(Product product,int qty)
 	{
 		CartItem transactionitem = new CartItem(product,product.getPrice(),qty);
-		if (itemList.contains(transactionitem))
-		{
-			
-		} else
+		if (!itemList.contains(transactionitem))
 		{
 			itemList.add(transactionitem);
 		}
 	}
 	
-	public void addItem(Product product,float price,int qty)
+	public void addItem(Product product,double price,int qty)
 	{
 		CartItem transactionitem = new CartItem(product,price,qty);
 		if (itemList.contains(transactionitem))

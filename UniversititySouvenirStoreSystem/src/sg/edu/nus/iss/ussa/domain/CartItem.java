@@ -11,12 +11,12 @@ public class CartItem
 {
 
 	private Product product = null;
-	private float price =0;
+	private double price =0;
 	private int quantity = 0;
 	
 	public CartItem(){}
 	
-	public CartItem(Product product,float price,int qty)
+	public CartItem(Product product,double price,int qty)
 	{
 		this.product = product;
 		this.price = price;
@@ -35,7 +35,7 @@ public class CartItem
 	{
 		return price;
 	}
-	public void setPrice(float price)
+	public void setPrice(double price)
 	{
 		this.price = price;
 	}

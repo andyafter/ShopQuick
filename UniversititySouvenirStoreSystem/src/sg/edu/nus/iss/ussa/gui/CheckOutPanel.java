@@ -657,7 +657,7 @@ public class CheckOutPanel extends JPanel
 				try
 				{
 					if (JlDiscountedPriceNum.getText().length()!=0)
-					transaction.setCashAmount(Util.castFloat(JlDiscountedPriceNum.getText()));
+					transaction.setCashAmount(Util.castDouble(JlDiscountedPriceNum.getText()));
 					if (discount.getPercent()!=0)
 					transaction.setDiscount(discount);
 					if (JtPaidNum.getText().length()!=0)

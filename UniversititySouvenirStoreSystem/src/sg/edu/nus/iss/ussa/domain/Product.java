@@ -8,14 +8,14 @@ public class Product {
 	private String productName;
 	private String description;
 	private int quantityAvailable;
-	private float price;
+	private double price;
 	private String barCode;
 	private int reorderQuantity;
 	private int orderQuantity;
         private Category category;
 	
 	public Product(Category category, String name,
-			String briefDescription, int quantityAvailable, float price,
+			String briefDescription, int quantityAvailable, double price,
 			String barCodeNumber, int recorderQuantity, int orderQuantity) {
             
 		super();
@@ -30,7 +30,7 @@ public class Product {
 	}
 	
 	public Product(String productId, Category category, String name,
-			String briefDescription, int quantityAvailable, float price,
+			String briefDescription, int quantityAvailable, double price,
 			String barCodeNumber, int recorderQuantity, int orderQuantity) {
 		super();
 		this.productId = productId;
@@ -104,11 +104,11 @@ public class Product {
 		this.quantityAvailable = quantityAvailable;
 	}
 
-	public float getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(float price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 

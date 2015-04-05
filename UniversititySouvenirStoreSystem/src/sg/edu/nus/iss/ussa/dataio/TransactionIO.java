@@ -70,7 +70,7 @@ public class TransactionIO extends DataIO
 				String customerID = fields[2];
 				int qty = Util.castInt(fields[3]);
 				Date date = Util.castDate(fields[4]);
-				float price = Util.castFloat(fields[5]);
+				double price = Util.castDouble(fields[5]);
 				//System.out.println("Dao" + date);
 				//ProductMgr pm = new ProductMgr();
 				Product product = store.getProductById(productID);
