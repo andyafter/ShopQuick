@@ -130,7 +130,9 @@ public class MemberListPanel extends javax.swing.JPanel {
 
             }
         ));
+        jTableMember.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(jTableMember);
+        jTableMember.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         jButtonAdd.setText("Add");
         jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -215,7 +217,7 @@ public class MemberListPanel extends javax.swing.JPanel {
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
         // TODO add your handling code here:
-        shopping.getStoreWindow().changePanel("mainScreen");
+        shopping.getStoreWindow().changePanel("checkOut");
     }//GEN-LAST:event_jButtonBackActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed

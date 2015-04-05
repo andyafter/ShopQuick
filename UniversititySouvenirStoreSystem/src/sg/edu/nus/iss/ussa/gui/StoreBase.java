@@ -33,7 +33,7 @@ import sg.edu.nus.iss.ussa.domain.*;
  * Register Panel here
  * 
  * For example:
- * ProductListPanel productListPanel = new ProductListPanel(manager);
+ * ProductListPanel productListPanel = new ProductListPanel(shopping);
  * cards.add(productListPanel,"cardName");
  * 
  * When call the panel, using changeCard(cardName) method
@@ -194,6 +194,7 @@ public class StoreBase extends JFrame {
             }
         });
         menu.add(menuItem);
+        
 
         return menuBar;
     }
