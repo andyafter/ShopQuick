@@ -46,15 +46,13 @@ public class StoreBase extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Shopping manager;
+	private Shopping baseApp;
 	private JMenuBar menuBar;
 	private JPanel panels;
 	private ProdListPanel prodListPanel;
 	private CheckInventoryPanel checkInvPanel;
-	//private LoginPanel loginPanel;
-	private CheckOutPanel checkOutPanel;
+	private CheckOutJPanel checkOutPanel;
 	private MemListPanel memListPanel;
-	//private ProductListPanel productListPanel;
 	private CateListPanel cateListPanel;
 	
 	//private ReportPanel reportPanel;
@@ -62,11 +60,11 @@ public class StoreBase extends JFrame{
 	public StoreBase(Shopping shopping){
 		super("University Souvenir Store System");
                 System.out.println("Store Window constructor");
-		this.manager = shopping;
+		this.baseApp = shopping;
 		
 		setJMenuBar(createMenu());
 		this.panels = new JPanel(new CardLayout());
-		this.checkOutPanel = new CheckOutPanel(shopping);
+		this.checkOutPanel = new CheckOutJPanel(shopping);
 		this.prodListPanel = new ProdListPanel(shopping);
 		this.checkInvPanel = new CheckInventoryPanel(shopping);
 		this.cateListPanel = new CateListPanel(shopping);
@@ -74,7 +72,7 @@ public class StoreBase extends JFrame{
 		
 		
 		//register cards with cardName
-		panels.add(createMainPanel(),"mainScreen");
+		//panels.add(createMainPanel(),"mainScreen");
 		panels.add(checkOutPanel,"checkOut");
 		panels.add(prodListPanel,"productList");
 		panels.add(checkInvPanel,"checkInventory");
@@ -89,8 +87,8 @@ public class StoreBase extends JFrame{
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
-                //checkOutPanel.setTransaction(manager.checkOut());
-		//changePanel("checkOut");
+                checkOutPanel.setTransaction(baseApp.checkOut());
+		changePanel("checkOut");
 		
 	}
 	
@@ -107,16 +105,16 @@ public class StoreBase extends JFrame{
 		JMenuItem menuItem;
 		menuBar = new JMenuBar();
 		//main menu
-		menu = new JMenu("Main");
+		menu = new JMenu("Memu");
 		menu.setMnemonic(KeyEvent.VK_M);
-		menuItem = new JMenuItem("Main Screen",KeyEvent.VK_M);
+		menuItem = new JMenuItem("Check Out",KeyEvent.VK_M);
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,ActionEvent.ALT_MASK));
 		menuItem.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				changePanel("mainScreen");
+				changePanel("checkOut");
 			}
 		});
 		menu.add(menuItem);
@@ -169,7 +167,7 @@ public class StoreBase extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				ProdDia d = new ProdDia(manager,"Add Product");
+				ProdDia d = new ProdDia(baseApp,"Add Product");
 				d.setVisible(true);
 			}
 		});
@@ -241,220 +239,6 @@ public class StoreBase extends JFrame{
 		return menuBar;
 	}
 	
-	//main screen
-	//cardName: mainScreen
-	private Container createMainPanel(){
-		JPanel mainWin;
-		JButton button;
-                
-		mainWin = new JPanel();
-		mainWin.setLayout(new BoxLayout(mainWin, BoxLayout.Y_AXIS));
-		mainWin.add(createTransactionFactory());
-		mainWin.add(createMemberFactory());
-		mainWin.add(createDiscountFactory());
-		mainWin.add(createCategoryFactory());
-		mainWin.add(createProductFactory());
-		mainWin.add(createReportFactory());
-
-		return mainWin;
-	}
-	
-	private JPanel createTransactionFactory(){
-		JPanel p = new JPanel();
-		p.setBorder(BorderFactory.createTitledBorder("TransactionFactory"));
-		JButton button = new JButton("CheckOut");
-		button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("checkout");
-				checkOutPanel.setTransaction(manager.checkOut());
-				changePanel("checkOut");
-				
-			}
-		});
-		p.add(button);
-		return p;
-	
-	}
-
-	private JPanel createProductFactory(){
-		JPanel p = new JPanel(new FlowLayout());
-		p.setBorder(BorderFactory.createTitledBorder("ProductFactory"));
-		JButton button = new JButton("Product List");
-		button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				changePanel("productList");
-			}
-		});
-		p.add(button);
-		button = new JButton("Add Product");
-		button.addActionListener(new ActionListener(){
-			
-			@Override
-			public void actionPerformed (ActionEvent e) {
-				ProdDia dialog = new ProdDia(manager,"Add Product");
-				dialog.setVisible(true);
-			}
-		});
-		p.add(button);
-		button = new JButton("Check Inventory");
-		button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				changePanel("checkInventory");
-			}
-		});
-		p.add(button);
-
-		return p;
-	}
-	
-	private JPanel createMemberFactory(){
-		JPanel p = new JPanel();
-		p.setBorder(BorderFactory.createTitledBorder("MemberFactory"));
-		JButton button = new JButton("Member List");
-		button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("member list");
-				changePanel("memberList");
-			}
-		});
-		p.add(button);
-		button = new JButton("Add Member");
-		button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				MemDia memDialog = new MemDia(manager, "Add Member");
-				memDialog.setVisible(true);
-				System.out.println("add member");
-				//changeCard("memberList");
-			}
-		});
-		p.add(button);
-		return p;
-	}
-	
-	private JPanel createDiscountFactory(){
-		JPanel p = new JPanel();
-		p.setBorder(BorderFactory.createTitledBorder("DiscountFactory"));
-		JButton button = new JButton("Discount List");
-		button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("discount list");
-				//changeCard("discountList");
-			}
-		});
-		p.add(button);
-		button = new JButton("Add Discount");
-		button.addActionListener(new ActionListener() {
-			
-	
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("add discount");
-				//changeCard("discountList");
-			}
-		});
-		p.add(button);
-		return p;
-	
-	}
-	
-	private JPanel createCategoryFactory(){
-		JPanel p = new JPanel();
-		p.setBorder(BorderFactory.createTitledBorder("CategoryFactory"));
-		JButton button = new JButton("Category List");
-		button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				changePanel("categoryList");
-			}
-		});
-		p.add(button);
-		button = new JButton("Add Category");
-		button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("add category");
-				//changeCard("memberList");
-			}
-		});
-		p.add(button);
-		return p;
-	
-	}
-	
-	private JPanel createReportFactory(){
-		JPanel p = new JPanel();
-		p.setBorder(BorderFactory.createTitledBorder("ReportFactory"));
-		JButton button = new JButton("Category Report");
-		button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("Category Report");
-				//changeCard("discountList");
-			}
-		});
-		p.add(button);
-		button = new JButton("Product Report");
-		button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("Product Report");
-				//changeCard("discountList");
-			}
-		});
-		p.add(button);
-		button = new JButton("Transaction Report");
-		button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("Report list");
-				//changeCard("discountList");
-			}
-		});
-		p.add(button);
-		button = new JButton("Member Report");
-		button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("Report list");
-				//changeCard("discountList");
-			}
-		});
-		p.add(button);
-		return p;
-	
-	}
 	
 	public void changePanel(String panelName){
 		CardLayout cl =  (CardLayout)panels.getLayout();
@@ -462,10 +246,7 @@ public class StoreBase extends JFrame{
 	}
 	
 	public void exit(){
-		//dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSED));
-		//System.exit(EXIT_ON_CLOSE);
-		manager.shutdown();
-		
+		baseApp.shutdown();
 	}
 
 	public JPanel getCards() {
