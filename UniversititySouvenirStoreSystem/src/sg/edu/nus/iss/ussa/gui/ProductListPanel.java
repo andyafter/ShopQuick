@@ -9,7 +9,6 @@ package sg.edu.nus.iss.ussa.gui;
  *
  * @author andypan
  */
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -42,9 +41,6 @@ import sg.edu.nus.iss.ussa.domain.*;
 import sg.edu.nus.iss.ussa.application.*;
 import sg.edu.nus.iss.ussa.util.TableColumnAdjuster;
 
-
-
-
 public class ProductListPanel extends javax.swing.JPanel {
 
     /**
@@ -53,169 +49,74 @@ public class ProductListPanel extends javax.swing.JPanel {
     public ProductListPanel(Shopping shopping) {
         this.shopping = shopping;
         initComponents();
-    }
-    private Object[][] loadTableData(ArrayList<Product> products){
-        Object[][] data =  new Object[products.size()][5];
-        Product p;
-        for(int i=0;i<products.size();i++){
-                p = products.get(i);
-                data[i][0] = p.getProductId();
-                data[i][1] = p.getName();
-                data[i][2] = p.getBriefDescription();
-                data[i][3] = p.getPrice();
-                data[i][4] = p.getQuantityAvailable();
-        }
-        return data;
-    }
-    private JPanel createTopPanel(){
-        JPanel p = new JPanel(new BorderLayout());
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panel.add(new JLabel("Product List"));
-        p.add("Center",panel);
-        JButton b = new JButton("Refresh");
-        b.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                        // TODO Auto-generated method stub
-                        refreshTable();
-                }
-        });
-        panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panel.add(b);
-        p.add("East",panel);
-
-        return p;
-    }
-    private Container createMiddlePanel(Object[][] data){
-		
-        tableModel = new DefaultTableModel(data,columnNames){
-            @Override
-            public boolean isCellEditable(int row, int column){
+        //setLayout(new BorderLayout());
+        //add("West",createMiddlePanel(loadTableData(shopping.getProductList())));
+        //createMiddlePanel(loadTableData(shopping.getProductList()));
+        Object[][] data = loadTableData(shopping.getProductList());
+        tableModel = new DefaultTableModel(data, columnNames) {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
 
-        productTable = new JTable(tableModel);
-        productTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTableProduct.setModel(tableModel);
+        jTableProduct.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         setTableFormat();
-        productTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        productTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-
-                @Override
-                public void valueChanged(ListSelectionEvent arg0) {
-                        // TODO Auto-generated method stub
-                        if(productTable.getSelectionModel().isSelectionEmpty()){
-                                modifyButton.setEnabled(false);
-                                deleteButton.setEnabled(false);
-                        }else{
-                                modifyButton.setEnabled(true);
-                                deleteButton.setEnabled(true);
-                        }
+        jTableProduct.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jTableProduct.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent arg0) {
+                if (jTableProduct.getSelectionModel().isSelectionEmpty()) {
+                    modifyButton.setEnabled(false);
+                    deleteButton.setEnabled(false);
+                } else {
+                    modifyButton.setEnabled(true);
+                    deleteButton.setEnabled(true);
                 }
+            }
         });;
-        productTable.setFillsViewportHeight(true);
-        productTable.setAutoCreateRowSorter(true);
-
-        JScrollPane p = new JScrollPane(productTable);
-
-        return p;
-    }
-	
-    private JPanel createBottomPanel(){
-        JPanel p = new JPanel();
-        JButton b = new JButton("Add");
-        b.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                        // TODO Auto-generated method stub
-                        ProdDia d = new ProdDia(shopping,"Add Product");				
-                        d.setVisible(true);
-                }
-        });
-        p.add(b);
-
-        modifyButton = new JButton("Modify");
-        modifyButton.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                        // TODO Auto-generated method stub
-                        int rowIndex = productTable.convertRowIndexToModel(productTable.getSelectedRow());
-                        int columnIndex = productTable.getColumnModel().getColumnIndex("Id");
-                        String id = (String)tableModel.getValueAt(rowIndex, columnIndex);
-                        //int index = Integer.parseInt(id.substring(4));
-                        ProdDia d = new ProdDia(shopping,"Modify Product", id);
-                        d.setVisible(true);
-                }
-        });
-        modifyButton.setEnabled(false);
-        p.add(modifyButton);
-
-        deleteButton = new JButton("Delete");
-        deleteButton.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                        // TODO Auto-generated method stub
-                        int rowIndex = productTable.convertRowIndexToModel(productTable.getSelectedRow());
-                        int columnIndex = productTable.getColumnModel().getColumnIndex("Id");
-                        String id = (String)tableModel.getValueAt(rowIndex, columnIndex);
-                        tableModel.removeRow(rowIndex);
-                        shopping.deleteProduct(id);
-                        //shopping.getStore().getPm().showData();
-//				deleteButton.setEnabled(false);
-//				modifyButton.setEnabled(false);
-                }
-        });
-        deleteButton.setEnabled(false);
-        p.add(deleteButton);
-
-        b = new JButton("Check Threshold");
-        b.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                        // TODO Auto-generated method stub
-                        shopping.getStoreWindow().changePanel("checkInventory");
-                }
-        });
-        p.add(b);
-
-        b = new JButton("Back");
-        b.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                        // TODO Auto-generated method stub
-                        shopping.getStoreWindow().changePanel("mainScreen");
-                }
-        });
-        p.add(b);
-        return p;
+        jTableProduct.setFillsViewportHeight(true);
+        jTableProduct.setAutoCreateRowSorter(true);
+        //JScrollPane p = new JScrollPane(jTableProduct);
+        refreshList();
+        setVisible(true);
     }
 
-    private void setTableFormat(){
-        TableColumnAdjuster tca = new TableColumnAdjuster(productTable);
+    private Object[][] loadTableData(ArrayList<Product> products) {
+        Object[][] data = new Object[products.size()][5];
+        Product p;
+        for (int i = 0; i < products.size(); i++) {
+            p = products.get(i);
+            data[i][0] = p.getProductId();
+            data[i][1] = p.getName();
+            data[i][2] = p.getBriefDescription();
+            data[i][3] = p.getPrice();
+            data[i][4] = p.getQuantityAvailable();
+        }
+        return data;
+    }
+
+    private void setTableFormat() {
+        TableColumnAdjuster tca = new TableColumnAdjuster(jTableProduct);
         tca.setColumnHeaderIncluded(true);
         tca.setColumnDataIncluded(true);
         tca.adjustColumns();
     }
 
-    public void refreshTable(){
+    public void refreshList() {
         tableModel.setDataVector(loadTableData(shopping.getProductList()), columnNames);
         tableModel.fireTableDataChanged();
         setTableFormat();
     }
 
     public JTable getProductTable() {
-        return productTable;
+        return jTableProduct;
     }
 
     public DefaultTableModel getTableModel() {
         return tableModel;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -235,13 +136,10 @@ public class ProductListPanel extends javax.swing.JPanel {
 
         jTableProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jTableProduct.setColumnSelectionAllowed(true);
@@ -256,12 +154,32 @@ public class ProductListPanel extends javax.swing.JPanel {
         });
 
         jButtonCheck.setText("Check");
+        jButtonCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCheckActionPerformed(evt);
+            }
+        });
 
         jButtonBack.setText("Back");
+        jButtonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBackActionPerformed(evt);
+            }
+        });
 
         jButtonModify.setText("Modify");
+        jButtonModify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModifyActionPerformed(evt);
+            }
+        });
 
         jButtonDelete.setText("Delete");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -269,19 +187,15 @@ public class ProductListPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonModify, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButtonDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonModify, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,7 +217,40 @@ public class ProductListPanel extends javax.swing.JPanel {
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         // TODO add your handling code here:
+        ProdDia d = new ProdDia(shopping, "Add Product");
+        d.setVisible(true);
     }//GEN-LAST:event_jButtonAddActionPerformed
+
+    private void jButtonModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifyActionPerformed
+        // TODO add your handling code here:
+        int r = jTableProduct.convertRowIndexToModel(jTableProduct.getSelectedRow());
+        int c = jTableProduct.getColumnModel().getColumnIndex("Id");
+        String id = (String) tableModel.getValueAt(r, c);
+        Object[][] data = loadTableData(shopping.getProductList());
+        //int index = Integer.parseInt(id.substring(4));
+        ProdDia d = new ProdDia(shopping, "Modify Product", id);
+        d.setVisible(true);
+    }//GEN-LAST:event_jButtonModifyActionPerformed
+
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        // TODO add your handling code here:
+        int rowIndex = jTableProduct.convertRowIndexToModel(jTableProduct.getSelectedRow());
+        int columnIndex = jTableProduct.getColumnModel().getColumnIndex("Id");
+        String id = (String) tableModel.getValueAt(rowIndex, columnIndex);
+        tableModel.removeRow(rowIndex);
+        shopping.deleteProduct(id);
+        refreshList();
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
+
+    private void jButtonCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckActionPerformed
+        // TODO add your handling code here:
+        shopping.getStoreWindow().changePanel("checkInventory");
+    }//GEN-LAST:event_jButtonCheckActionPerformed
+
+    private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
+        // TODO add your handling code here:
+        shopping.getStoreWindow().changePanel("checkOut");
+    }//GEN-LAST:event_jButtonBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -316,13 +263,12 @@ public class ProductListPanel extends javax.swing.JPanel {
     private javax.swing.JTable jTableProduct;
     // End of variables declaration//GEN-END:variables
 
-    private final String[] columnNames = {"Id","Name","Description","Price","Quantity"};
+    private final String[] columnNames = {"Id", "Name", "Description", "Price", "Quantity"};
     private JButton modifyButton;
     private JButton deleteButton;
     private JTextField filterText;
-    private JTable productTable;
     private DefaultTableModel tableModel;
     private TableRowSorter<DefaultTableModel> sorter;
     private Shopping shopping;
-    
+
 }

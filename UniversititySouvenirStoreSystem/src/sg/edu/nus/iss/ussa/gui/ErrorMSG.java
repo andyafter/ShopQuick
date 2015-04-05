@@ -10,7 +10,8 @@ package sg.edu.nus.iss.ussa.gui;
  * @author andypan
  */
 public class ErrorMSG {
-    private final String NonExistingMem= "Error MemberID!";
+
+    private final String NonExistingMem = "Error MemberID!";
     private final String NonExistingProd = "No product!";
     private final String WrongBarCode = "Bar Code Error!";
     private final String WrongQuantityForm = "Quantity Format Error";
@@ -60,6 +61,5 @@ public class ErrorMSG {
     public String getSelectRow() {
         return SelectRow;
     }
-    
-    
+
 }

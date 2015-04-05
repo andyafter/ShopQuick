@@ -3,45 +3,44 @@ package sg.edu.nus.iss.ussa.domain;
 /**
  * @author Andy Pan
  */
-
 public class Member extends Customer {
 
-	private static final long serialVersionUID = 1L;
-	private String memberID;
-	private int loyaltyPoint;
+    private static final long serialVersionUID = 1L;
+    private String memberID;
+    private int loyaltyPoint;
 
-	public Member(String name, String memberID, int loyaltyPoint) {
-		super(name);
-		this.memberID = memberID;
-		this.loyaltyPoint = loyaltyPoint;
-	}
-	
-	public String getName(){
-		return name;
-	}
+    public Member(String name, String memberID, int loyaltyPoint) {
+        super(name);
+        this.memberID = memberID;
+        this.loyaltyPoint = loyaltyPoint;
+    }
 
-	public String getMemberID() {
-		return memberID;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setMemberID(String memberID) {
-		this.memberID = memberID;
-	}
+    public String getMemberID() {
+        return memberID;
+    }
 
-	public int getLoyaltyPoint() {
-		return loyaltyPoint;
-	}
+    public void setMemberID(String memberID) {
+        this.memberID = memberID;
+    }
 
-	public void setLoyaltyPoint(int loyaltyPoint) {
-		this.loyaltyPoint = loyaltyPoint;
-	}
+    public int getLoyaltyPoint() {
+        return loyaltyPoint;
+    }
 
-	public String toString() {
-		return name + "," + memberID + "," + loyaltyPoint;
-	}
+    public void setLoyaltyPoint(int loyaltyPoint) {
+        this.loyaltyPoint = loyaltyPoint;
+    }
 
-	@Override
-	public String getID() {
-		return memberID;
-	}
+    public String toString() {
+        return name + "," + memberID + "," + loyaltyPoint;
+    }
+
+    @Override
+    public String getID() {
+        return memberID;
+    }
 }

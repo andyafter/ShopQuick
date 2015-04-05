@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
  * @author andypan
  */
 public class LoginForm extends javax.swing.JFrame {
+
     private Shopping storeApp;
 
     /**
@@ -26,7 +27,7 @@ public class LoginForm extends javax.swing.JFrame {
      */
     public LoginForm(Shopping storeApp) {
         super();
-	this.storeApp=storeApp;
+        this.storeApp = storeApp;
         initComponents();
     }
 
@@ -89,14 +90,13 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println("Login.actionPerformed, event="+evt);
-		//TODO add your code for Login.actionPerformed
+        System.out.println("Login.actionPerformed, event=" + evt);
+        //TODO add your code for Login.actionPerformed
         String msg;
-        if (storeApp.login(jTextField1.getText(),jPasswordField1.getText().toString()) == false)
-        {
-                msg="Invalid UserName/Password";
-                AlertMsgPopUp success = new AlertMsgPopUp(new JFrame(),"Login Status", msg);
-                success.setVisible(true);
+        if (storeApp.login(jTextField1.getText(), jPasswordField1.getText().toString()) == false) {
+            msg = "Invalid UserName/Password";
+            AlertMsgPopUp success = new AlertMsgPopUp(new JFrame(), "Login Status", msg);
+            success.setVisible(true);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 

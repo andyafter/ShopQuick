@@ -16,11 +16,11 @@ public class UIError extends javax.swing.JFrame {
         setBounds(new java.awt.Rectangle(400, 250, 0, 0));
         setResizable(false);
 
-        L_SSA_ErrorMessage.setFont(new java.awt.Font("Verdana", 0, 14)); 
+        L_SSA_ErrorMessage.setFont(new java.awt.Font("Verdana", 0, 14));
         L_SSA_ErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
         L_SSA_ErrorMessage.setText("Press Ok to continue...");
 
-        jButton1.setFont(new java.awt.Font("Verdana", 0, 14)); 
+        jButton1.setFont(new java.awt.Font("Verdana", 0, 14));
         jButton1.setForeground(new java.awt.Color(51, 51, 51));
         jButton1.setText("OK");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -37,32 +37,32 @@ public class UIError extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(L_SSA_ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(195, 195, 195)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                        .addGap(53, 53, 53)
+                                        .addComponent(L_SSA_ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                        .addGap(195, 195, 195)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(L_SSA_ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(30, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(L_SSA_ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
     }
 
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {
-       
+
     }
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {
@@ -89,10 +89,9 @@ public class UIError extends javax.swing.JFrame {
         UIError UIEDB = new UIError();
         UIEDB.L_SSA_ErrorMessage.setText(meaasge);
         UIEDB.setVisible(true);
-        
-                
+
     }
     private javax.swing.JLabel L_SSA_ErrorMessage;
     private javax.swing.JButton jButton1;
-    
+
 }

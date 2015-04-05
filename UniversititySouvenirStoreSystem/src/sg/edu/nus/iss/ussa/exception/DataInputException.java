@@ -1,18 +1,17 @@
 package sg.edu.nus.iss.ussa.exception;
 
 public class DataInputException extends Exception {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	public DataInputException() {
-		super();
-	}
+    public DataInputException() {
+        super();
+    }
 
-
-	public DataInputException(String message) {
-		super(message);
-	}
+    public DataInputException(String message) {
+        super(message);
+    }
 }
