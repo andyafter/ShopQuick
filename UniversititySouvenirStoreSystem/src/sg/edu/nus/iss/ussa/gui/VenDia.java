@@ -27,9 +27,6 @@ public class VenDia extends javax.swing.JDialog {
     private ArrayList<Vendor> UI_VendorList = new ArrayList<Vendor>();
     private DefaultTableModel tableModel
             = new javax.swing.table.DefaultTableModel(new Object[][]{}, columnNames) {
-                /**
-                 *
-                 */
                 private static final long serialVersionUID = 1L;
                 @SuppressWarnings("rawtypes")
                 Class[] types = new Class[]{

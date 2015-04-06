@@ -40,7 +40,7 @@ public class MemberManager {
 
     }
 
-    public Member getMemberByID(String memID) {
+    public Member getMember(String memID) {
         Iterator<Member> i = this.memberList.iterator();
         while (i.hasNext()) {
             Member mem = i.next();
@@ -52,7 +52,7 @@ public class MemberManager {
     }
 
     public void removeMember(String memID) {
-        Member mem = getMemberByID(memID);
+        Member mem = getMember(memID);
         if (mem != null) {
             this.memberList.remove(mem);
         }

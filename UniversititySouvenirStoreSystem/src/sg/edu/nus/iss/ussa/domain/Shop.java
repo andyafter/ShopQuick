@@ -88,7 +88,7 @@ public class Shop {
         if (memberId == null) {
             customer = new Public("");
         } else {
-            customer = memberMgr.getMemberByID(memberId);
+            customer = memberMgr.getMember(memberId);
             if (customer == null) {
                 throw new DataNotFoundException("Member", memberId);
             }
@@ -114,7 +114,7 @@ public class Shop {
      */
     public Transaction addBillItem(Transaction transaction, String productId, int quantity) throws DataNotFoundException {
 
-        Product product = productMgr.getProductById(productId);
+        Product product = productMgr.getProduct(productId);
 
         if (product == null) {
             throw new DataNotFoundException("Product", productId);
@@ -133,7 +133,7 @@ public class Shop {
      */
     public Transaction removeBillItem(Transaction transaction, String productId) {
 
-        Product product = productMgr.getProductById(productId);
+        Product product = productMgr.getProduct(productId);
 
         transaction.removeItem(product);
 
@@ -144,11 +144,11 @@ public class Shop {
      *
      * @param transaction
      * @param cash
-     * @param redeemLoyaltyPoint
+     * @param usedPoints
      * @return
      */
-    public Transaction setPayment(Transaction transaction, double cash, int redeemLoyaltyPoint) {
-        transaction.setUsedPoints(redeemLoyaltyPoint);
+    public Transaction setPayment(Transaction transaction, double cash, int usedPoints) {
+        transaction.setUsedPoints(usedPoints);
         transaction.setCashAmount(cash);
         return transaction;
     }
@@ -167,7 +167,7 @@ public class Shop {
         // update product's quantity
         ArrayList<CartItem> itemList = transaction.getItemList();
         for (CartItem item : itemList) {
-            productMgr.changeProductQty(item.getProduct(), item.getProduct().getQuantity() - item.getQty());
+            productMgr.changeQuantity(item.getProduct(), item.getProduct().getQuantity() - item.getQty());
         }
 
         // update Member's loyalty point
@@ -199,7 +199,7 @@ public class Shop {
 
 
     public Member getMemberById(String memberId) {
-        return memberMgr.getMemberByID(memberId);
+        return memberMgr.getMember(memberId);
     }
 
 
@@ -216,7 +216,7 @@ public class Shop {
     }
 
     public Member getMemberByID(String memID) {
-        return memberMgr.getMemberByID(memID);
+        return memberMgr.getMember(memID);
     }
 
 //  -------------------- product related methods	-------------------
@@ -274,7 +274,7 @@ public class Shop {
      * @return
      */
     public Product getProductById(String productId) {
-        return productMgr.getProductById(productId);
+        return productMgr.getProduct(productId);
     }
 
     /**
@@ -286,70 +286,33 @@ public class Shop {
         return productMgr.getProductByBarCode(barCode);
     }
 
-    public PurchaseOrder getPurchaseOrder() {
+    
 
-        PurchaseOrder purchaseOrder = new PurchaseOrder();
 
-        ArrayList<Product> productList = null;
-        productList = productMgr.checkInventory();
-
-        HashMap<Product, Vendor> purchaseList = new HashMap<Product, Vendor>();
-
-		// foreach product in productList, 
-        // purchaseList.add(product, product.getCategory().getPreferenceVendor())
-		// purchaseOrder.
-        return purchaseOrder;
-    }
-
-//  -------------------- category related methods	-------------------
-    /**
-     *
-     * @param code
-     * @param name
-     * @param vendorNameList
-     */
     public void addCategory(String code, String name, ArrayList<Vendor> vendorList) {
         categoryMgr.addCategory(code, name, vendorList);
     }
 
-    /**
-     *
-     * @param code
-     * @param name
-     * @param vendorNameList
-     */
+
     public void updCategory(String code, String name) {
         categoryMgr.updCategory(code, name);
     }
 
-    /**
-     *
-     * @param code
-     */
+
     public void delCategoryByCode(String code) {
         categoryMgr.delCategoryByCode(code);
     }
 
-    /**
-     *
-     * @param categoryList
-     */
     public void setCategoryList(ArrayList<Category> categoryList) {
         categoryMgr.setCategoryList(categoryList);
     }
 
-    /**
-     *
-     * @return
-     */
+
     public ArrayList<Category> getCategoryList() {
         return categoryMgr.getCategoryList();
     }
 
-    /**
-     *
-     * @return
-     */
+
     public Category getCategoryByCode(String code) {
         if (getCategoryList().size() == 0) {
             return null;
@@ -357,23 +320,13 @@ public class Shop {
         return categoryMgr.getCategoryByCode(code);
     }
 
-    /**
-     * discount related
-     *
-     *
-     *
-     *
-     */
     public void addDiscount(String discountCode, String discountDescription,
             Date startDate, int period, double percent, String Applicable) {
 
         discountMgr.registerDiscount(discountCode, discountDescription, startDate, period, percent, Applicable);
     }
 
-    /**
-     *
-     *
-     */
+
     public void addDiscount(Discount discount) {
         discountMgr.getdiscountList();
     }

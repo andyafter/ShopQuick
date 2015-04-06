@@ -17,11 +17,11 @@ import javax.swing.SwingUtilities;
  * PURCHASED FOR THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED LEGALLY FOR
  * ANY CORPORATE OR COMMERCIAL PURPOSE.
  */
-public class AlertMsgPopUp extends javax.swing.JDialog {
+public class InvalidAuth extends javax.swing.JDialog {
 
     private JTextField txtNotification;
 
-    public AlertMsgPopUp(JFrame frame, String title, String msg) {
+    public InvalidAuth(JFrame frame, String title, String msg) {
         super(frame);
         initGUI();
         this.setTitle(title);

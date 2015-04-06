@@ -13,9 +13,6 @@ import sg.edu.nus.iss.ussa.util.StringDocument;
 
 public class MemDia extends JDialog {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
     private Shopping manager;
     private ShopBase mainScreen;

@@ -16,12 +16,12 @@ import sg.edu.nus.iss.ussa.domain.ShopKeeper;
 public class StoreKeeperManager {
 
     private ArrayList<ShopKeeper> storeKeeperList;
-    private ShopKeeperIO userDao;
+    private ShopKeeperIO skIO;
 
     public StoreKeeperManager() throws IOException {
-        userDao = new ShopKeeperIO();
+        skIO = new ShopKeeperIO();
         storeKeeperList = new ArrayList<ShopKeeper>();
-        storeKeeperList = userDao.loadData();
+        storeKeeperList = skIO.loadData();
     }
 
     public boolean checkAuthority(String userName, String Password) {
@@ -29,7 +29,6 @@ public class StoreKeeperManager {
         boolean isValidUser = false;
         for (ShopKeeper user : storeKeeperList) {
             if (user.getUserName().equalsIgnoreCase(userName) && user.getPassword().equals(Password)) {
-                // password should be case sensitive
                 isValidUser = true;
                 break;
             }

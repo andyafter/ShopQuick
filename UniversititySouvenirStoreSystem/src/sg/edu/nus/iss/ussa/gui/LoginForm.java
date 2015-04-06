@@ -95,7 +95,7 @@ public class LoginForm extends javax.swing.JFrame {
         String msg;
         if (storeApp.login(jTextField1.getText(), jPasswordField1.getText().toString()) == false) {
             msg = "Invalid UserName/Password";
-            AlertMsgPopUp success = new AlertMsgPopUp(new JFrame(), "Login Status", msg);
+            InvalidAuth success = new InvalidAuth(new JFrame(), "Login Status", msg);
             success.setVisible(true);
         }
     }//GEN-LAST:event_loginButtonActionPerformed

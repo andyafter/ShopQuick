@@ -118,7 +118,7 @@ public class ProductManager {
         }
     }
 
-    public void changeProductQty(Product p, int quantity) {
+    public void changeQuantity(Product p, int quantity) {
         if (productList.contains(p)) {
             int i = productList.indexOf(p);
             productList.get(i).setQuantity(quantity);
@@ -126,7 +126,7 @@ public class ProductManager {
 
     }
 
-    public Product getProductById(String id) {
+    public Product getProduct(String id) {
         for (int x = 0; x < productList.size(); x++) {
             if (id.equals(productList.get(x).getProductId())) {
                 return productList.get(x);

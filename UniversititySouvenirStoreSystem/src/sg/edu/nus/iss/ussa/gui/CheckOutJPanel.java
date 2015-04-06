@@ -272,7 +272,7 @@ public class CheckOutJPanel extends javax.swing.JPanel {
         ));
         checkOutTable.setColumnSelectionAllowed(true);
         jScrollPane2.setViewportView(checkOutTable);
-        checkOutTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        checkOutTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jTextBarCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
