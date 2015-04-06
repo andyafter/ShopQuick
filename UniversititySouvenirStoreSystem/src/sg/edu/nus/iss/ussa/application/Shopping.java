@@ -77,6 +77,10 @@ public class Shopping {
             return false;
         }
     }
+    
+    public void updVendorForCategory(String categoryCode, String oldName, String newName, String newDesc) {
+        //categoryMgr.updVendorForCategory(categoryCode, oldName, newName, newDesc);
+    }
 
     public Transaction checkOut() {
         return shop.checkout();

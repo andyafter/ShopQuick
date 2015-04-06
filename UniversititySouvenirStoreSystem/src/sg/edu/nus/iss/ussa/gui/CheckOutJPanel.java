@@ -21,6 +21,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.JFrame;
 import sg.edu.nus.iss.ussa.application.Shopping;
 
 import sg.edu.nus.iss.ussa.domain.Customer;
@@ -28,12 +29,14 @@ import sg.edu.nus.iss.ussa.domain.Discount;
 import sg.edu.nus.iss.ussa.domain.Product;
 import sg.edu.nus.iss.ussa.domain.Transaction;
 import sg.edu.nus.iss.ussa.domain.CartItem;
+import sg.edu.nus.iss.ussa.domain.Public;
 import sg.edu.nus.iss.ussa.exception.DataInputException;
 import sg.edu.nus.iss.ussa.exception.DataNotFoundException;
 import sg.edu.nus.iss.ussa.util.DigitDocument;
 import sg.edu.nus.iss.ussa.util.Util;
 import sg.edu.nus.iss.ussa.domain.Member;
 
+import java.util.Date;
 /**
  *
  * @author andypan
@@ -191,16 +194,17 @@ public class CheckOutJPanel extends javax.swing.JPanel {
         }
         // refresh UI
         {
-            jLabelTotalMoney.setText(Double.toString(transaction.getTotal()));
-            jLabelAfterDiscount.setText(Double.toString(transaction.calcDiscountPrice()));
+            jLabelTotalMoney.setText("00.00");
+            //jLabelAfterDiscount.setText(Double.toString(transaction.calcDiscountPrice()));
             jLabelMemberPoints.setText("0");
-            jLabelAfterDiscount.setText(Double.toString(transaction.calcRest()));
-            jLabelChange.setText(Double.toString(transaction.calcChange()));
+            //jLabelAfterDiscount.setText(Double.toString(transaction.calcRest()));
+            jLabelChange.setText("00.00");
             jTextBarCode.setText(null);
             jLabelMemberID.setText("Member ID");
             jLabelErrorMSG.setText(null);
             jTextCashPaid.setText(null);
             jTextUsedPoints.setText(null);
+            jLabelAfterDiscount.setText("00.00");
 
         }
     }
@@ -589,20 +593,19 @@ public class CheckOutJPanel extends javax.swing.JPanel {
 
     private void jButtonCheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckOutActionPerformed
         // TODO add your handling code here:
-        try {
-            if (jLabelAfterDiscount.getText().length() != 0) {
-                transaction.setCashAmount(Util.strToDouble(jLabelAfterDiscount.getText()));
-            }
-            if (discount.getPercent() != 0) {
-                transaction.setDiscount(discount);
-            }
-            if (jTextCashPaid.getText().length() != 0) {
-                transaction.setUsedPoints(Util.strToInt(jTextCashPaid.getText()));
-            }
-        } catch (DataInputException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
+        if (transaction.getCustomer().name == null) {
+            transaction.setCustomer(new Public());
         }
+        transaction.setDate(new Date());
+				// deal with the problem getLoyaltypoint==0 & reset the
+        // loyaltypoint
+        if (transaction.getCustomer() instanceof Member) {
+            Member member = (Member) transaction.getCustomer();
+            if (member.getPoint() == -1) {
+                member.setPoint(0);
+            }
+        }
+        clear();
     }//GEN-LAST:event_jButtonCheckOutActionPerformed
 
     public void setTransaction(Transaction transaction) {

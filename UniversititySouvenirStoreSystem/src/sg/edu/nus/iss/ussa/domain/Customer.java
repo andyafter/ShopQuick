@@ -3,7 +3,7 @@ package sg.edu.nus.iss.ussa.domain;
 import java.io.Serializable;
 
 
-public class Customer  {
+public abstract class Customer  {
 
     public String name;
 
@@ -15,7 +15,6 @@ public class Customer  {
         this.name = name;
     }
 
-    public String getID()
-    {return "";};
+    public abstract String getID();
 
 }

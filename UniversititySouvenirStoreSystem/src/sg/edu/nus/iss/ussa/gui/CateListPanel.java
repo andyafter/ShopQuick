@@ -1,285 +1,61 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package sg.edu.nus.iss.ussa.gui;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import sg.edu.nus.iss.ussa.application.Shopping;
 import sg.edu.nus.iss.ussa.domain.Category;
 import sg.edu.nus.iss.ussa.domain.Product;
 import sg.edu.nus.iss.ussa.domain.Vendor;
 
-import java.util.ArrayList;
-
 import javax.swing.table.DefaultTableModel;
 
+/**
+ *
+ * @author andypan
+ */
 public class CateListPanel extends javax.swing.JPanel {
 
     /**
-     *
+     * Creates new form CategoryPanel
      */
-    private static final long serialVersionUID = 1L;
-    private final String[] columnNames = {"Category Code", "Categry Name"};
-
     private Shopping shopping;
-
-    private String categoryName = new String();
-    private String categoryCode = new String();
-
-    //private CategoryMgr CAT_MAN = new CategoryMgr();
-    private ArrayList<Category> UI_CategoryList = new ArrayList<Category>();
-    private DefaultTableModel tableModel = new DefaultTableModel();
-
+    
     public CateListPanel(Shopping shopping) {
         this.shopping = shopping;
-
         initComponents();
-        initLook();
-        reloadData();
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
-        System.out.println("category list panel components init");
-        jScrollPane1 = new javax.swing.JScrollPane();
-        T_SSA_CategoryTable = new javax.swing.JTable();
-        jButtonAdd = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        TF_SSA_CategoryName = new javax.swing.JTextField();
-        TF_SSA_CategoryCode = new javax.swing.JTextField();
-        BT_SSA_Update = new javax.swing.JButton();
-        BT_SSA_Delete = new javax.swing.JButton();
-        BT_SSA_ManageVendor = new javax.swing.JButton();
-
-        //setTitle("Category Manager");
-        setBounds(new java.awt.Rectangle(300, 100, 600, 400));
-        //setResizable(false);
-
-        T_SSA_CategoryTable.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        T_SSA_CategoryTable.setForeground(new java.awt.Color(12, 12, 12));
-        T_SSA_CategoryTable.setModel(new javax.swing.table.DefaultTableModel(new Object[][]{}, columnNames) {
+        jTableCate.setModel(new javax.swing.table.DefaultTableModel(new Object [][] {},  columnNames ) {
             /**
-             *
-             */
-            private static final long serialVersionUID = 1L;
-            @SuppressWarnings("rawtypes")
-            Class[] types = new Class[]{
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+			@SuppressWarnings("rawtypes")
+			Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean[]{
+            boolean[] canEdit = new boolean [] {
                 false, false
             };
 
             public Class<?> getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                return types [columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
-        T_SSA_CategoryTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        T_SSA_CategoryTable.setSelectionBackground(new java.awt.Color(51, 51, 51));
-        T_SSA_CategoryTable.setSelectionForeground(new java.awt.Color(204, 204, 204));
-        T_SSA_CategoryTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                T_SSA_CategoryTableMouseClicked(evt);
-            }
-        });
-        T_SSA_CategoryTable.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                T_SSA_CategoryTableKeyPressed(evt);
-            }
-
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                T_SSA_CategoryTableKeyReleased(evt);
-            }
-        });
-        jScrollPane1.setViewportView(T_SSA_CategoryTable);
-
-        jButtonAdd.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jButtonAdd.setForeground(new java.awt.Color(51, 51, 51));
-        jButtonAdd.setText("Add New");
-        jButtonAdd.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BT_SSA_AddNewCategoryMouseClicked(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Category Code");
-
-        jLabel3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Category Name");
-
-        TF_SSA_CategoryCode.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        TF_SSA_CategoryCode.setForeground(new java.awt.Color(51, 51, 51));
-
-        TF_SSA_CategoryName.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        TF_SSA_CategoryName.setForeground(new java.awt.Color(51, 51, 51));
-
-        BT_SSA_Update.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        BT_SSA_Update.setForeground(new java.awt.Color(51, 51, 51));
-        BT_SSA_Update.setText("Update");
-        BT_SSA_Update.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BT_SSA_UpdateMouseClicked(evt);
-            }
-        });
-
-        BT_SSA_Delete.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        BT_SSA_Delete.setForeground(new java.awt.Color(51, 51, 51));
-        BT_SSA_Delete.setText("Delete");
-        BT_SSA_Delete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BT_SSA_DeleteMouseClicked(evt);
-            }
-        });
-
-        BT_SSA_ManageVendor.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        BT_SSA_ManageVendor.setForeground(new java.awt.Color(51, 51, 51));
-        BT_SSA_ManageVendor.setText("Manage Vendor");
-        BT_SSA_ManageVendor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BT_SSA_ManageVendorMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 798, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(TF_SSA_CategoryCode, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(TF_SSA_CategoryName, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jButtonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                                .addComponent(BT_SSA_Update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(BT_SSA_ManageVendor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BT_SSA_Delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(134, 134, 134))
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(jLabel2)
-                                                .addComponent(jButtonAdd)
-                                                .addComponent(BT_SSA_Delete)))
-                                .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(TF_SSA_CategoryCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(TF_SSA_CategoryName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3)
-                                .addComponent(BT_SSA_Update)
-                                .addComponent(BT_SSA_ManageVendor))
-                        .addContainerGap(29, Short.MAX_VALUE))
-        );
-
-        //pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void BT_SSA_AddNewCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BT_SSA_AddNewCategoryMouseClicked
-
-        if (this.init()) {
-            if (!this.validAdd()) {
-                UIError.openDialog("Duplicate Category ID `" + categoryCode + "`");
-            } else {
-                this.shopping.addCategory(this.categoryCode, this.categoryName, new ArrayList<Vendor>());
-                reloadData();
-            }
-        }
-    }//GEN-LAST:event_BT_SSA_AddNewCategoryMouseClicked
-
-    private void BT_SSA_UpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BT_SSA_UpdateMouseClicked
-        int selectedIndex = this.T_SSA_CategoryTable.getSelectedRow();
-        if (selectedIndex == -1 || this.T_SSA_CategoryTable.getRowCount() == 0) {
-            UIError.openDialog("Please select an item.");
-        } else if (this.init()) {
-            if (this.validUpd()) {
-                String code = this.tableModel.getValueAt(this.T_SSA_CategoryTable.getSelectedRow(), 0).toString();
-                String name = this.TF_SSA_CategoryName.getText().toString();
-                this.shopping.changeCate(code, name);
-                reloadData();
-            } else {
-                UIError.openDialog("Category Code should not be changed");
-            }
-        }
-    }//GEN-LAST:event_BT_SSA_UpdateMouseClicked
-
-    private void T_SSA_CategoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_SSA_CategoryTableMouseClicked
-        int selectedIndex = this.T_SSA_CategoryTable.getSelectedRow();
-        if (selectedIndex > -1) {
-            this.TF_SSA_CategoryCode.setText(this.T_SSA_CategoryTable.getValueAt(selectedIndex, 0).toString());
-            this.TF_SSA_CategoryName.setText(this.T_SSA_CategoryTable.getValueAt(selectedIndex, 1).toString());
-        }
-    }//GEN-LAST:event_T_SSA_CategoryTableMouseClicked
-
-    private void BT_SSA_DeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BT_SSA_DeleteMouseClicked
-        int selectedIndex = this.T_SSA_CategoryTable.getSelectedRow();
-        if (selectedIndex == -1 || this.T_SSA_CategoryTable.getRowCount() == 0) {
-            UIError.openDialog("Please select an item.");
-        } else {
-            String code = this.tableModel.getValueAt(this.T_SSA_CategoryTable.getSelectedRow(), 0).toString();
-            if (validDel(code)) {
-                shopping.deleteCate(code);
-                reloadData();
-            } else {
-                UIError.openDialog("there have product in this Category `" + code + "`, should not be deleted");
-            }
-
-        }
-    }//GEN-LAST:event_BT_SSA_DeleteMouseClicked
-
-    private void T_SSA_CategoryTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T_SSA_CategoryTableKeyReleased
-        int selectedIndex = this.T_SSA_CategoryTable.getSelectedRow();
-        if (selectedIndex > -1) {
-            this.TF_SSA_CategoryCode.setText(this.T_SSA_CategoryTable.getValueAt(selectedIndex, 0).toString());
-            this.TF_SSA_CategoryName.setText(this.T_SSA_CategoryTable.getValueAt(selectedIndex, 1).toString());
-        }
-    }//GEN-LAST:event_T_SSA_CategoryTableKeyReleased
-
-    private void T_SSA_CategoryTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T_SSA_CategoryTableKeyPressed
-        int selectedIndex = this.T_SSA_CategoryTable.getSelectedRow();
-        if (selectedIndex > -1) {
-            this.TF_SSA_CategoryCode.setText(this.T_SSA_CategoryTable.getValueAt(selectedIndex, 0).toString());
-            this.TF_SSA_CategoryName.setText(this.T_SSA_CategoryTable.getValueAt(selectedIndex, 1).toString());
-        }
-    }//GEN-LAST:event_T_SSA_CategoryTableKeyPressed
-
-    private void BT_SSA_ManageVendorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BT_SSA_ManageVendorMouseClicked
-        int selectedIndex = this.T_SSA_CategoryTable.getSelectedRow();
-        if (selectedIndex == -1 || this.T_SSA_CategoryTable.getRowCount() == 0) {
-            UIError.openDialog("Please select an item.");
-        } else {
-            VenDia vendorDlg = new VenDia(shopping, this.tableModel.getValueAt(selectedIndex, 0).toString());
-            vendorDlg.setVisible(true);
-
-        }
-    }//GEN-LAST:event_BT_SSA_ManageVendorMouseClicked
-
-    private void initLook() {
+        initLook();
+        reloadData();
+        
+    }
+    
+        private void initLook() {
         try {
-            System.out.println("Category list panel look Initialized!");
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -303,25 +79,11 @@ public class CateListPanel extends javax.swing.JPanel {
         if (this.UI_CategoryList.isEmpty()) {
             this.UI_CategoryList = new ArrayList<Category>();
         }
-        this.tableModel = (DefaultTableModel) this.T_SSA_CategoryTable.getModel();//Creating Table model
+        this.tableModel = (DefaultTableModel) this.jTableCate.getModel();//Creating Table model
 
         this.LoadTable();
 
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAdd;
-    private javax.swing.JButton BT_SSA_Delete;
-    private javax.swing.JButton BT_SSA_ManageVendor;
-    private javax.swing.JButton BT_SSA_Update;
-    private javax.swing.JTextField TF_SSA_CategoryCode;
-    private javax.swing.JTextField TF_SSA_CategoryName;
-    private javax.swing.JTable T_SSA_CategoryTable;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    // End of variables declaration//GEN-END:variables
-
     private void LoadTable() {
 
         tableModel.setRowCount(0);
@@ -337,11 +99,10 @@ public class CateListPanel extends javax.swing.JPanel {
 
         tableModel.fireTableDataChanged();
     }
-
     private boolean init() {
         System.out.println("Category init Initialized!");
-        this.categoryCode = this.TF_SSA_CategoryCode.getText().trim().toUpperCase();
-        this.categoryName = this.TF_SSA_CategoryName.getText().trim();
+        this.categoryCode = this.jTextCateCode.getText().trim().toUpperCase();
+        this.categoryName = this.jTextCateName.getText().trim();
 
         if (this.categoryName.isEmpty() || this.categoryCode.isEmpty()) {
             UIError.openDialog("Category Name or ID should not be empty.");
@@ -369,7 +130,7 @@ public class CateListPanel extends javax.swing.JPanel {
     }
 
     private boolean validUpd() {
-        String originCode = this.tableModel.getValueAt(this.T_SSA_CategoryTable.getSelectedRow(), 0).toString();
+        String originCode = this.tableModel.getValueAt(this.jTableCate.getSelectedRow(), 0).toString();
         return (originCode.equals(this.categoryCode));
     }
 
@@ -386,4 +147,256 @@ public class CateListPanel extends javax.swing.JPanel {
         return result;
     }
 
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableCate = new javax.swing.JTable();
+        jButtonAdd = new javax.swing.JButton();
+        jButtonDelete = new javax.swing.JButton();
+        jButtonBack = new javax.swing.JButton();
+        jTextCateName = new javax.swing.JTextField();
+        jTextCateCode = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButtonVendor = new javax.swing.JButton();
+
+        jTableCate.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jTableCate.setColumnSelectionAllowed(true);
+        jTableCate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableCateMouseClicked(evt);
+            }
+        });
+        jTableCate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTableCateKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTableCateKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableCate);
+        jTableCate.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+
+        jButtonAdd.setText("Add");
+        jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddActionPerformed(evt);
+            }
+        });
+
+        jButtonDelete.setText("Delete");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteActionPerformed(evt);
+            }
+        });
+
+        jButtonBack.setText("Back");
+        jButtonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBackActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Category Code");
+
+        jLabel2.setText("Category Name");
+
+        jButton1.setText("Modify");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButtonVendor.setText("Manage Vendor");
+        jButtonVendor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVendorActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextCateCode, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextCateName, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButtonVendor, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18))))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextCateCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextCateName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonVendor, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
+                .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
+        // TODO add your handling code here:
+        if (this.init()) {
+            if (!this.validAdd()) {
+                UIError.openDialog("Duplicate Category ID `" + categoryCode + "`");
+            } else {
+                this.shopping.addCategory(this.categoryCode, this.categoryName, new ArrayList<Vendor>());
+                reloadData();
+            }
+        }
+    }//GEN-LAST:event_jButtonAddActionPerformed
+
+    private void jTableCateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCateMouseClicked
+        // TODO add your handling code here:
+        int selectedIndex = this.jTableCate.getSelectedRow();
+        if (selectedIndex > -1) {
+            this.jTextCateCode.setText(this.jTableCate.getValueAt(selectedIndex, 0).toString());
+            this.jTextCateName.setText(this.jTableCate.getValueAt(selectedIndex, 1).toString());
+        }
+    }//GEN-LAST:event_jTableCateMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = this.jTableCate.getSelectedRow();
+        if (selectedIndex == -1 || this.jTableCate.getRowCount() == 0) {
+            UIError.openDialog("Please select an item.");
+        } else if (this.init()) {
+            if (this.validUpd()) {
+                String code = this.tableModel.getValueAt(this.jTableCate.getSelectedRow(), 0).toString();
+                String name = this.jTextCateName.getText().toString();
+                this.shopping.changeCate(code, name);
+                reloadData();
+            } else {
+                UIError.openDialog("Category Code should not be changed");
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = this.jTableCate.getSelectedRow();
+        if (selectedIndex == -1 || this.jTableCate.getRowCount() == 0) {
+            UIError.openDialog("Please select an item.");
+        } else {
+            String code = this.tableModel.getValueAt(this.jTableCate.getSelectedRow(), 0).toString();
+            if (validDel(code)) {
+                shopping.deleteCate(code);
+                reloadData();
+            } else {
+                UIError.openDialog("there have product in this Category `" + code + "`, should not be deleted");
+            }
+
+        }
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
+
+    private void jTableCateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableCateKeyPressed
+        // TODO add your handling code here:
+        int selectedIndex = this.jTableCate.getSelectedRow();
+        if (selectedIndex > -1) {
+            this.jTextCateCode.setText(this.jTableCate.getValueAt(selectedIndex, 0).toString());
+            this.jTextCateName.setText(this.jTableCate.getValueAt(selectedIndex, 1).toString());
+        }
+    }//GEN-LAST:event_jTableCateKeyPressed
+
+    private void jTableCateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableCateKeyReleased
+        // TODO add your handling code here:
+        int selectedIndex = this.jTableCate.getSelectedRow();
+        if (selectedIndex > -1) {
+            this.jTextCateCode.setText(this.jTableCate.getValueAt(selectedIndex, 0).toString());
+            this.jTextCateName.setText(this.jTableCate.getValueAt(selectedIndex, 1).toString());
+        }
+    }//GEN-LAST:event_jTableCateKeyReleased
+
+    private void jButtonVendorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVendorActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = this.jTableCate.getSelectedRow();
+        if (selectedIndex == -1 || this.jTableCate.getRowCount() == 0) {
+            UIError.openDialog("Please select an item.");
+        } else {
+            VenDia vendorDlg = new VenDia(shopping, this.tableModel.getValueAt(selectedIndex, 0).toString());
+            vendorDlg.setVisible(true);
+
+        }
+    }//GEN-LAST:event_jButtonVendorActionPerformed
+
+    private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
+        // TODO add your handling code here:
+        shopping.getShopWindow().changePanel("checkOut");
+    }//GEN-LAST:event_jButtonBackActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonAdd;
+    private javax.swing.JButton jButtonBack;
+    private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonVendor;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableCate;
+    private javax.swing.JTextField jTextCateCode;
+    private javax.swing.JTextField jTextCateName;
+    // End of variables declaration//GEN-END:variables
+    private final String[] columnNames = {"Category Code", "Categry Name"};
+    private Shopping manager;
+    private String categoryName = new String();
+    private String categoryCode = new String();
+    private ArrayList<Category> UI_CategoryList = new ArrayList<Category>();
+    private DefaultTableModel tableModel = new DefaultTableModel();
 }

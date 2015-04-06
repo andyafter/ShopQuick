@@ -18,13 +18,13 @@ public class VenDia extends javax.swing.JDialog {
     private static final long serialVersionUID = 1L;
     private final String[] columnNames = new String[]{"Vendor Name", "Description"};
 
-    private Shopping manager;
+    private Shopping shopping;
 
     private String VendorName = new String();
     private String VendorDescription = new String();
     private Category selectedCategory;
     private ArrayList<Category> CategoryList = new ArrayList<Category>();
-    private ArrayList<Vendor> UI_VendorList = new ArrayList<Vendor>();
+    private ArrayList<Vendor> UIVendorList = new ArrayList<Vendor>();
     private DefaultTableModel tableModel
             = new javax.swing.table.DefaultTableModel(new Object[][]{}, columnNames) {
                 private static final long serialVersionUID = 1L;
@@ -47,7 +47,7 @@ public class VenDia extends javax.swing.JDialog {
             };
 
     public VenDia(Shopping manager, String categoryCode) {
-        this.manager = manager;
+        this.shopping = manager;
 
         initComponents();
 
@@ -60,35 +60,35 @@ public class VenDia extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        T_SSA_VendorTable = new javax.swing.JTable();
+        jTableVendorTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        TF_SSA_VendorName = new javax.swing.JTextField();
-        TF_SSA_VendorDescription = new javax.swing.JTextField();
-        BT_SSA_AddNewVendor = new javax.swing.JButton();
-        BT_SSA_UpdateVendor = new javax.swing.JButton();
-        BT_SSA_DeleteVendor = new javax.swing.JButton();
+        jTextVendorName = new javax.swing.JTextField();
+        jTextVendorDescription = new javax.swing.JTextField();
+        jButtonAdd = new javax.swing.JButton();
+        jButtonModify = new javax.swing.JButton();
+        jButtonDelete = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        TF_CategoryName = new javax.swing.JTextField();
-        TF_CategoryCode = new javax.swing.JTextField();
+        jTextCateName = new javax.swing.JTextField();
+        jTextCateCode = new javax.swing.JTextField();
         COMBO_Category = new JComboBox<String>();
 
         setTitle("Vendor Manager");
         setAlwaysOnTop(true);
-        setBounds(new java.awt.Rectangle(310, 100, 600, 400));
+        setBounds(new java.awt.Rectangle(400, 100, 600, 400));
         setResizable(false);
 
-        T_SSA_VendorTable.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        T_SSA_VendorTable.setForeground(new java.awt.Color(51, 51, 51));
-        T_SSA_VendorTable.setModel(tableModel);
-        T_SSA_VendorTable.setSelectionBackground(new java.awt.Color(51, 51, 51));
-        T_SSA_VendorTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableVendorTable.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jTableVendorTable.setForeground(new java.awt.Color(51, 51, 51));
+        jTableVendorTable.setModel(tableModel);
+        jTableVendorTable.setSelectionBackground(new java.awt.Color(51, 51, 51));
+        jTableVendorTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 T_SSA_VendorTableMouseClicked(evt);
             }
         });
-        T_SSA_VendorTable.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTableVendorTable.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 T_SSA_VendorTableKeyPressed(evt);
             }
@@ -97,7 +97,7 @@ public class VenDia extends javax.swing.JDialog {
                 T_SSA_VendorTableKeyReleased(evt);
             }
         });
-        jScrollPane1.setViewportView(T_SSA_VendorTable);
+        jScrollPane1.setViewportView(jTableVendorTable);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
@@ -107,34 +107,34 @@ public class VenDia extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Description");
 
-        TF_SSA_VendorName.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        TF_SSA_VendorName.setForeground(new java.awt.Color(51, 51, 51));
+        jTextVendorName.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jTextVendorName.setForeground(new java.awt.Color(51, 51, 51));
 
-        TF_SSA_VendorDescription.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        TF_SSA_VendorDescription.setForeground(new java.awt.Color(51, 51, 51));
+        jTextVendorDescription.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jTextVendorDescription.setForeground(new java.awt.Color(51, 51, 51));
 
-        BT_SSA_AddNewVendor.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        BT_SSA_AddNewVendor.setForeground(new java.awt.Color(51, 51, 51));
-        BT_SSA_AddNewVendor.setText("Add New");
-        BT_SSA_AddNewVendor.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonAdd.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jButtonAdd.setForeground(new java.awt.Color(51, 51, 51));
+        jButtonAdd.setText("Add New");
+        jButtonAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BT_SSA_AddNewVendorMouseClicked(evt);
             }
         });
 
-        BT_SSA_UpdateVendor.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        BT_SSA_UpdateVendor.setForeground(new java.awt.Color(51, 51, 51));
-        BT_SSA_UpdateVendor.setText("Update");
-        BT_SSA_UpdateVendor.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonModify.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jButtonModify.setForeground(new java.awt.Color(51, 51, 51));
+        jButtonModify.setText("Update");
+        jButtonModify.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BT_SSA_UpdateVendorMouseClicked(evt);
             }
         });
 
-        BT_SSA_DeleteVendor.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        BT_SSA_DeleteVendor.setForeground(new java.awt.Color(51, 51, 51));
-        BT_SSA_DeleteVendor.setText("Delete");
-        BT_SSA_DeleteVendor.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonDelete.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jButtonDelete.setForeground(new java.awt.Color(51, 51, 51));
+        jButtonDelete.setText("Delete");
+        jButtonDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BT_SSA_DeleteVendorMouseClicked(evt);
             }
@@ -146,19 +146,19 @@ public class VenDia extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel4.setText("Category ID:");
 
-        TF_CategoryCode.setEditable(false);
-        TF_CategoryCode.setBackground(new java.awt.Color(51, 51, 51));
-        TF_CategoryCode.setFont(new java.awt.Font("Verdana", 2, 11)); // NOI18N
-        TF_CategoryCode.setForeground(new java.awt.Color(0, 255, 204));
-        TF_CategoryCode.setSelectedTextColor(new java.awt.Color(0, 0, 0));
-        TF_CategoryCode.setSelectionColor(new java.awt.Color(204, 204, 204));
+        jTextCateCode.setEditable(false);
+        jTextCateCode.setBackground(new java.awt.Color(51, 51, 51));
+        jTextCateCode.setFont(new java.awt.Font("Verdana", 2, 11)); // NOI18N
+        jTextCateCode.setForeground(new java.awt.Color(0, 255, 204));
+        jTextCateCode.setSelectedTextColor(new java.awt.Color(0, 0, 0));
+        jTextCateCode.setSelectionColor(new java.awt.Color(204, 204, 204));
 
-        TF_CategoryName.setEditable(false);
-        TF_CategoryName.setBackground(new java.awt.Color(51, 51, 51));
-        TF_CategoryName.setFont(new java.awt.Font("Verdana", 2, 11)); // NOI18N
-        TF_CategoryName.setForeground(new java.awt.Color(0, 255, 204));
-        TF_CategoryName.setSelectedTextColor(new java.awt.Color(0, 0, 0));
-        TF_CategoryName.setSelectionColor(new java.awt.Color(204, 204, 204));
+        jTextCateName.setEditable(false);
+        jTextCateName.setBackground(new java.awt.Color(51, 51, 51));
+        jTextCateName.setFont(new java.awt.Font("Verdana", 2, 11)); // NOI18N
+        jTextCateName.setForeground(new java.awt.Color(0, 255, 204));
+        jTextCateName.setSelectedTextColor(new java.awt.Color(0, 0, 0));
+        jTextCateName.setSelectionColor(new java.awt.Color(204, 204, 204));
 
         COMBO_Category.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         COMBO_Category.setForeground(new java.awt.Color(51, 51, 51));
@@ -188,22 +188,22 @@ public class VenDia extends javax.swing.JDialog {
                                 .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(TF_CategoryName, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(TF_SSA_VendorName, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(TF_SSA_VendorDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextCateName, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextVendorName, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextVendorDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(TF_CategoryCode, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jTextCateCode, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(BT_SSA_UpdateVendor, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(BT_SSA_AddNewVendor, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jButtonModify, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(BT_SSA_DeleteVendor, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                                                .addComponent(jButtonDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                                                 .addComponent(COMBO_Category, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -214,20 +214,20 @@ public class VenDia extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel1)
-                                .addComponent(TF_SSA_VendorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(BT_SSA_AddNewVendor)
-                                .addComponent(BT_SSA_DeleteVendor))
+                                .addComponent(jTextVendorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonAdd)
+                                .addComponent(jButtonDelete))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(TF_SSA_VendorDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextVendorDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel2)
-                                .addComponent(BT_SSA_UpdateVendor)
+                                .addComponent(jButtonModify)
                                 .addComponent(COMBO_Category, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(TF_CategoryCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextCateCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel3)
-                                .addComponent(TF_CategoryName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextCateName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel4))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -241,39 +241,39 @@ public class VenDia extends javax.swing.JDialog {
                 UIError.openDialog("Duplicate vendor name is not possible.");
             } else {
                 Vendor tempVen = new Vendor(this.VendorName, this.VendorDescription);
-                this.UI_VendorList.add(tempVen);
+                this.UIVendorList.add(tempVen);
                 this.tableModel.addRow(new Object[]{this.VendorName, this.VendorDescription});
             }
         }
     }//GEN-LAST:event_BT_SSA_AddNewVendorMouseClicked
 
     private void T_SSA_VendorTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T_SSA_VendorTableMouseClicked
-        int selectedIndex = this.T_SSA_VendorTable.getSelectedRow();
+        int selectedIndex = this.jTableVendorTable.getSelectedRow();
         if (selectedIndex > -1) {
-            this.TF_SSA_VendorName.setText(this.T_SSA_VendorTable.getValueAt(selectedIndex, 0).toString());
-            this.TF_SSA_VendorDescription.setText(this.T_SSA_VendorTable.getValueAt(selectedIndex, 1).toString());
+            this.jTextVendorName.setText(this.jTableVendorTable.getValueAt(selectedIndex, 0).toString());
+            this.jTextVendorDescription.setText(this.jTableVendorTable.getValueAt(selectedIndex, 1).toString());
         }
     }//GEN-LAST:event_T_SSA_VendorTableMouseClicked
 
     private void T_SSA_VendorTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T_SSA_VendorTableKeyPressed
-        int selectedIndex = this.T_SSA_VendorTable.getSelectedRow();
+        int selectedIndex = this.jTableVendorTable.getSelectedRow();
         if (selectedIndex > -1) {
-            this.TF_SSA_VendorName.setText(this.T_SSA_VendorTable.getValueAt(selectedIndex, 0).toString());
-            this.TF_SSA_VendorDescription.setText(this.T_SSA_VendorTable.getValueAt(selectedIndex, 1).toString());
+            this.jTextVendorName.setText(this.jTableVendorTable.getValueAt(selectedIndex, 0).toString());
+            this.jTextVendorDescription.setText(this.jTableVendorTable.getValueAt(selectedIndex, 1).toString());
         }
     }//GEN-LAST:event_T_SSA_VendorTableKeyPressed
 
     private void T_SSA_VendorTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T_SSA_VendorTableKeyReleased
-        int selectedIndex = this.T_SSA_VendorTable.getSelectedRow();
+        int selectedIndex = this.jTableVendorTable.getSelectedRow();
         if (selectedIndex > -1) {
-            this.TF_SSA_VendorName.setText(this.T_SSA_VendorTable.getValueAt(selectedIndex, 0).toString());
-            this.TF_SSA_VendorDescription.setText(this.T_SSA_VendorTable.getValueAt(selectedIndex, 1).toString());
+            this.jTextVendorName.setText(this.jTableVendorTable.getValueAt(selectedIndex, 0).toString());
+            this.jTextVendorDescription.setText(this.jTableVendorTable.getValueAt(selectedIndex, 1).toString());
         }
     }//GEN-LAST:event_T_SSA_VendorTableKeyReleased
 
     private void BT_SSA_UpdateVendorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BT_SSA_UpdateVendorMouseClicked
-        int selectedIndex = this.T_SSA_VendorTable.getSelectedRow();
-        if (selectedIndex == -1 || this.T_SSA_VendorTable.getRowCount() == 0) {
+        int selectedIndex = this.jTableVendorTable.getSelectedRow();
+        if (selectedIndex == -1 || this.jTableVendorTable.getRowCount() == 0) {
             UIError.openDialog("Please select an item.");
         } else if (this.init()) {
             if (!this.validName()) {
@@ -286,8 +286,8 @@ public class VenDia extends javax.swing.JDialog {
     }//GEN-LAST:event_BT_SSA_UpdateVendorMouseClicked
 
     private void BT_SSA_DeleteVendorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BT_SSA_DeleteVendorMouseClicked
-        int selectedIndex = this.T_SSA_VendorTable.getSelectedRow();
-        if (selectedIndex == -1 || this.T_SSA_VendorTable.getRowCount() == 0) {
+        int selectedIndex = this.jTableVendorTable.getSelectedRow();
+        if (selectedIndex == -1 || this.jTableVendorTable.getRowCount() == 0) {
             UIError.openDialog("Please select an item.");
         } else {
             this.tableModel.removeRow(selectedIndex);
@@ -302,18 +302,18 @@ public class VenDia extends javax.swing.JDialog {
 
     private void COMBO_CategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_COMBO_CategoryActionPerformed
         String categoryCode = this.COMBO_Category.getModel().getSelectedItem().toString();
-        this.TF_SSA_VendorName.setText("");
-        this.TF_SSA_VendorDescription.setText("");
+        this.jTextVendorName.setText("");
+        this.jTextVendorDescription.setText("");
 
         this.selectedCategory = getSelectedCategory(categoryCode);
-        this.TF_CategoryCode.setText(this.selectedCategory.getCode());
-        this.TF_CategoryName.setText(this.selectedCategory.getName());
+        this.jTextCateCode.setText(this.selectedCategory.getCode());
+        this.jTextCateName.setText(this.selectedCategory.getName());
 
         //this.UI_VendorList.clear();
-        this.UI_VendorList = selectedCategory.getVendorList();
+        this.UIVendorList = selectedCategory.getVendorList();
 
-        if (this.UI_VendorList.isEmpty()) {
-            this.UI_VendorList = new ArrayList<Vendor>();
+        if (this.UIVendorList.isEmpty()) {
+            this.UIVendorList = new ArrayList<Vendor>();
         }
 
         this.LoadTable();
@@ -321,15 +321,15 @@ public class VenDia extends javax.swing.JDialog {
     }//GEN-LAST:event_COMBO_CategoryActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BT_SSA_AddNewVendor;
-    private javax.swing.JButton BT_SSA_DeleteVendor;
-    private javax.swing.JButton BT_SSA_UpdateVendor;
+    private javax.swing.JButton jButtonAdd;
+    private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonModify;
     private javax.swing.JComboBox<String> COMBO_Category;
-    private javax.swing.JTextField TF_CategoryCode;
-    private javax.swing.JTextField TF_CategoryName;
-    private javax.swing.JTextField TF_SSA_VendorDescription;
-    private javax.swing.JTextField TF_SSA_VendorName;
-    private javax.swing.JTable T_SSA_VendorTable;
+    private javax.swing.JTextField jTextCateCode;
+    private javax.swing.JTextField jTextCateName;
+    private javax.swing.JTextField jTextVendorDescription;
+    private javax.swing.JTextField jTextVendorName;
+    private javax.swing.JTable jTableVendorTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -360,30 +360,30 @@ public class VenDia extends javax.swing.JDialog {
 
     private void initData(String categoryCode) {
 
-        this.CategoryList = this.manager.getCategoryList();
+        this.CategoryList = this.shopping.getCategoryList();
 
         this.selectedCategory = getSelectedCategory(categoryCode);
-        this.TF_CategoryCode.setText(selectedCategory.getCode());
-        this.TF_CategoryName.setText(selectedCategory.getName());
+        this.jTextCateCode.setText(selectedCategory.getCode());
+        this.jTextCateName.setText(selectedCategory.getName());
 
-        this.UI_VendorList = selectedCategory.getVendorList();
+        this.UIVendorList = selectedCategory.getVendorList();
 
-        if (this.UI_VendorList.isEmpty()) {
-            this.UI_VendorList = new ArrayList<Vendor>();
+        if (this.UIVendorList.isEmpty()) {
+            this.UIVendorList = new ArrayList<Vendor>();
         }
 
         this.LoadList();
-        this.tableModel = (DefaultTableModel) this.T_SSA_VendorTable.getModel();//Creating Table model
+        this.tableModel = (DefaultTableModel) this.jTableVendorTable.getModel();//Creating Table model
 
         this.LoadTable();
     }
 
     private void LoadTable() {
         tableModel.setRowCount(0);
-        if (this.UI_VendorList != null) {
-            if (!this.UI_VendorList.isEmpty()) {
-                for (int i = 0; i < this.UI_VendorList.size(); i++) {
-                    this.tableModel.addRow(new Object[]{this.UI_VendorList.get(i).getName(), this.UI_VendorList.get(i).getDescription()});
+        if (this.UIVendorList != null) {
+            if (!this.UIVendorList.isEmpty()) {
+                for (int i = 0; i < this.UIVendorList.size(); i++) {
+                    this.tableModel.addRow(new Object[]{this.UIVendorList.get(i).getName(), this.UIVendorList.get(i).getDescription()});
                 }
             }
         } else {
@@ -407,8 +407,8 @@ public class VenDia extends javax.swing.JDialog {
     }
 
     private boolean init() {
-        this.VendorName = this.TF_SSA_VendorName.getText().trim();
-        this.VendorDescription = this.TF_SSA_VendorDescription.getText().trim();
+        this.VendorName = this.jTextVendorName.getText().trim();
+        this.VendorDescription = this.jTextVendorDescription.getText().trim();
         if (this.VendorName.isEmpty() || this.VendorDescription.isEmpty()) {
             UIError.openDialog("Vendor Name or Description should not be empty.");
         } else if (this.VendorDescription.contains(",") || this.VendorName.contains(",")) {
@@ -424,7 +424,7 @@ public class VenDia extends javax.swing.JDialog {
         boolean result = true;
 
         // duplicate check
-        for (Vendor vendor : this.UI_VendorList) {
+        for (Vendor vendor : this.UIVendorList) {
             if (vendor.getName().equals(this.VendorName)) {
                 result = false;
                 break;
@@ -445,9 +445,8 @@ public class VenDia extends javax.swing.JDialog {
 
     }
 
-    private void UpdVendorForCategory() {
-
-    	//this.selectedCategory
+    public void updVendorForCategory(String categoryCode, String oldName, String newName, String newDesc) {
+        shopping.updVendorForCategory(categoryCode, oldName, newName, newDesc);
     }
 
 }
