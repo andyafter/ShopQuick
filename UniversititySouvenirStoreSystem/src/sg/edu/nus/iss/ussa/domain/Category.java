@@ -1,73 +1,73 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sg.edu.nus.iss.ussa.domain;
 
 import java.util.ArrayList;
 
 /**
  *
- * @author a0134449b
+ * @author Andy Pan
+ *
  */
 public class Category {
-        
-    private String categorycode;
-	private String categoryname;
-	private ArrayList<Vendor> vendorList;
-	
-	public Category(String categorycode, String categoryname, ArrayList<Vendor> vendorList) {
-		super();
-		this.categorycode = categorycode;
-		this.categoryname = categoryname;
-		this.vendorList = vendorList;
-	}
-        
-        public void deleteVendor(String name){
-            if(name == ""){
-                return;
-            }
-            else{
-                if(this.vendorList.isEmpty()){
-                    System.out.println("The Vendor list is empty asshole!");
-                }
-                for(Vendor i: this.vendorList){
-                    if(i.getVendorName()==name){
-                        vendorList.remove(i);
-                    }
-                }
-            }
-        }
-        
-        public Vendor getFirstVendor(){
-		Vendor vendor = null;
-		if (!this.vendorList.isEmpty()){
-			vendor = this.vendorList.get(0);
-		}	
-		return vendor;
-	}
-	
-	public String getCategoryCode() {
-		return categorycode;
-	}
-	public void setCategoryCode(String code) {
-		this.categorycode = categorycode;
-	}
-	public String getCategoryName() {
-		return categoryname;
-	}
-	public void setCategoryName(String name) {
-		this.categoryname = categoryname;
-	}
-	public ArrayList<Vendor> getVendorList() {
-		return vendorList;
-	}
-	public void setVendorList(ArrayList<Vendor> vendorList) {
-		this.vendorList = vendorList;
-	}
-        
-	
 
+    protected String code = "";
+    protected String name = "";
+    protected ArrayList<Vendor> vendorList;
     
+    public Category() {
+    }
+
+    public Category(String code, String name, ArrayList<Vendor> vendorList) {
+        super();
+        this.code = code;
+        this.name = name;
+        this.vendorList = vendorList;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<Vendor> getVendorList() {
+        return vendorList;
+    }
+
+    public void setVendorList(ArrayList<Vendor> vendorList) {
+        this.vendorList = vendorList;
+    }
+
+    /**
+     *
+     * @return most preference vendor
+     */
+    public Vendor getPreferenceVendor() {
+        Vendor vendor = null;
+
+        // has vendor
+        if (!this.vendorList.isEmpty()) {
+            vendor = this.vendorList.get(0);
+        }
+
+        return vendor;
+    }
+
+    public boolean equalsCode(Category CATOBJ) {
+        return this.code.equalsIgnoreCase(CATOBJ.code);
+    }
+
+    public boolean equals(Category CATOBJ) {
+        return this.code.equalsIgnoreCase(CATOBJ.code) && this.name.equalsIgnoreCase(CATOBJ.name);
+    }
+
 }
