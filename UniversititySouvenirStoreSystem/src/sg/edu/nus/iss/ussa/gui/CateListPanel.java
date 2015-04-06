@@ -17,7 +17,7 @@ public class CateListPanel extends javax.swing.JPanel {
     private static final long serialVersionUID = 1L;
     private final String[] columnNames = {"Category Code", "Categry Name"};
 
-    private Shopping manager;
+    private Shopping shopping;
 
     private String categoryName = new String();
     private String categoryCode = new String();
@@ -26,8 +26,8 @@ public class CateListPanel extends javax.swing.JPanel {
     private ArrayList<Category> UI_CategoryList = new ArrayList<Category>();
     private DefaultTableModel tableModel = new DefaultTableModel();
 
-    public CateListPanel(Shopping manager) {
-        this.manager = manager;
+    public CateListPanel(Shopping shopping) {
+        this.shopping = shopping;
 
         initComponents();
         initLook();
@@ -40,7 +40,7 @@ public class CateListPanel extends javax.swing.JPanel {
         System.out.println("category list panel components init");
         jScrollPane1 = new javax.swing.JScrollPane();
         T_SSA_CategoryTable = new javax.swing.JTable();
-        BT_SSA_AddNewCategory = new javax.swing.JButton();
+        jButtonAdd = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         TF_SSA_CategoryName = new javax.swing.JTextField();
@@ -95,10 +95,10 @@ public class CateListPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(T_SSA_CategoryTable);
 
-        BT_SSA_AddNewCategory.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        BT_SSA_AddNewCategory.setForeground(new java.awt.Color(51, 51, 51));
-        BT_SSA_AddNewCategory.setText("Add New");
-        BT_SSA_AddNewCategory.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonAdd.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jButtonAdd.setForeground(new java.awt.Color(51, 51, 51));
+        jButtonAdd.setText("Add New");
+        jButtonAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BT_SSA_AddNewCategoryMouseClicked(evt);
             }
@@ -164,7 +164,7 @@ public class CateListPanel extends javax.swing.JPanel {
                                         .addComponent(TF_SSA_CategoryName, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(BT_SSA_AddNewCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                                .addComponent(jButtonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
                                 .addComponent(BT_SSA_Update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -181,7 +181,7 @@ public class CateListPanel extends javax.swing.JPanel {
                                         .addGap(14, 14, 14)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                 .addComponent(jLabel2)
-                                                .addComponent(BT_SSA_AddNewCategory)
+                                                .addComponent(jButtonAdd)
                                                 .addComponent(BT_SSA_Delete)))
                                 .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
@@ -204,7 +204,7 @@ public class CateListPanel extends javax.swing.JPanel {
             if (!this.validAdd()) {
                 UIError.openDialog("Duplicate Category ID `" + categoryCode + "`");
             } else {
-                this.manager.addCategory(this.categoryCode, this.categoryName, new ArrayList<Vendor>());
+                this.shopping.addCategory(this.categoryCode, this.categoryName, new ArrayList<Vendor>());
                 reloadData();
             }
         }
@@ -218,7 +218,7 @@ public class CateListPanel extends javax.swing.JPanel {
             if (this.validUpd()) {
                 String code = this.tableModel.getValueAt(this.T_SSA_CategoryTable.getSelectedRow(), 0).toString();
                 String name = this.TF_SSA_CategoryName.getText().toString();
-                this.manager.changeCate(code, name);
+                this.shopping.changeCate(code, name);
                 reloadData();
             } else {
                 UIError.openDialog("Category Code should not be changed");
@@ -241,7 +241,7 @@ public class CateListPanel extends javax.swing.JPanel {
         } else {
             String code = this.tableModel.getValueAt(this.T_SSA_CategoryTable.getSelectedRow(), 0).toString();
             if (validDel(code)) {
-                manager.deleteCate(code);
+                shopping.deleteCate(code);
                 reloadData();
             } else {
                 UIError.openDialog("there have product in this Category `" + code + "`, should not be deleted");
@@ -271,7 +271,7 @@ public class CateListPanel extends javax.swing.JPanel {
         if (selectedIndex == -1 || this.T_SSA_CategoryTable.getRowCount() == 0) {
             UIError.openDialog("Please select an item.");
         } else {
-            VenDia vendorDlg = new VenDia(manager, this.tableModel.getValueAt(selectedIndex, 0).toString());
+            VenDia vendorDlg = new VenDia(shopping, this.tableModel.getValueAt(selectedIndex, 0).toString());
             vendorDlg.setVisible(true);
 
         }
@@ -299,7 +299,7 @@ public class CateListPanel extends javax.swing.JPanel {
 
     private void reloadData() {
 
-        this.UI_CategoryList = this.manager.getCategoryList();//Retriving Saved UI_CategoryList form File
+        this.UI_CategoryList = this.shopping.getCategoryList();//Retriving Saved UI_CategoryList form File
         if (this.UI_CategoryList.isEmpty()) {
             this.UI_CategoryList = new ArrayList<Category>();
         }
@@ -310,7 +310,7 @@ public class CateListPanel extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BT_SSA_AddNewCategory;
+    private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton BT_SSA_Delete;
     private javax.swing.JButton BT_SSA_ManageVendor;
     private javax.swing.JButton BT_SSA_Update;
@@ -377,7 +377,7 @@ public class CateListPanel extends javax.swing.JPanel {
         boolean result = true;
 
         // check whether any product in this category
-        for (Product product : this.manager.getProductList()) {
+        for (Product product : this.shopping.getProductList()) {
             if (product.getCategory().getCode().equals(code)) {
                 result = false;
                 break;

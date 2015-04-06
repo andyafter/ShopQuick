@@ -33,8 +33,6 @@ public class MemberListPanel extends javax.swing.JPanel {
         "Loyalty Points"};
 
     private Shopping shopping;
-    private JButton modifyButton;
-    private JButton deleteButton;
     private DefaultTableModel tableModel;
 
     public MemberListPanel(Shopping shopping) {
@@ -64,11 +62,11 @@ public class MemberListPanel extends javax.swing.JPanel {
                     public void valueChanged(ListSelectionEvent arg0) {
                         // TODO Auto-generated method stub
                         if (jTableMember.getSelectionModel().isSelectionEmpty()) {
-                            modifyButton.setEnabled(false);
-                            deleteButton.setEnabled(false);
+                            jButtonModify.setEnabled(false);
+                            jButtonDelete.setEnabled(false);
                         } else {
-                            modifyButton.setEnabled(true);
-                            deleteButton.setEnabled(true);
+                            jButtonModify.setEnabled(true);
+                            jButtonDelete.setEnabled(true);
                         }
                     }
                 });

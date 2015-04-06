@@ -67,11 +67,11 @@ public class ProductListPanel extends javax.swing.JPanel {
             @Override
             public void valueChanged(ListSelectionEvent arg0) {
                 if (jTableProduct.getSelectionModel().isSelectionEmpty()) {
-                    modifyButton.setEnabled(false);
-                    deleteButton.setEnabled(false);
+                    jButtonModify.setEnabled(false);
+                    jButtonDelete.setEnabled(false);
                 } else {
-                    modifyButton.setEnabled(true);
-                    deleteButton.setEnabled(true);
+                    jButtonModify.setEnabled(true);
+                    jButtonDelete.setEnabled(true);
                 }
             }
         });;
@@ -264,8 +264,6 @@ public class ProductListPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private final String[] columnNames = {"Id", "Name", "Description", "Price", "Quantity"};
-    private JButton modifyButton;
-    private JButton deleteButton;
     private JTextField filterText;
     private DefaultTableModel tableModel;
     private TableRowSorter<DefaultTableModel> sorter;

@@ -10,24 +10,22 @@ import javax.swing.SwingUtilities;
 
 public class InvalidAuth extends javax.swing.JDialog {
 
-    private JTextField txtNotification;
-
+    private JTextField alert;
     public InvalidAuth(JFrame frame, String title, String msg) {
         super(frame);
         initGUI();
         this.setTitle(title);
-        txtNotification.setText(msg);
+        alert.setText(msg);
     }
 
     private void initGUI() {
         try {
             {
-                System.out.println("Alert Message Pop Up Initialized!");
-                txtNotification = new JTextField();
-                getContentPane().add(txtNotification, BorderLayout.CENTER);
-                txtNotification.setEditable(false);
-                txtNotification.setPreferredSize(new java.awt.Dimension(245, 47));
-                txtNotification.setHorizontalAlignment(SwingConstants.CENTER);
+                alert = new JTextField();
+                getContentPane().add(alert, BorderLayout.CENTER);
+                alert.setEditable(false);
+                alert.setPreferredSize(new java.awt.Dimension(300, 100));
+                alert.setHorizontalAlignment(SwingConstants.CENTER);
             }
             pack();
         } catch (Exception e) {
