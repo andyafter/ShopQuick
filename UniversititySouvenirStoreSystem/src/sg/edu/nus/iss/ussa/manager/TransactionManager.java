@@ -21,7 +21,7 @@ public class TransactionManager {
      * @author A0136010A
      * @version 1.0
      */
-    private ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
+    private static  ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
     private TransactionIO td;
 
     public void finalize() throws IOException {
